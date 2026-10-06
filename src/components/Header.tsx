@@ -73,7 +73,8 @@ export function Header({ setBagOpen }: { setBagOpen: (open: boolean) => void }) 
           </button>
           
           <Link to="/" className="brand bare" style={{ textDecoration: 'none' }}>
-            <span>Haniya deeq</span>
+            <span>Haniya Deeq</span>
+            <small>COLLECTION</small>
           </Link>
           
           <nav aria-label="Primary navigation" className="desktop-nav primary-nav">
@@ -150,7 +151,10 @@ export function Header({ setBagOpen }: { setBagOpen: (open: boolean) => void }) 
         <div className="overlay" onMouseDown={() => setMobileMenu(false)}>
           <aside aria-label="Mobile menu" className="mobile-drawer" onMouseDown={(event) => event.stopPropagation()}>
             <div className="drawer-head">
-              <div className="brand"><span>Haniya deeq</span></div>
+              <div className="brand">
+                <span>Haniya Deeq</span>
+                <small>COLLECTION</small>
+              </div>
               <button aria-label="Close menu" className="bare icon-button" onClick={() => setMobileMenu(false)}><Icon name="close" /></button>
             </div>
             <nav>

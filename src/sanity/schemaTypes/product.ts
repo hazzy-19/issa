@@ -89,7 +89,29 @@ export default defineType({
           type: 'object',
           fields: [
             { name: 'colourName', title: 'Colour Name', type: 'string', validation: (Rule) => Rule.required() },
-            { name: 'swatchColour', title: 'Swatch Colour (Hex)', type: 'string', validation: (Rule) => Rule.regex(/^#[0-9A-Fa-f]{6}$/).error('Use hex format, e.g. #7a1e2c') },
+            { 
+              name: 'swatchColour', 
+              title: 'Swatch Colour', 
+              type: 'string', 
+              options: {
+                list: [
+                  { title: 'Black', value: '#000000' },
+                  { title: 'White', value: '#FFFFFF' },
+                  { title: 'Red', value: '#FF0000' },
+                  { title: 'Blue', value: '#0000FF' },
+                  { title: 'Green', value: '#008000' },
+                  { title: 'Navy', value: '#000080' },
+                  { title: 'Grey', value: '#808080' },
+                  { title: 'Pink', value: '#FFC0CB' },
+                  { title: 'Brown', value: '#A52A2A' },
+                  { title: 'Beige', value: '#F5F5DC' },
+                  { title: 'Burgundy', value: '#800020' },
+                  { title: 'Olive', value: '#808000' },
+                  { title: 'Teal', value: '#008080' }
+                ]
+              },
+              validation: (Rule) => Rule.required() 
+            },
             {
               name: 'images',
               title: 'Images',
@@ -105,7 +127,36 @@ export default defineType({
                 {
                   type: 'object',
                   fields: [
-                    { name: 'sizeName', title: 'Size Name', type: 'string', validation: (Rule) => Rule.required() },
+                    { 
+                      name: 'sizeName', 
+                      title: 'Size Name', 
+                      type: 'string', 
+                      options: {
+                        list: [
+                          { title: 'Clothing: XXS', value: 'XXS' },
+                          { title: 'Clothing: XS', value: 'XS' },
+                          { title: 'Clothing: S', value: 'S' },
+                          { title: 'Clothing: M', value: 'M' },
+                          { title: 'Clothing: L', value: 'L' },
+                          { title: 'Clothing: XL', value: 'XL' },
+                          { title: 'Clothing: XXL', value: 'XXL' },
+                          { title: 'Clothing: 3XL', value: '3XL' },
+                          { title: 'One Size', value: 'One Size' },
+                          { title: 'Shoe: 36', value: '36' },
+                          { title: 'Shoe: 37', value: '37' },
+                          { title: 'Shoe: 38', value: '38' },
+                          { title: 'Shoe: 39', value: '39' },
+                          { title: 'Shoe: 40', value: '40' },
+                          { title: 'Shoe: 41', value: '41' },
+                          { title: 'Shoe: 42', value: '42' },
+                          { title: 'Shoe: 43', value: '43' },
+                          { title: 'Shoe: 44', value: '44' },
+                          { title: 'Shoe: 45', value: '45' },
+                          { title: 'Shoe: 46', value: '46' },
+                        ]
+                      },
+                      validation: (Rule) => Rule.required() 
+                    },
                     { name: 'inStock', title: 'In Stock', type: 'boolean', initialValue: true },
                   ],
                 },
