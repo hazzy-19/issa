@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'shapc1fi',
     dataset: 'production',
   },
+  studioHost: 'haniya-deeq',
 })
