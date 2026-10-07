@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { client } from '../sanity/client';
 
 export interface Category {
@@ -48,14 +49,16 @@ interface SanityState {
   fetchData: () => Promise<void>;
 }
 
-export const useSanityStore = create<SanityState>((set) => ({
-  products: [],
-  categories: [],
-  homePage: null,
-  siteSettings: null,
-  announcementBar: null,
-  loading: true,
-  fetchData: async () => {
+export const useSanityStore = create<SanityState>()(
+  persist(
+    (set) => ({
+      products: [],
+      categories: [],
+      homePage: null,
+      siteSettings: null,
+      announcementBar: null,
+      loading: true,
+      fetchData: async () => {
     try {
       const [productsData, categoriesData, homePageData, siteSettingsData, announcementBarData] = await Promise.all([
         client.fetch(`*[_type == "product"]{
@@ -152,7 +155,12 @@ export const useSanityStore = create<SanityState>((set) => ({
       set({ loading: false });
     }
   }
-}));
+    }),
+    {
+      name: 'sanity-storage'
+    }
+  )
+);
 
 export function computeVisibleCategories(allCats: Category[], allProds: Product[], countSoldOut: boolean) {
   const visibleIds = new Set<string>();
