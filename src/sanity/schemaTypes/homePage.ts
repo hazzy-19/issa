@@ -10,27 +10,14 @@ export default defineType({
       title: 'Hero Section',
       type: 'object',
       fields: [
-        {
-          name: 'slides',
-          title: 'Hero Slides',
-          type: 'array',
-          description: 'Add multiple images for the hero carousel',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } },
-                { name: 'mobileImage', title: 'Mobile Image (Optional)', type: 'image', options: { hotspot: true }, description: 'If set, this image is used on mobile instead' },
-                { name: 'alt', title: 'Alt Text', type: 'string' },
-              ],
-            },
-          ],
-          validation: (Rule) => Rule.min(1).error('Add at least one hero slide'),
-        },
-        { name: 'headline', title: 'Headline', type: 'string', validation: (Rule) => Rule.required() },
-        { name: 'copy', title: 'Short Copy', type: 'text' },
-        { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-        { name: 'buttonLink', title: 'Button Link', type: 'string' },
+        { name: 'imageDesktop', title: 'Desktop Background Image', type: 'image', options: { hotspot: true } },
+        { name: 'imageMobile', title: 'Mobile Background Image (Optional)', type: 'image', options: { hotspot: true }, description: 'Used on small screens' },
+        { name: 'heading', title: 'Heading Text', type: 'string', initialValue: 'Intro to Fall' },
+        { name: 'subheading', title: 'Subheading Text', type: 'text', initialValue: 'Timeless silhouettes, seasonal tones. Fall into something new.' },
+        { name: 'button1Label', title: 'Primary Button Label', type: 'string', initialValue: 'SHOP NEW' },
+        { name: 'button1Link', title: 'Primary Button Link (e.g., /?filter=new)', type: 'string' },
+        { name: 'button2Label', title: 'Secondary Button Label', type: 'string', initialValue: 'SHOP SALE' },
+        { name: 'button2Link', title: 'Secondary Button Link (e.g., /?filter=sale)', type: 'string' },
       ],
     }),
     defineField({

@@ -86,19 +86,19 @@ export const useSanityStore = create<SanityState>((set) => ({
           manualHide
         }`),
         client.fetch(`*[_type == "homePage"][0]{
-          hero {
-            slides[]{
-              "image": image.asset->url,
-              "mobileImage": mobileImage.asset->url,
-              alt
-            },
-            headline,
-            copy,
-            buttonLabel,
-            buttonLink
-          },
-          sectionTitles,
-          trustStrip
+          "imageDesktop": heroImageDesktop.asset->url,
+          "imageMobile": heroImageMobile.asset->url,
+          heroHeading,
+          heroSubheading,
+          primaryButton,
+          secondaryButton,
+          featuredCategories,
+          featuredProducts,
+          newArrivalsTitle,
+          extraBanners,
+          shopByCategoryTitle,
+          trustStrip,
+          brandStory
         }`),
         client.fetch(`*[_type == "siteSettings"][0]`),
         client.fetch(`*[_type == "announcementBar"][0]`)

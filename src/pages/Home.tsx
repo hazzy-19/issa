@@ -71,17 +71,7 @@ export function Home() {
     return selection.slice(0, 4);
   }, [visibleCats]);
 
-  // Carousel logic
-  const [heroIndex, setHeroIndex] = useState(0);
-  const slides = homePage?.hero?.slides || [];
-
-  useEffect(() => {
-    if (slides.length <= 1) return;
-    const timer = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % slides.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+  const hero = homePage || {};
 
   // Determine if we show the hero and top-level categories
   const showHero = !search && !filterId;
@@ -90,20 +80,27 @@ export function Home() {
     <main>
       {showHero && (
         <>
-          <section className="hero">
-            {slides.length > 0 && (
-              <picture className="hero-carousel">
-                {slides[heroIndex].mobileImage && <source media="(max-width: 760px)" srcSet={slides[heroIndex].mobileImage} />}
-                <img src={slides[heroIndex].image} alt={slides[heroIndex].alt || "Hero image"} className="hero-image" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </picture>
-            )}
-            <div className="hero-copy">
-              <span className="eyebrow">{homePage?.hero?.headline ? "THE NEW MODEST EDIT" : "THE NEW MODEST EDIT"}</span>
-              <h1>{homePage?.hero?.headline || "Grace in every layer."}</h1>
-              <p>{homePage?.hero?.copy || "Considered pieces for quiet mornings, shared moments, and everything between."}</p>
-              <button className="button button-primary" onClick={() => document.getElementById("product-grid-start")?.scrollIntoView({ behavior: "smooth" })}>
-                {homePage?.hero?.buttonLabel || "SHOP NEW ARRIVALS"}
-              </button>
+          <section className="full-bleed-hero">
+            <picture className="hero-bg">
+              {hero.imageMobile && <source media="(max-width: 760px)" srcSet={hero.imageMobile} />}
+              {hero.imageDesktop && <img src={hero.imageDesktop} alt="Hero" className="hero-image" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+            </picture>
+            <div className="hero-overlay"></div>
+            <div className="hero-content">
+              <h1>{hero.heroHeading || "Modest wear for every day"}</h1>
+              <p>{hero.heroSubheading || "Abayas, hijabs and sets in soft fabrics. Delivered countrywide."}</p>
+              <div className="hero-buttons">
+                {(hero.primaryButton?.label || "New arrivals") && (
+                  <button className="button button-outline-white" onClick={() => document.getElementById("product-grid-start")?.scrollIntoView({ behavior: "smooth" })}>
+                    {hero.primaryButton?.label || "New arrivals"}
+                  </button>
+                )}
+                {(hero.secondaryButton?.label || "Reach out") && (
+                  <button className="button button-outline-white" onClick={() => document.getElementById("product-grid-start")?.scrollIntoView({ behavior: "smooth" })}>
+                    {hero.secondaryButton?.label || "Reach out"}
+                  </button>
+                )}
+              </div>
             </div>
           </section>
 

@@ -60,19 +60,16 @@ a { color: inherit; text-decoration: none; }
 .count-button { color: white; position: relative; }
 .count-button > span { align-items: center; background: var(--wine); border: 1px solid #0b0b0b; border-radius: 50%; display: flex; font-size: 8px; height: 17px; justify-content: center; position: absolute; right: 2px; top: 5px; width: 17px; }
 .mobile-search, .mobile-only { display: none; }
-.hero { background: var(--surface); display: grid; grid-template-columns: 58% 42%; min-height: 540px; }
-.hero-carousel { position: relative; min-height: 540px; overflow: hidden; display: block; }
-.hero-carousel img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; z-index: 0; }
-.carousel-slide.active { opacity: 1; z-index: 1; }
-.carousel-slide .hero-image { width: 100%; height: 100%; min-height: 540px; }
-.carousel-dots { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
-.carousel-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); border: none; padding: 0; transition: 0.3s; }
-.carousel-dots button.active { background: white; transform: scale(1.2); }
-.hero-image { min-height: 540px; }
-.hero-copy { align-items: flex-start; display: flex; flex-direction: column; justify-content: center; padding: 9vw; }
-.hero h1 { font-family: var(--serif); font-size: clamp(54px, 6vw, 94px); font-weight: 500; letter-spacing: -.035em; line-height: .88; margin: 22px 0 30px; max-width: 580px; }
-.hero-copy p { color: var(--muted); font-family: var(--serif); font-size: 22px; line-height: 1.4; margin: 0 0 40px; max-width: 430px; }
+.full-bleed-hero { position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; color: white; background: var(--surface); height: 75vh; min-height: 500px; max-height: 900px; padding-bottom: 20px; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.25); z-index: 1; }
+.hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; padding: 40px max(4vw, calc((100vw - 1380px) / 2)); width: 100%; text-align: center; }
+.hero-content h1 { font-family: var(--serif); font-size: clamp(36px, 6vw, 84px); font-weight: 400; margin: 0 0 12px; letter-spacing: -0.01em; text-shadow: 0 2px 14px rgba(0,0,0,0.1); max-width: 800px; line-height: 1; }
+.hero-content p { font-size: 14.5px; font-weight: 400; color: rgba(255,255,255,0.85); max-width: 440px; line-height: 1.5; margin: 0 0 40px; text-shadow: 0 1px 10px rgba(0,0,0,0.15); }
+.hero-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 380px; margin-top: 10px; }
+.button-outline-white { background: rgba(0,0,0,0.05); border: 1.5px solid white; color: white; width: 100%; min-height: 48px; border-radius: 999px; text-transform: uppercase; font-size: 10px; letter-spacing: .15em; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; padding: 0 10px; cursor: pointer; text-align: center; backdrop-filter: blur(4px); }
+.button-outline-white:hover { background: white; color: black; border-color: white; }
 .button { align-items: center; border: 1px solid transparent; display: inline-flex; font-size: 11px; font-weight: 600; justify-content: center; letter-spacing: .18em; min-height: 50px; padding: 0 28px; text-transform: uppercase; transition: background .2s, color .2s; }
 .button-primary { background: var(--wine); color: white; }
 .button-primary:hover { background: var(--wine-dark); }

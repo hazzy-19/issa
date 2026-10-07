@@ -1,26 +1,33 @@
-import siteSettings from './siteSettings'
-import announcementBar from './announcementBar'
-import homePage from './homePage'
-import navigation from './navigation'
-import interfaceText from './interfaceText'
-
-import product from './product'
-import category from './category'
-import sizeGuide from './sizeGuide'
-import page from './page'
-import promoBanner from './promoBanner'
+import link from './objects/link'
+import seo from './objects/seo'
+import colourVariant from './objects/colourVariant'
+import product from './documents/product'
+import category from './documents/category'
+import colour from './documents/colour'
+import sizeGuide from './documents/sizeGuide'
+import page from './documents/page'
+import promoBanner from './documents/promoBanner'
+import siteSettings from './singletons/siteSettings'
+import announcementBar from './singletons/announcementBar'
+import homePage from './singletons/homePage'
+import navigation from './singletons/navigation'
+import deliveryInfo from './singletons/deliveryInfo'
+import interfaceText from './singletons/interfaceText'
 
 export const schemaTypes = [
-  // Singletons
+  link,
+  seo,
+  colourVariant,
+  product,
+  category,
+  colour,
+  sizeGuide,
+  page,
+  promoBanner,
   siteSettings,
   announcementBar,
   homePage,
   navigation,
+  deliveryInfo,
   interfaceText,
-  // Collections
-  product,
-  category,
-  sizeGuide,
-  page,
-  promoBanner,
 ]
