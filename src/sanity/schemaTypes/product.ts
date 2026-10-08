@@ -89,29 +89,6 @@ export default defineType({
           type: 'object',
           fields: [
             { name: 'colourName', title: 'Colour Name', type: 'string', validation: (Rule) => Rule.required() },
-            { 
-              name: 'swatchColour', 
-              title: 'Swatch Colour', 
-              type: 'string', 
-              options: {
-                list: [
-                  { title: 'Black', value: '#000000' },
-                  { title: 'White', value: '#FFFFFF' },
-                  { title: 'Red', value: '#FF0000' },
-                  { title: 'Blue', value: '#0000FF' },
-                  { title: 'Green', value: '#008000' },
-                  { title: 'Navy', value: '#000080' },
-                  { title: 'Grey', value: '#808080' },
-                  { title: 'Pink', value: '#FFC0CB' },
-                  { title: 'Brown', value: '#A52A2A' },
-                  { title: 'Beige', value: '#F5F5DC' },
-                  { title: 'Burgundy', value: '#800020' },
-                  { title: 'Olive', value: '#808000' },
-                  { title: 'Teal', value: '#008080' }
-                ]
-              },
-              validation: (Rule) => Rule.required() 
-            },
             {
               name: 'images',
               title: 'Images',

@@ -11,11 +11,10 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
   const category = categories.find(c => c.id === product?.primaryCategoryId);
 
   const [selectedSize, setSelectedSize] = useState("");
-  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const currentVariant = product?.colourVariants?.[selectedVariantIndex];
+  const currentVariant = product?.colourVariants?.[0];
   const currentImages = currentVariant?.images || [];
   const [detailsOpen, setDetailsOpen] = useState("details");
 
@@ -24,8 +23,8 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
   const addToCart = useCartStore((state) => state.addToCart);
 
   function handleAdd() {
-    if (!selectedSize || product?.tag === "Sold out" || !currentVariant) return;
-    addToCart({ product, size: selectedSize, colour: currentVariant.colourName, quantity });
+    if (!selectedSize || product?.tag === "Sold out") return;
+    addToCart({ product, size: selectedSize, colour: currentVariant?.colourName || '', quantity });
     setBagOpen(true);
   }
 
@@ -109,20 +108,7 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
           </div>
           <button className="size-guide">SEE SIZING GUIDE <Icon name="chevron" size={16} /></button>
 
-          <div className="option-heading colour-heading">
-            <strong>Colour</strong><span>{currentVariant?.colourName}</span>
-          </div>
-          <div className="swatch-row">
-            {product.colourVariants?.map((variant, index) => (
-              <button
-                aria-label={variant.colourName}
-                className={selectedVariantIndex === index ? "swatch selected" : "swatch"}
-                key={variant.colourName}
-                onClick={() => { setSelectedVariantIndex(index); setSelectedSize(""); setActiveImageIndex(0); }}
-                style={{ backgroundColor: variant.swatchColour }}
-              />
-            ))}
-          </div>
+
 
           <div className="purchase-row">
             <div className="quantity-stepper">

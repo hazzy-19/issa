@@ -1,6 +1,5 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
-import { colorInput } from '@sanity/color-input'
 import { schemaTypes } from './src/sanity/schemaTypes'
 import { structure, singletonTypes } from './src/sanity/structure'
 
@@ -13,7 +12,6 @@ export default defineConfig({
 
   plugins: [
     structureTool({ structure }),
-    colorInput()
   ],
 
   schema: {

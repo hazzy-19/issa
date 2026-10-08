@@ -33,7 +33,6 @@ export interface Product {
   };
   colourVariants: {
     colourName: string;
-    swatchColour: string;
     images: string[];
     sizes: { name: string; inStock: boolean }[];
   }[];
@@ -61,23 +60,25 @@ export const useSanityStore = create<SanityState>()(
       fetchData: async () => {
     try {
       const [productsData, categoriesData, homePageData, siteSettingsData, announcementBarData] = await Promise.all([
-        client.fetch(`*[_type == "product"]{
+        client.fetch(`*[_type == "product"] | order(_createdAt desc){
           _id,
           name,
           "slug": slug.current,
-          "primaryCategoryId": primaryCategory->_id,
-          "alsoShowInIds": alsoShowIn[]->_id,
+          "primaryCategoryId": primaryCategory->\_id,
+          "alsoShowInIds": alsoShowIn[]->\_id,
           price,
           oldPrice,
           "tag": badge,
           "description": shortDescription,
           fullDescription,
           details,
+          sizeType,
+          clothingSizes,
+          shoeSizes,
+          manualSoldOut,
           colourVariants[]{
             colourName,
-            swatchColour,
-            "images": images[].asset->url,
-            sizes
+            "images": images[].asset->url
           }
         }`),
         client.fetch(`*[_type == "category"]{
@@ -111,26 +112,37 @@ export const useSanityStore = create<SanityState>()(
       let toneIndex = 0;
       const getNextTone = () => tones[(toneIndex++) % tones.length];
 
-      const mappedProducts = productsData.map((p: any) => ({
-        id: p._id,
-        name: p.name,
-        slug: p.slug,
-        primaryCategoryId: p.primaryCategoryId,
-        alsoShowInIds: p.alsoShowInIds || [],
-        price: p.price,
-        oldPrice: p.oldPrice,
-        tag: p.tag || '',
-        description: p.description || '',
-        fullDescription: p.fullDescription,
-        details: p.details || {},
-        tone: getNextTone(),
-        colourVariants: p.colourVariants?.map((cv: any) => ({
-          colourName: cv.colourName,
-          swatchColour: cv.swatchColour,
-          images: cv.images || [],
-          sizes: cv.sizes?.map((s: any) => ({ name: s.sizeName, inStock: s.inStock })) || []
-        })) || []
-      }));
+      const mappedProducts = productsData.map((p: any) => {
+        // Build sizes from product-level size fields
+        let sizes: { name: string; inStock: boolean }[] = [];
+        if (p.sizeType === 'clothing' && p.clothingSizes) {
+          sizes = p.clothingSizes.map((s: string) => ({ name: s, inStock: true }));
+        } else if (p.sizeType === 'shoes' && p.shoeSizes) {
+          sizes = p.shoeSizes.map((s: string) => ({ name: s, inStock: true }));
+        } else if (p.sizeType === 'oneSize') {
+          sizes = [{ name: 'One Size', inStock: true }];
+        }
+
+        return {
+          id: p._id,
+          name: p.name,
+          slug: p.slug,
+          primaryCategoryId: p.primaryCategoryId,
+          alsoShowInIds: p.alsoShowInIds || [],
+          price: p.price,
+          oldPrice: p.oldPrice,
+          tag: p.manualSoldOut ? 'Sold out' : (p.tag || ''),
+          description: p.description || '',
+          fullDescription: p.fullDescription,
+          details: p.details || {},
+          tone: getNextTone(),
+          colourVariants: p.colourVariants?.map((cv: any) => ({
+            colourName: cv.colourName,
+            images: cv.images || [],
+            sizes,
+          })) || []
+        };
+      });
 
       const mappedCategories = categoriesData.map((c: any) => ({
         id: c._id,

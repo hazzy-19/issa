@@ -3,7 +3,6 @@ import seo from './objects/seo'
 import colourVariant from './objects/colourVariant'
 import product from './documents/product'
 import category from './documents/category'
-import colour from './documents/colour'
 import sizeGuide from './documents/sizeGuide'
 import page from './documents/page'
 import promoBanner from './documents/promoBanner'
@@ -20,7 +19,6 @@ export const schemaTypes = [
   colourVariant,
   product,
   category,
-  colour,
   sizeGuide,
   page,
   promoBanner,
