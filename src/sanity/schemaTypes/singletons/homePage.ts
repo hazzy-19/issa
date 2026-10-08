@@ -38,25 +38,6 @@ export default defineType({
       ],
     }),
 
-    // Categories
-    defineField({
-      name: 'featuredCategories',
-      title: 'Featured Categories',
-      description: 'Pick the categories to show as big tiles. If one has no products it is skipped automatically.',
-      type: 'array',
-      group: 'categories',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'category', title: 'Category', type: 'reference', to: [{ type: 'category' }], validation: (Rule) => Rule.required() }),
-            defineField({ name: 'imageOverride', title: 'Image Override', type: 'image', options: { hotspot: true } }),
-          ],
-        },
-      ],
-      validation: (Rule) => Rule.max(4),
-    }),
-
     // Products
     defineField({
       name: 'featuredProducts',
@@ -76,7 +57,7 @@ export default defineType({
       group: 'banners',
       of: [{ type: 'reference', to: [{ type: 'promoBanner' }] }],
     }),
-    defineField({ name: 'shopByCategoryTitle', title: 'Title above the category tiles', type: 'string', group: 'banners' }),
+    defineField({ name: 'shopByCategoryTitle', title: 'Title above the category tiles', description: 'Shown above the Female and Male tiles.', type: 'string', group: 'banners' }),
 
     // Extras
     defineField({

@@ -24,7 +24,9 @@ export default defineType({
           const parent = (context.document?.parent as any)?._ref || null
           
           const count = await client.fetch(
-            'count(*[_type == "category" && lower(name) == lower($name) && parent._ref == $parent && !(_id in [$id, "drafts." + $id])])',
+            parent
+              ? 'count(*[_type == "category" && lower(name) == lower($name) && parent._ref == $parent && !(_id in [$id, "drafts." + $id])])'
+              : 'count(*[_type == "category" && lower(name) == lower($name) && !defined(parent) && !(_id in [$id, "drafts." + $id])])',
             { name: value, parent, id: id ? String(id).replace('drafts.', '') : '' }
           )
           
@@ -37,9 +39,10 @@ export default defineType({
     defineField({
       name: 'parent',
       title: 'Sits under',
-      description: 'Leave empty for a main section like Women or Men. Pick Women to create a category inside Women.',
       type: 'reference',
       to: [{ type: 'category' }],
+      description:
+        'Leave this empty for a main section (Female or Male). To make a category inside Female, pick Female here.',
       options: {
         filter: ({ document }) => ({
           filter: '_id != $id && !defined(parent->parent)',
@@ -48,17 +51,15 @@ export default defineType({
       },
       validation: (Rule) =>
         Rule.custom(async (value, context) => {
-          if (!value) return true
+          if (!value?._ref) return true
           const client = context.getClient({ apiVersion: '2024-01-01' })
-          const currentId = String(context.document?._id).replace('drafts.', '')
-          
-          let currentParentId = value._ref
-          while (currentParentId) {
-            if (currentParentId === currentId) {
+          const selfId = String(context.document?._id).replace('drafts.', '')
+          let currentId: string | undefined = value._ref
+          for (let i = 0; i < 5 && currentId; i++) {
+            if (currentId === selfId) {
               return 'A category cannot sit inside one of its own subcategories.'
             }
-            const parentDoc = await client.fetch('*[_id == $id][0]', { id: currentParentId })
-            currentParentId = parentDoc?.parent?._ref
+            currentId = await client.fetch('*[_id == $id][0].parent._ref', { id: currentId })
           }
           return true
         }),
@@ -66,8 +67,15 @@ export default defineType({
     defineField({
       name: 'tileImage',
       title: 'Picture for the home page tile',
+      description: 'Only needed for main sections like Female and Male. Other categories do not need a picture.',
       type: 'image',
+      hidden: ({ document }) => Boolean(document?.parent),
       options: { hotspot: true },
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const hasParent = Boolean((context.document as { parent?: unknown })?.parent)
+          return !hasParent && !value ? 'Add a picture for this main section' : true
+        }),
     }),
     defineField({
       name: 'shortDescription',
