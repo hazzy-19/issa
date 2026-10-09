@@ -71,18 +71,12 @@ export default defineType({
       type: 'image',
       hidden: ({ document }) => Boolean(document?.parent),
       options: { hotspot: true },
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          const hasParent = Boolean((context.document as { parent?: unknown })?.parent)
-          return !hasParent && !value ? 'Add a picture for this main section' : true
-        }),
     }),
     defineField({
       name: 'shortDescription',
       title: 'Short Description',
       type: 'text',
       rows: 2,
-      validation: (Rule) => Rule.max(160),
     }),
     defineField({
       name: 'slug',
@@ -93,7 +87,6 @@ export default defineType({
       options: {
         source: 'name',
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'displayOrder',

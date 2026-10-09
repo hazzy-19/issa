@@ -19,7 +19,7 @@ export default defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'zoneName', title: 'Zone Name', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'zoneName', title: 'Zone Name', type: 'string' }),
             defineField({ name: 'estimatedTime', title: 'Estimated Time', type: 'string' }),
             defineField({
               name: 'fee',

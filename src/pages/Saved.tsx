@@ -29,7 +29,7 @@ export function Saved() {
               <div className="product-image-wrap">
                 <Link to={`/product/${product.id}`} className="image-link" style={{ display: 'block' }}>
                   {product.colourVariants?.[0]?.images?.[0] ? (
-                    <img src={product.colourVariants[0].images[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={product.colourVariants[0].images[0].url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                   ) : (
                     <ImagePlaceholder tone={product.tone} label={`${product.name} product image placeholder`} />
                   )}

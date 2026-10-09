@@ -30,7 +30,6 @@ export default defineType({
       type: 'slug',
       fieldset: 'moreOptions',
       options: { source: 'title' },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'seo',

@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Icon } from './UI';
 import { useCartStore } from '../store/cartStore';
 import { useSanityStore, computeVisibleCategories } from '../store/sanityStore';
+import { siteConfig } from '../config/site';
 
 export function Header({ setBagOpen }: { setBagOpen: (open: boolean) => void }) {
   const [announcement, setAnnouncement] = useState(true);
@@ -170,7 +171,7 @@ export function Header({ setBagOpen }: { setBagOpen: (open: boolean) => void }) 
                   ))}
                 </div>
               ))}
-              <a href="https://wa.me/254700000000" className="mobile-dept-title" style={{ color: '#25D366' }}>CHAT ON WHATSAPP <Icon name="chevron" /></a>
+              <a href={`https://wa.me/${(siteConfig.whatsappNumber || '254700000000').replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="mobile-dept-title" style={{ color: '#25D366' }}>CHAT ON WHATSAPP <Icon name="chevron" /></a>
             </nav>
             <p>Modest pieces, thoughtfully chosen.</p>
           </aside>

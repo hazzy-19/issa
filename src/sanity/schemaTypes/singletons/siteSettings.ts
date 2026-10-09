@@ -33,8 +33,6 @@ export default defineType({
       description: 'This is the number customers will chat with.',
       type: 'string',
       group: 'contact',
-      validation: (Rule) =>
-        Rule.required().regex(/^254\d{9}$/).error('Use digits only, starting with 254, for example 254712345678. No plus sign and no spaces.'),
     }),
     defineField({ name: 'phone', title: 'Phone', type: 'string', group: 'contact' }),
     defineField({ name: 'email', title: 'Email', type: 'string', group: 'contact' }),
@@ -70,7 +68,6 @@ export default defineType({
       title: 'Free delivery above (KSh)',
       type: 'number',
       group: 'shop',
-      validation: (Rule) => Rule.integer().min(0),
     }),
     defineField({
       name: 'countSoldOutProducts',

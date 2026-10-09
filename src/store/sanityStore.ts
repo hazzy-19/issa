@@ -33,7 +33,7 @@ export interface Product {
   };
   colourVariants: {
     colourName: string;
-    images: string[];
+    images: { url: string; color?: string }[];
     sizes: { name: string; inStock: boolean }[];
   }[];
 }
@@ -78,7 +78,10 @@ export const useSanityStore = create<SanityState>()(
           manualSoldOut,
           colourVariants[]{
             colourName,
-            "images": images[].asset->url
+            "images": images[]{
+              "url": coalesce(image.asset->url, asset->url),
+              color
+            }
           }
         }`),
         client.fetch(`*[_type == "category"]{
@@ -138,7 +141,7 @@ export const useSanityStore = create<SanityState>()(
           tone: getNextTone(),
           colourVariants: p.colourVariants?.map((cv: any) => ({
             colourName: cv.colourName,
-            images: cv.images || [],
+            images: cv.images?.map((img: any) => typeof img === 'string' ? { url: img } : { url: img?.url || '', color: img?.color }) || [],
             sizes,
           })) || []
         };

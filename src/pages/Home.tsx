@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Icon, ImagePlaceholder, formatPrice } from '../components/UI';
 import { useSanityStore, computeVisibleCategories } from '../store/sanityStore';
 import { useCartStore } from '../store/cartStore';
+import { siteConfig } from '../config/site';
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +39,7 @@ export function Home() {
       }
     }
 
-    return products.filter((product) => {
+    const matched = products.filter((product) => {
       // Is it matching the category?
       const inCategory = filterId === '' || 
         descendantIds.has(product.primaryCategoryId) || 
@@ -49,7 +50,14 @@ export function Home() {
 
       return inCategory && inSearch;
     });
-  }, [filterId, search, visibleCats]);
+
+    // If viewing unfiltered New Arrivals, limit to 20 newest items
+    if (!filterId && !term) {
+      return matched.slice(0, 20);
+    }
+
+    return matched;
+  }, [filterId, search, visibleCats, products]);
 
   // Determine subcategories to show as chips
   const chips = useMemo(() => {
@@ -76,6 +84,16 @@ export function Home() {
   // Determine if we show the hero and top-level categories
   const showHero = !search && !filterId;
 
+  const handleNewArrivalsClick = () => {
+    setSearchParams({});
+    setTimeout(() => {
+      document.getElementById("product-grid-start")?.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
+  const cleanWhatsApp = (siteConfig.whatsappNumber || '254700000000').replace(/\D/g, '');
+  const reachOutMessage = "Hi! I'd like to reach out regarding your collection.";
+
   return (
     <main>
       {showHero && (
@@ -91,14 +109,20 @@ export function Home() {
               <p>{hero.heroSubheading || "Abayas, hijabs and sets in soft fabrics. Delivered countrywide."}</p>
               <div className="hero-buttons">
                 {(hero.primaryButton?.label || "New arrivals") && (
-                  <button className="button button-outline-white" onClick={() => document.getElementById("product-grid-start")?.scrollIntoView({ behavior: "smooth" })}>
+                  <button className="button button-outline-white" onClick={handleNewArrivalsClick}>
                     {hero.primaryButton?.label || "New arrivals"}
                   </button>
                 )}
                 {(hero.secondaryButton?.label || "Reach out") && (
-                  <button className="button button-outline-white" onClick={() => document.getElementById("product-grid-start")?.scrollIntoView({ behavior: "smooth" })}>
+                  <a
+                    href={`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(reachOutMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button button-outline-white"
+                    style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
                     {hero.secondaryButton?.label || "Reach out"}
-                  </button>
+                  </a>
                 )}
               </div>
             </div>
@@ -158,7 +182,7 @@ export function Home() {
                 <div className="product-image-wrap">
                   <Link to={`/product/${product.id}`} className="image-link" style={{ display: 'block' }}>
                     {product.colourVariants?.[0]?.images?.[0] ? (
-                      <img src={product.colourVariants[0].images[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={product.colourVariants[0].images[0].url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     ) : (
                       <ImagePlaceholder tone={product.tone} label={`${product.name} product image placeholder`} />
                     )}

@@ -17,7 +17,6 @@ export default defineType({
       description: 'The guide appears on every product in these categories and the ones inside them.',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'category' }] }],
-      validation: (Rule) => Rule.min(1),
     }),
     defineField({
       name: 'rows',
@@ -28,13 +27,13 @@ export default defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'size', title: 'Size', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'bust', title: 'Bust (cm)', type: 'number', validation: (Rule) => Rule.integer() }),
-            defineField({ name: 'waist', title: 'Waist (cm)', type: 'number', validation: (Rule) => Rule.integer() }),
-            defineField({ name: 'hips', title: 'Hips (cm)', type: 'number', validation: (Rule) => Rule.integer() }),
-            defineField({ name: 'length', title: 'Length (cm)', type: 'number', validation: (Rule) => Rule.integer() }),
-            defineField({ name: 'sleeve', title: 'Sleeve (cm)', type: 'number', validation: (Rule) => Rule.integer() }),
-            defineField({ name: 'footLength', title: 'Foot length (cm)', type: 'number', validation: (Rule) => Rule.integer() }),
+            defineField({ name: 'size', title: 'Size', type: 'string' }),
+            defineField({ name: 'bust', title: 'Bust (cm)', type: 'number' }),
+            defineField({ name: 'waist', title: 'Waist (cm)', type: 'number' }),
+            defineField({ name: 'hips', title: 'Hips (cm)', type: 'number' }),
+            defineField({ name: 'length', title: 'Length (cm)', type: 'number' }),
+            defineField({ name: 'sleeve', title: 'Sleeve (cm)', type: 'number' }),
+            defineField({ name: 'footLength', title: 'Foot length (cm)', type: 'number' }),
           ],
           preview: {
             select: {
@@ -61,7 +60,6 @@ export default defineType({
           },
         },
       ],
-      validation: (Rule) => Rule.min(1),
     }),
     defineField({
       name: 'note',

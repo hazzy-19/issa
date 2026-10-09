@@ -24,7 +24,6 @@ export default defineType({
               name: 'text',
               title: 'Text',
               type: 'string',
-              validation: (Rule) => Rule.required().max(100),
             }),
             defineField({
               name: 'link',

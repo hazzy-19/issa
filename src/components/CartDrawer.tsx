@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Icon, ImagePlaceholder, formatPrice } from './UI';
 import { useCartStore } from '../store/cartStore';
+import { siteConfig } from '../config/site';
 
 export function CartDrawer({ isOpen, setOpen }: { isOpen: boolean; setOpen: (open: boolean) => void }) {
   const cart = useCartStore((state) => state.cart);
@@ -15,10 +16,35 @@ export function CartDrawer({ isOpen, setOpen }: { isOpen: boolean; setOpen: (ope
   const hasUnavailable = cart.some((item) => item.product.tag === "Sold out");
 
   function getWhatsAppLink() {
-    const itemsText = cart.map(item => `- ${item.quantity}x ${item.product.name} (Size: ${item.size}, Colour: ${item.colour})`).join('\n');
-    const total = formatPrice(subtotal);
-    const text = encodeURIComponent(`Hello, I'd like to place an order:\n\n${itemsText}\n\nTotal: ${total}`);
-    return `https://wa.me/254700000000?text=${text}`;
+    if (!cart.length) return "#";
+
+    const itemLines = cart.map((item, index) => {
+      const parts = [item.product.name];
+      if (item.colour && item.colour.trim()) {
+        parts.push(`Color: ${item.colour.trim()}`);
+      }
+      if (item.size && item.size.trim()) {
+        parts.push(`Size: ${item.size.trim()}`);
+      }
+      if (item.quantity) {
+        parts.push(`Qty: ${item.quantity}`);
+      }
+      const itemTotal = item.product.price * (item.quantity || 1);
+      parts.push(`Price: KES ${itemTotal.toLocaleString('en-KE')}`);
+
+      return `${index + 1}. ${parts.join(' | ')}`;
+    });
+
+    const message = [
+      "Hi! I'd like to order the following:",
+      "",
+      ...itemLines,
+      "",
+      `Total: KES ${subtotal.toLocaleString('en-KE')}`
+    ].join('\n');
+
+    const cleanNumber = (siteConfig.whatsappNumber || '254700000000').replace(/\D/g, '');
+    return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
   }
 
   function submitCheckout(e: React.FormEvent) {
@@ -52,7 +78,7 @@ export function CartDrawer({ isOpen, setOpen }: { isOpen: boolean; setOpen: (ope
                     <article className="bag-item" key={`${item.product.id}-${item.size}-${index}`}>
                       {(() => {
                         const variant = item.product.colourVariants?.find(cv => cv.colourName === item.colour) || item.product.colourVariants?.[0];
-                        const img = variant?.images?.[0];
+                        const img = variant?.images?.[0]?.url;
                         return img ? (
                           <img src={img} alt={item.product.name} style={{ width: '80px', height: '100%', minHeight: '100px', objectFit: 'cover', borderRadius: '4px' }} />
                         ) : (

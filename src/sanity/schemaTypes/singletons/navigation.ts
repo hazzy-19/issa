@@ -19,7 +19,7 @@ export default defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'label', title: 'Label', type: 'string' }),
             defineField({ name: 'link', title: 'Link', type: 'link' }),
           ],
         },
@@ -34,7 +34,7 @@ export default defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'title', title: 'Title', type: 'string' }),
             defineField({
               name: 'links',
               title: 'Links',

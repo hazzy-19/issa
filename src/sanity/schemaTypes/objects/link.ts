@@ -22,7 +22,6 @@ export default defineType({
         layout: 'radio',
       },
       initialValue: 'category',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'category',
@@ -30,12 +29,6 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'category' }],
       hidden: ({ parent }) => parent?.kind !== 'category',
-      validation: (Rule) =>
-        Rule.custom((value, context) =>
-          (context.parent as { kind?: string })?.kind === 'category' && !value
-            ? 'Please pick a category'
-            : true
-        ),
     }),
     defineField({
       name: 'page',
@@ -43,12 +36,6 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'page' }],
       hidden: ({ parent }) => parent?.kind !== 'page',
-      validation: (Rule) =>
-        Rule.custom((value, context) =>
-          (context.parent as { kind?: string })?.kind === 'page' && !value
-            ? 'Please pick a page'
-            : true
-        ),
     }),
     defineField({
       name: 'product',
@@ -56,24 +43,12 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'product' }],
       hidden: ({ parent }) => parent?.kind !== 'product',
-      validation: (Rule) =>
-        Rule.custom((value, context) =>
-          (context.parent as { kind?: string })?.kind === 'product' && !value
-            ? 'Please pick a product'
-            : true
-        ),
     }),
     defineField({
       name: 'externalUrl',
       title: 'External URL',
       type: 'url',
       hidden: ({ parent }) => parent?.kind !== 'external',
-      validation: (Rule) =>
-        Rule.custom((value, context) =>
-          (context.parent as { kind?: string })?.kind === 'external' && !value
-            ? 'Please enter a web address'
-            : true
-        ),
     }),
   ],
   preview: {

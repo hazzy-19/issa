@@ -24,7 +24,7 @@ export function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
   );
 }
 
-export function ImagePlaceholder({ tone, className = "", label = "Image placeholder" }: { tone: string; className?: string; label?: string; }) {
+export function ImagePlaceholder({ tone = "sand", className = "", label = "Image placeholder" }: { tone?: string; className?: string; label?: string; }) {
   return (
     <div aria-label={label} className={`photo-placeholder tone-${tone} ${className}`} role="img">
       <span className="photo-arch" />

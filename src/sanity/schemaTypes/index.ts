@@ -12,6 +12,7 @@ import homePage from './singletons/homePage'
 import navigation from './singletons/navigation'
 import deliveryInfo from './singletons/deliveryInfo'
 import interfaceText from './singletons/interfaceText'
+import colour from './documents/colour'
 
 export const schemaTypes = [
   link,
@@ -28,4 +29,5 @@ export const schemaTypes = [
   navigation,
   deliveryInfo,
   interfaceText,
+  colour,
 ]

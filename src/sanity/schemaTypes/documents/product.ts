@@ -26,7 +26,7 @@ export default defineType({
       to: [{ type: 'category' }],
       group: 'basics',
       validation: (Rule) =>
-        Rule.required().custom(async (value, context) => {
+        Rule.custom(async (value, context) => {
           if (!value) return true
           const client = context.getClient({ apiVersion: '2024-01-01' })
           const category = await client.fetch('*[_id == $id][0]', { id: value._ref })
@@ -41,7 +41,6 @@ export default defineType({
       title: 'Price (KSh)',
       type: 'number',
       group: 'basics',
-      validation: (Rule) => Rule.required().integer().min(1),
     }),
     defineField({
       name: 'oldPrice',
@@ -49,14 +48,6 @@ export default defineType({
       description: 'Fill this in to show the item as on sale. It must be higher than the price.',
       type: 'number',
       group: 'basics',
-      validation: (Rule) =>
-        Rule.integer().custom((value, context) => {
-          const price = (context.document as any)?.price
-          if (value && price && value <= price) {
-            return 'Old price must be higher than the current price.'
-          }
-          return true
-        }),
     }),
     defineField({
       name: 'sizeType',
@@ -72,7 +63,6 @@ export default defineType({
         layout: 'radio',
       },
       initialValue: 'clothing',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'clothingSizes',
@@ -86,13 +76,6 @@ export default defineType({
         layout: 'grid',
       },
       hidden: ({ document }) => document?.sizeType !== 'clothing',
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          if (context.document?.sizeType === 'clothing' && (!value || value.length === 0)) {
-            return 'Please select at least one size'
-          }
-          return true
-        }),
     }),
     defineField({
       name: 'shoeSizes',
@@ -106,13 +89,6 @@ export default defineType({
         layout: 'grid',
       },
       hidden: ({ document }) => document?.sizeType !== 'shoes',
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          if (context.document?.sizeType === 'shoes' && (!value || value.length === 0)) {
-            return 'Please select at least one size'
-          }
-          return true
-        }),
     }),
     defineField({
       name: 'badge',
@@ -146,7 +122,6 @@ export default defineType({
       type: 'array',
       group: 'colours',
       of: [{ type: 'colourVariant' }],
-      validation: (Rule) => Rule.min(1).error('Add at least one colour'),
     }),
 
     // Description group
@@ -157,7 +132,6 @@ export default defineType({
       type: 'text',
       rows: 2,
       group: 'description',
-      validation: (Rule) => Rule.max(140),
     }),
     defineField({
       name: 'fullDescription',
@@ -192,7 +166,6 @@ export default defineType({
       type: 'slug',
       group: 'advanced',
       options: { source: 'name' },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'alsoShowIn',

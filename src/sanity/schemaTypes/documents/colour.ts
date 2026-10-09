@@ -14,15 +14,14 @@ export default defineType({
     defineField({
       name: 'swatch',
       title: 'Swatch',
-      type: 'color',
-      options: { disableAlpha: true },
-      validation: (Rule) => Rule.required(),
+      type: 'string',
+      description: 'Hex color code (e.g. #000000)',
     }),
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'swatch.hex',
+      subtitle: 'swatch',
     },
   },
 })

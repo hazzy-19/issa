@@ -10,15 +10,35 @@ export default defineType({
       title: 'Colour Name',
       description: 'e.g. Black, Ivory, Dusty Rose',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'images',
       title: 'Photos',
       type: 'array',
       description: 'The first photo is the main one.',
-      of: [{ type: 'image', options: { hotspot: true } }],
-      validation: (Rule) => Rule.min(1).error('Add at least one photo'),
+      of: [
+        {
+          type: 'object',
+          name: 'colorImage',
+          fields: [
+            defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
+            defineField({ name: 'color', title: 'Color (optional)', type: 'string' }),
+          ],
+          preview: {
+            select: {
+              title: 'color',
+              media: 'image',
+            },
+            prepare({ title, media }) {
+              return {
+                title: title || 'No color specified',
+                media,
+              }
+            }
+          }
+        },
+        { type: 'image', options: { hotspot: true } }
+      ],
     }),
   ],
   preview: {
@@ -32,7 +52,7 @@ export default defineType({
       return {
         title: title || 'Unnamed colour',
         subtitle: `${count} photo${count !== 1 ? 's' : ''}`,
-        media: images && images[0] ? images[0] : undefined,
+        media: images && images[0] ? (images[0].image || images[0]) : undefined,
       }
     },
   },
