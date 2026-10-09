@@ -67,9 +67,9 @@ export default defineType({
     defineField({
       name: 'tileImage',
       title: 'Picture for the home page tile',
-      description: 'Only needed for main sections like Female and Male. Other categories do not need a picture.',
+      description: 'Used for subcategories displayed on the homepage (e.g. Abayas, Dresses, Shoes). Main sections (like Women or Men) do not need a picture.',
       type: 'image',
-      hidden: ({ document }) => Boolean(document?.parent),
+      hidden: ({ document }) => !document?.parent,
       options: { hotspot: true },
     }),
     defineField({
