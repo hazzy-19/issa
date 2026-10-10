@@ -80,11 +80,11 @@ a { color: inherit; text-decoration: none; }
 .section-heading h2, .bag-head h2, .checkout-modal h2 { font-family: var(--serif); font-size: clamp(42px, 4vw, 62px); font-weight: 500; letter-spacing: -.025em; line-height: 1; margin: 12px 0 0; }
 .section-heading p { color: var(--muted); font-family: var(--serif); font-size: 19px; margin: 0; }
 .category-grid { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
-.category-tile { border: 0; color: white; min-height: 500px; overflow: hidden; padding: 0; position: relative; }
+.category-tile { border: 0; color: white; height: 250px; overflow: hidden; padding: 0; position: relative; }
 .category-tile .photo-placeholder { height: 100%; position: absolute; inset: 0; transition: transform .55s ease; }
 .category-tile:hover .photo-placeholder { transform: scale(1.025); }
 .category-tile::after { background: linear-gradient(transparent 55%, rgba(0,0,0,.57)); content: ""; inset: 0; position: absolute; }
-.category-tile > span { bottom: 26px; font-family: var(--serif); font-size: 38px; left: 28px; position: absolute; z-index: 2; }
+.category-tile > span { bottom: 18px; font-family: var(--serif); font-size: 28px; left: 20px; position: absolute; z-index: 2; }
 .photo-placeholder { background: #d8d4cb; overflow: hidden; position: relative; }
 .photo-placeholder::before { background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), transparent 40%); content: ""; inset: 0; position: absolute; }
 .tone-sage { background: #c4c8bd; }
@@ -331,8 +331,8 @@ del { color: var(--muted); font-size: .9em; }
   .section-heading h2 { font-size: 43px; }
   .section-heading p { font-size: 16px; }
   .category-grid { gap: 8px; grid-template-columns: repeat(2, 1fr); }
-  .category-tile { min-height: 310px; }
-  .category-tile > span { bottom: 16px; font-size: 28px; left: 16px; }
+  .category-tile { height: 155px; }
+  .category-tile > span { bottom: 12px; font-size: 20px; left: 12px; }
   .products-section { padding-top: 70px; }
   .product-heading p { display: none; }
   .filter-row { margin-left: -16px; margin-right: -16px; padding-left: 16px; }

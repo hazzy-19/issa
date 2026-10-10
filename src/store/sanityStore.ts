@@ -148,6 +148,13 @@ export const useSanityStore = create<SanityState>()(
         };
       });
 
+      // Fisher-Yates shuffle to randomize the order of products
+      const shuffledProducts = [...mappedProducts];
+      for (let i = shuffledProducts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledProducts[i], shuffledProducts[j]] = [shuffledProducts[j], shuffledProducts[i]];
+      }
+
       const mappedCategories = categoriesData.map((c: any) => ({
         id: c._id || '',
         name: c.name || '',
@@ -159,7 +166,7 @@ export const useSanityStore = create<SanityState>()(
       }));
 
       set({
-        products: mappedProducts,
+        products: shuffledProducts,
         categories: mappedCategories,
         homePage: homePageData,
         siteSettings: siteSettingsData,
