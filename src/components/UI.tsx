@@ -35,5 +35,5 @@ export function ImagePlaceholder({ tone = "sand", className = "", label = "Image
 }
 
 export function formatPrice(price: number) {
-  return `KSh ${price.toLocaleString("en-KE")}`;
+  return `KSh ${(price || 0).toLocaleString("en-KE")}`;
 }

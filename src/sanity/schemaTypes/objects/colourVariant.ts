@@ -13,31 +13,42 @@ export default defineType({
     }),
     defineField({
       name: 'images',
-      title: 'Photos',
+      title: 'Photos & Videos',
       type: 'array',
-      description: 'The first photo is the main one.',
+      description: 'The first item is the main one. You can upload images or videos here.',
       of: [
         {
           type: 'object',
           name: 'colorImage',
+          title: 'Color Image',
           fields: [
             defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
             defineField({ name: 'color', title: 'Color (optional)', type: 'string' }),
           ],
           preview: {
-            select: {
-              title: 'color',
-              media: 'image',
-            },
+            select: { title: 'color', media: 'image' },
             prepare({ title, media }) {
-              return {
-                title: title || 'No color specified',
-                media,
-              }
+              return { title: title || 'No color specified', media }
             }
           }
         },
-        { type: 'image', options: { hotspot: true } }
+        {
+          type: 'object',
+          name: 'colorVideo',
+          title: 'Color Video',
+          fields: [
+            defineField({ name: 'videoFile', title: 'Video', type: 'file', options: { accept: 'video/*' } }),
+            defineField({ name: 'color', title: 'Color (optional)', type: 'string' }),
+          ],
+          preview: {
+            select: { title: 'color' },
+            prepare({ title }) {
+              return { title: title || 'No color specified', subtitle: 'Video' }
+            }
+          }
+        },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'file', title: 'Video File', options: { accept: 'video/*' } }
       ],
     }),
   ],

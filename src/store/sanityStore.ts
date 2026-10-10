@@ -33,7 +33,7 @@ export interface Product {
   };
   colourVariants: {
     colourName: string;
-    images: { url: string; color?: string }[];
+    images: { url: string; mimeType?: string; color?: string }[];
     sizes: { name: string; inStock: boolean }[];
   }[];
 }
@@ -79,7 +79,8 @@ export const useSanityStore = create<SanityState>()(
           colourVariants[]{
             colourName,
             "images": images[]{
-              "url": coalesce(image.asset->url, asset->url),
+              "url": coalesce(image.asset->url, videoFile.asset->url, asset->url),
+              "mimeType": coalesce(image.asset->mimeType, videoFile.asset->mimeType, asset->mimeType),
               color
             }
           }
@@ -127,32 +128,32 @@ export const useSanityStore = create<SanityState>()(
         }
 
         return {
-          id: p._id,
-          name: p.name,
-          slug: p.slug,
-          primaryCategoryId: p.primaryCategoryId,
+          id: p._id || '',
+          name: p.name || '',
+          slug: p.slug || '',
+          primaryCategoryId: p.primaryCategoryId || '',
           alsoShowInIds: p.alsoShowInIds || [],
-          price: p.price,
-          oldPrice: p.oldPrice,
+          price: p.price || 0,
+          oldPrice: p.oldPrice || 0,
           tag: p.manualSoldOut ? 'Sold out' : (p.tag || ''),
           description: p.description || '',
-          fullDescription: p.fullDescription,
+          fullDescription: p.fullDescription || [],
           details: p.details || {},
           tone: getNextTone(),
-          colourVariants: p.colourVariants?.map((cv: any) => ({
-            colourName: cv.colourName,
-            images: cv.images?.map((img: any) => typeof img === 'string' ? { url: img } : { url: img?.url || '', color: img?.color }) || [],
+          colourVariants: p.colourVariants?.filter(Boolean).map((cv: any) => ({
+            colourName: cv?.colourName || '',
+            images: cv?.images?.filter(Boolean).map((img: any) => typeof img === 'string' ? { url: img } : { url: img?.url || '', mimeType: img?.mimeType || '', color: img?.color || '' }) || [],
             sizes,
           })) || []
         };
       });
 
       const mappedCategories = categoriesData.map((c: any) => ({
-        id: c._id,
-        name: c.name,
+        id: c._id || '',
+        name: c.name || '',
         parentId: c.parentId || null,
-        slug: c.slug,
-        tileImage: c.tileImage,
+        slug: c.slug || '',
+        tileImage: c.tileImage || '',
         manualHide: c.manualHide || false,
         tone: getNextTone()
       }));

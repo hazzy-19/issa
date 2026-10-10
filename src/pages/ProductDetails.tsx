@@ -66,11 +66,15 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
 
   // Flatten all images across colour variants and preserve color tags
   const allImages = (product?.colourVariants || [])
+    .filter(Boolean)
     .flatMap((cv) =>
-      (cv.images || []).map((img) => ({
-        url: img.url,
-        color: (img.color || cv.colourName || '').trim(),
-      }))
+      (cv.images || [])
+        .filter(Boolean)
+        .map((img) => ({
+          url: img.url,
+          mimeType: img.mimeType,
+          color: (img.color || cv.colourName || '').trim(),
+        }))
     )
     .filter((img) => Boolean(img.url));
 
@@ -184,7 +188,11 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
                   key={`${img.url}-${idx}`}
                   onClick={() => setActiveImageIndex(idx)}
                 >
-                  <img src={img.url} alt={`${product.name} thumbnail ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                  {img.mimeType?.startsWith('video/') ? (
+                    <video src={img.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} muted />
+                  ) : (
+                    <img src={img.url} alt={`${product.name} thumbnail ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  )}
                 </button>
               ))}
               {currentImages.length === 0 && (
@@ -195,11 +203,23 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
             </div>
             <div className="main-product-image">
               {currentImages[activeImageIndex] ? (
-                <img
-                  src={currentImages[activeImageIndex].url}
-                  alt={product.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                />
+                currentImages[activeImageIndex].mimeType?.startsWith('video/') ? (
+                  <video
+                    src={currentImages[activeImageIndex].url}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls
+                  />
+                ) : (
+                  <img
+                    src={currentImages[activeImageIndex].url}
+                    alt={product.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  />
+                )
               ) : (
                 <ImagePlaceholder tone={product.tone} label={`${product.name} main image placeholder`} />
               )}
@@ -232,7 +252,7 @@ export function ProductDetails({ setBagOpen }: { setBagOpen: (open: boolean) => 
             {selectedSize && <span>{selectedSize}</span>}
           </div>
           <div className="size-grid">
-            {currentVariant?.sizes?.map((size) => (
+            {currentVariant?.sizes?.filter(Boolean).map((size) => (
               <button
                 className={`${selectedSize === size.name ? "selected " : ""}${!size.inStock ? "unavailable" : ""}`}
                 disabled={!size.inStock}

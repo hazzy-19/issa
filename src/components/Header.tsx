@@ -32,7 +32,7 @@ export function Header({ setBagOpen }: { setBagOpen: (open: boolean) => void }) 
 
   // Compute visible departments
   const visibleCats = computeVisibleCategories(categories, products, true);
-  const departments = visibleCats.filter(c => !c.parentId && (c.name.toLowerCase() === 'women' || c.name.toLowerCase() === 'men'));
+  const departments = visibleCats.filter(c => !c.parentId && (c.name?.toLowerCase() === 'women' || c.name?.toLowerCase() === 'men'));
 
   // Determine active department based on current filter or default to the first one (Women)
   let activeDepartmentId = departments[0]?.id;

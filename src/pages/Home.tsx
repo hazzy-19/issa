@@ -64,16 +64,16 @@ export function Home() {
     if (filterId) {
       return visibleCats.filter(c => c.parentId === filterId);
     } else {
-      const topLevelIds = new Set(visibleCats.filter(c => !c.parentId && (c.name.toLowerCase() === 'women' || c.name.toLowerCase() === 'men')).map(c => c.id));
+      const topLevelIds = new Set(visibleCats.filter(c => !c.parentId && (c.name?.toLowerCase() === 'women' || c.name?.toLowerCase() === 'men')).map(c => c.id));
       return visibleCats.filter(c => c.parentId && topLevelIds.has(c.parentId));
     }
   }, [filterId, visibleCats]);
 
   // Featured categories for the "Shop by category" grid (limit to 4)
   const featuredCategories = useMemo(() => {
-    const topLevelIds = new Set(visibleCats.filter(c => !c.parentId && (c.name.toLowerCase() === 'women' || c.name.toLowerCase() === 'men')).map(c => c.id));
+    const topLevelIds = new Set(visibleCats.filter(c => !c.parentId && (c.name?.toLowerCase() === 'women' || c.name?.toLowerCase() === 'men')).map(c => c.id));
     const level2 = visibleCats.filter(c => c.parentId && topLevelIds.has(c.parentId));
-    const shoes = level2.find(c => c.name.toLowerCase().includes('shoe'));
+    const shoes = level2.find(c => c.name?.toLowerCase().includes('shoe'));
     const others = level2.filter(c => c.id !== shoes?.id);
     const selection = shoes ? [shoes, ...others] : others;
     return selection.slice(0, 4);
@@ -155,7 +155,7 @@ export function Home() {
       <section className="section products-section" id="product-grid-start">
         <div className="section-heading product-heading">
           <div>
-            <span className="eyebrow">{search ? "SEARCH" : activeCategory ? activeCategory.name.toUpperCase() : "JUST IN"}</span>
+            <span className="eyebrow">{search ? "SEARCH" : activeCategory ? activeCategory.name?.toUpperCase() : "JUST IN"}</span>
             <h2>{search ? `Results for “${search}”` : activeCategory ? activeCategory.name : "New arrivals"}</h2>
           </div>
           {!search && !activeCategory && <p>Fresh silhouettes in an easy, modest palette.</p>}
@@ -181,8 +181,12 @@ export function Home() {
               <article className={product.tag === "Sold out" ? "product-card sold-out" : "product-card"} key={product.id}>
                 <div className="product-image-wrap">
                   <Link to={`/product/${product.id}`} className="image-link" style={{ display: 'block' }}>
-                    {product.colourVariants?.[0]?.images?.[0] ? (
-                      <img src={product.colourVariants[0].images[0].url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    {product.colourVariants?.[0]?.images?.[0]?.url ? (
+                      product.colourVariants[0].images[0].mimeType?.startsWith('video/') ? (
+                        <video src={product.colourVariants[0].images[0].url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} autoPlay loop muted playsInline />
+                      ) : (
+                        <img src={product.colourVariants[0].images[0].url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                      )
                     ) : (
                       <ImagePlaceholder tone={product.tone} label={`${product.name} product image placeholder`} />
                     )}

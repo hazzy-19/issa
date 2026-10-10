@@ -28,8 +28,12 @@ export function Saved() {
             <article className={product.tag === "Sold out" ? "product-card sold-out" : "product-card"} key={product.id}>
               <div className="product-image-wrap">
                 <Link to={`/product/${product.id}`} className="image-link" style={{ display: 'block' }}>
-                  {product.colourVariants?.[0]?.images?.[0] ? (
-                    <img src={product.colourVariants[0].images[0].url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                  {product.colourVariants?.[0]?.images?.[0]?.url ? (
+                    product.colourVariants[0].images[0].mimeType?.startsWith('video/') ? (
+                      <video src={product.colourVariants[0].images[0].url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} autoPlay loop muted playsInline />
+                    ) : (
+                      <img src={product.colourVariants[0].images[0].url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    )
                   ) : (
                     <ImagePlaceholder tone={product.tone} label={`${product.name} product image placeholder`} />
                   )}

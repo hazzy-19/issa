@@ -77,7 +77,7 @@ export function CartDrawer({ isOpen, setOpen }: { isOpen: boolean; setOpen: (ope
                   {cart.map((item, index) => (
                     <article className="bag-item" key={`${item.product.id}-${item.size}-${index}`}>
                       {(() => {
-                        const variant = item.product.colourVariants?.find(cv => cv.colourName === item.colour) || item.product.colourVariants?.[0];
+                        const variant = item.product.colourVariants?.find(cv => cv?.colourName === item.colour) || item.product.colourVariants?.[0];
                         const img = variant?.images?.[0]?.url;
                         return img ? (
                           <img src={img} alt={item.product.name} style={{ width: '80px', height: '100%', minHeight: '100px', objectFit: 'cover', borderRadius: '4px' }} />
