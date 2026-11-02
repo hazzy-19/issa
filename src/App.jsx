@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import About from "./components/About";
 import ChefsPicks from "./components/ChefsPicks";
 import Menu from "./components/Menu";
 import Gallery from "./components/Gallery";
@@ -23,17 +24,22 @@ export default function App() {
 
       {/* Main Content */}
       <main id="main-content" className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6">
-        {/* Phase 2: Hero */}
+        {/* Hero with 5-image slideshow and true liquid glass card */}
         <Hero />
 
-        {/* Phase 3: Chef's picks */}
+        {/* About section moving through history & principles */}
+        <About />
+
+        {/* Chef's picks */}
         <ChefsPicks />
 
-        {/* Phase 4: Menu */}
+        {/* Menu */}
         <Menu />
 
-        {/* Phase 5: Gallery & Find us */}
+        {/* Gallery with distinct customer, food, and space categories */}
         <Gallery />
+
+        {/* Find us */}
         <FindUs />
       </main>
 

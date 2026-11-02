@@ -21,18 +21,12 @@ export default function ChefsPicks() {
   };
 
   return (
-    <section id="chefs-picks" className="scroll-mt-24 py-12 md:py-16">
-      {/* Section Header */}
-      <div className="text-center mb-10">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-[#C07A46] bg-[#C07A46]/10 px-3.5 py-1 rounded-full inline-block mb-2">
-          Handcrafted Daily
-        </span>
+    <section id="chefs-picks" className="scroll-mt-20 py-8 md:py-10">
+      {/* Section Header without fluff badges */}
+      <div className="text-center mb-6">
         <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-[#1E100A]">
           Chef's picks
         </h2>
-        <p className="text-xs sm:text-sm text-[#542F1E] mt-2 max-w-md mx-auto">
-          A few favourites from our kitchen, made fresh every day.
-        </p>
       </div>
 
       {/* ============================================================ */}
@@ -48,7 +42,7 @@ export default function ChefsPicks() {
             aria-label={`View ${item.name} in menu for ${formatPrice(item.price)}`}
           >
             {/* Real photo container with smooth zoom */}
-            <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-3.5 bg-[#FAF5EE]">
+            <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-3 bg-[#FAF5EE]">
               <img
                 src={item.image}
                 alt={item.name}
@@ -58,7 +52,7 @@ export default function ChefsPicks() {
             </div>
 
             {/* Name and Price */}
-            <div className="flex items-baseline justify-between gap-2 mb-1.5">
+            <div className="flex items-baseline justify-between gap-2 mb-1">
               <h3 className="font-serif font-bold text-[#1E100A] text-base group-hover:text-[#C07A46] transition-colors">
                 {item.name}
               </h3>
@@ -99,7 +93,7 @@ export default function ChefsPicks() {
               </div>
 
               {/* Name and Price */}
-              <div className="flex items-baseline justify-between gap-2 mb-1.5">
+              <div className="flex items-baseline justify-between gap-2 mb-1">
                 <h3 className="font-serif font-bold text-[#1E100A] text-sm">
                   {item.name}
                 </h3>
@@ -117,7 +111,7 @@ export default function ChefsPicks() {
         </div>
 
         {/* Swipe for more hint */}
-        <div className="flex justify-center mt-3">
+        <div className="flex justify-center mt-2">
           <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#1E100A] text-[#FAF5EE] text-[11px] font-semibold shadow-xs">
             <svg
               className="w-3.5 h-3.5 text-[#C07A46]"

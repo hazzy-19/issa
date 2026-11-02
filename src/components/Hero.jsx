@@ -1,22 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { cafeData } from "../data/cafe";
 
 export default function Hero() {
-  return (
-    <section id="home" className="scroll-mt-24 pt-6 pb-12 md:py-12">
-      {/* Outer Photographic Container */}
-      <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#321B11] min-h-[580px] sm:min-h-[560px] md:min-h-[520px] lg:min-h-[550px] flex items-end md:items-center">
-        {/* Full-bleed real hero photography */}
-        <img
-          src={cafeData.brand.heroImage}
-          alt="Barista brewing artisan coffee"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-        />
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = cafeData.brand.heroSlides || [
+    { url: cafeData.brand.heroImage, alt: "Café interior" },
+  ];
 
-        {/* Ambient Dark Roast Vignette to make photo colors pop and glass card glow */}
+  // Auto-advance slideshow every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  return (
+    <section id="home" className="scroll-mt-20 pt-4 pb-8 md:py-8">
+      {/* Full Hero Container covering the entire section */}
+      <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#321B11] min-h-[580px] sm:min-h-[540px] md:min-h-[500px] lg:min-h-[540px] flex items-end md:items-center">
+        {/* 5-Image Slideshow with smooth crossfade */}
+        {slides.map((slide, index) => (
+          <img
+            key={slide.url}
+            src={slide.url}
+            alt={slide.alt}
+            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
+              index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+            }`}
+            style={{ transitionProperty: "opacity, transform" }}
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+        ))}
+
+        {/* Ambient Dark Roast Vignette to emphasize coffee colors and glass sheen */}
         <div
-          className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/85 via-black/40 to-black/15 pointer-events-none"
           aria-hidden="true"
         />
 
@@ -24,11 +43,6 @@ export default function Hero() {
         {/* TRUE LIQUID GLASS / FROSTED GLASS CARD                       */}
         {/* ============================================================ */}
         <div className="relative z-10 m-4 sm:m-6 md:my-10 md:ml-10 lg:ml-14 max-w-md lg:max-w-lg w-full rounded-3xl p-6 sm:p-8 lg:p-10 text-left backdrop-blur-2xl bg-gradient-to-br from-white/25 via-white/10 to-white/5 border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_1px_0_rgba(255,255,255,0.4),inset_0_-1px_1px_0_rgba(0,0,0,0.2)]">
-          {/* Badge */}
-          <span className="inline-block text-[11px] uppercase tracking-widest font-bold text-white bg-[#C07A46]/90 border border-white/30 backdrop-blur-md px-3.5 py-1 rounded-full shadow-xs mb-3.5">
-            Brewed to Perfection
-          </span>
-
           {/* Heading */}
           <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight mb-3.5 drop-shadow-md">
             {cafeData.brand.tagline}
@@ -78,6 +92,21 @@ export default function Hero() {
               {cafeData.hours.display}
             </p>
           </div>
+        </div>
+
+        {/* Slideshow Indicator Dots */}
+        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setCurrentSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-white ${
+                idx === currentSlide ? "w-6 bg-[#C07A46]" : "w-2 bg-white/50 hover:bg-white"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

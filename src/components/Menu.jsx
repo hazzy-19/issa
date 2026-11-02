@@ -33,22 +33,16 @@ export default function Menu() {
   );
 
   return (
-    <section id="menu" className="scroll-mt-24 py-12 md:py-16">
-      {/* Section Header */}
-      <div className="text-center mb-10">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-[#C07A46] bg-[#C07A46]/10 px-3.5 py-1 rounded-full inline-block mb-2">
-          Seasonal Selection
-        </span>
+    <section id="menu" className="scroll-mt-20 py-8 md:py-10">
+      {/* Section Header without fluff badges */}
+      <div className="text-center mb-6">
         <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-[#1E100A]">
           The menu
         </h2>
-        <p className="text-xs sm:text-sm text-[#542F1E] mt-2 max-w-md mx-auto">
-          Simple ingredients, freshly prepared. Find something you'll love.
-        </p>
       </div>
 
       {/* Category Tabs: Scroll horizontally on mobile, centered on desktop */}
-      <div className="mb-10">
+      <div className="mb-8">
         <div className="flex overflow-x-auto gap-2.5 pb-2 scrollbar-none justify-start md:justify-center -mx-4 px-4 md:mx-0 md:px-0">
           {cafeData.menuCategories.map((category) => {
             const isActive = activeCategory === category;
@@ -72,7 +66,7 @@ export default function Menu() {
       </div>
 
       {/* Category Title & Kitchen Hours Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-[#DFCCA] pb-3 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-[#DFCCA] pb-3 mb-6">
         <h3 className="font-serif text-2xl font-bold text-[#1E100A]">
           {activeCategory}
         </h3>
@@ -82,7 +76,7 @@ export default function Menu() {
       </div>
 
       {/* Menu Items Grid: Two-column on desktop, single column on mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
         {filteredItems.map((item) => (
           <div
             key={item.id}
@@ -125,7 +119,7 @@ export default function Menu() {
       </div>
 
       {/* Notes Below the List */}
-      <div className="mt-14 pt-6 border-t border-[#DFCCA] text-center space-y-1.5 bg-[#FAF5EE] rounded-3xl p-6 border border-[#DFCCA]">
+      <div className="mt-10 pt-5 border-t border-[#DFCCA] text-center space-y-1 bg-[#FAF5EE] rounded-3xl p-5 border border-[#DFCCA]">
         <p className="text-xs text-[#1E100A] font-semibold">
           {cafeData.hours.kitchenNotice}
         </p>

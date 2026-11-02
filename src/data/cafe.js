@@ -6,8 +6,28 @@ export const cafeData = {
       "Freshly brewed coffee, comforting plates and a welcoming space to slow down. Join us for breakfast, lunch or a little break.",
     heroBlurbShort: "Fresh coffee. Comforting plates.",
     blurb: "Your neighbourhood spot for fresh food and good coffee.",
-    heroImage:
-      "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&w=1600&q=80",
+    heroSlides: [
+      {
+        url: "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&w=1600&q=80",
+        alt: "Barista pouring latte art into cup",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80",
+        alt: "Sunlit café interior and counter",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80",
+        alt: "Artisan coffee and breakfast spread",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=80",
+        alt: "Cozy café seating and ambient lighting",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1600&q=80",
+        alt: "Single-origin pour-over craft coffee",
+      },
+    ],
   },
   hours: {
     display: "Mon to Fri 8:00 am to 8:00 pm, Sat to Sun 9:00 am to 8:00 pm",
@@ -31,6 +51,7 @@ export const cafeData = {
   },
   navigation: [
     { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
     { label: "Chef's picks", href: "#chefs-picks" },
     { label: "Menu", href: "#menu" },
     { label: "Gallery", href: "#gallery" },
@@ -42,6 +63,28 @@ export const cafeData = {
     { name: "Twitter", href: "https://twitter.com" },
     { name: "TikTok", href: "https://tiktok.com" },
   ],
+  about: {
+    historyTitle: "Our Story",
+    historyText:
+      "Founded in 2018 in Brookside, The Corner Café began with a single vintage espresso group and a passion for slow, honest mornings. What started as a modest neighborhood espresso corner has grown into a community hearth where neighbors, creators, and coffee lovers gather every day.",
+    principles: [
+      {
+        title: "Ethical Direct Trade",
+        description:
+          "We source our single-origin coffees directly from sustainable cooperatives, paying above fair-trade premiums and roasting in small weekly batches.",
+      },
+      {
+        title: "Slow Fermentation & Fresh Food",
+        description:
+          "Everything from our 36-hour sourdough to our house pasta and market salads is made from scratch with honest, seasonal ingredients.",
+      },
+      {
+        title: "Community First",
+        description:
+          "More than great coffee, we are an unhurried sanctuary designed for genuine connection, warm hospitality, and lingering conversations.",
+      },
+    ],
+  },
   chefsPicks: [
     {
       id: "avocado-toast",
@@ -351,24 +394,96 @@ export const cafeData = {
         "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
     },
   ],
+  galleryCategories: ["All", "Customers & Moments", "Food & Treats", "The Space & Brews"],
   gallery: [
+    // Customers & Moments
     {
-      id: "interior",
-      title: "Café interior",
+      id: "gallery-1",
+      title: "Morning coffee & conversation",
+      category: "Customers & Moments",
       image:
-        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      id: "coffee-counter",
-      title: "Coffee counter",
+      id: "gallery-2",
+      title: "Quiet moments with a good book",
+      category: "Customers & Moments",
+      image:
+        "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-3",
+      title: "Warm smiles at the espresso bar",
+      category: "Customers & Moments",
+      image:
+        "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-4",
+      title: "Weekend brunch table",
+      category: "Customers & Moments",
+      image:
+        "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=1200&q=80",
+    },
+
+    // Food & Treats
+    {
+      id: "gallery-5",
+      title: "Freshly baked artisan croissants",
+      category: "Food & Treats",
+      image:
+        "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-6",
+      title: "Signature avocado & poached egg toast",
+      category: "Food & Treats",
+      image:
+        "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-7",
+      title: "Fudgy chocolate brownie with vanilla gelato",
+      category: "Food & Treats",
+      image:
+        "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-8",
+      title: "Crispy stone-baked margherita flatbread",
+      category: "Food & Treats",
+      image:
+        "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=1200&q=80",
+    },
+
+    // The Space & Brews
+    {
+      id: "gallery-9",
+      title: "Artisan espresso bar & craft gear",
+      category: "The Space & Brews",
       image:
         "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
     },
     {
-      id: "outdoor-seating",
-      title: "Outdoor seating",
+      id: "gallery-10",
+      title: "Sunlit dining room & natural oak tables",
+      category: "The Space & Brews",
       image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-11",
+      title: "Breezy garden patio seating",
+      category: "The Space & Brews",
+      image:
+        "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      id: "gallery-12",
+      title: "Slow pour-over bar",
+      category: "The Space & Brews",
+      image:
+        "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80",
     },
   ],
   copyrightYear: 2026,
