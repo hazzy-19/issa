@@ -7,7 +7,7 @@ export const cafeData = {
     heroBlurbShort: "Fresh coffee. Comforting plates.",
     blurb: "Your neighbourhood spot for fresh food and good coffee.",
     heroImage:
-      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&w=1600&q=80",
   },
   hours: {
     display: "Mon to Fri 8:00 am to 8:00 pm, Sat to Sun 9:00 am to 8:00 pm",

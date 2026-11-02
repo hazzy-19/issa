@@ -24,13 +24,13 @@ export default function ChefsPicks() {
     <section id="chefs-picks" className="scroll-mt-24 py-12 md:py-16">
       {/* Section Header */}
       <div className="text-center mb-10">
-        <span className="text-xs font-semibold uppercase tracking-widest text-terracotta-600 block mb-1">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-[#C07A46] bg-[#C07A46]/10 px-3.5 py-1 rounded-full inline-block mb-2">
           Handcrafted Daily
         </span>
-        <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-warmstone-900">
+        <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-[#1E100A]">
           Chef's picks
         </h2>
-        <p className="text-xs sm:text-sm text-warmstone-600 mt-2 max-w-md mx-auto">
+        <p className="text-xs sm:text-sm text-[#542F1E] mt-2 max-w-md mx-auto">
           A few favourites from our kitchen, made fresh every day.
         </p>
       </div>
@@ -44,11 +44,11 @@ export default function ChefsPicks() {
             key={item.id}
             href={`#${item.menuItemId}`}
             onClick={(e) => handleItemClick(e, item.menuItemId)}
-            className="group block text-left bg-white p-3.5 rounded-2xl border border-warmstone-200/80 shadow-sm hover:shadow-md hover:border-terracotta-500/40 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta-600"
+            className="group block text-left bg-white p-4 rounded-3xl border border-[#DFCCA] shadow-sm hover:shadow-xl hover:border-[#C07A46]/60 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             aria-label={`View ${item.name} in menu for ${formatPrice(item.price)}`}
           >
             {/* Real photo container with smooth zoom */}
-            <div className="relative w-full h-44 rounded-xl overflow-hidden mb-3 bg-warmstone-100">
+            <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-3.5 bg-[#FAF5EE]">
               <img
                 src={item.image}
                 alt={item.name}
@@ -59,16 +59,16 @@ export default function ChefsPicks() {
 
             {/* Name and Price */}
             <div className="flex items-baseline justify-between gap-2 mb-1.5">
-              <h3 className="font-serif font-bold text-warmstone-900 text-base group-hover:text-terracotta-600 transition-colors">
+              <h3 className="font-serif font-bold text-[#1E100A] text-base group-hover:text-[#C07A46] transition-colors">
                 {item.name}
               </h3>
-              <span className="text-xs font-bold text-terracotta-600 bg-terracotta-50 px-2 py-0.5 rounded-md whitespace-nowrap">
+              <span className="text-xs font-bold text-[#A96434] bg-[#C07A46]/10 px-2.5 py-1 rounded-full whitespace-nowrap">
                 {formatPrice(item.price)}
               </span>
             </div>
 
             {/* Description */}
-            <p className="text-xs text-warmstone-600 leading-relaxed">
+            <p className="text-xs text-[#542F1E] leading-relaxed">
               {item.description}
             </p>
           </a>
@@ -85,11 +85,11 @@ export default function ChefsPicks() {
               key={item.id}
               href={`#${item.menuItemId}`}
               onClick={(e) => handleItemClick(e, item.menuItemId)}
-              className="flex-none w-[75vw] sm:w-[50vw] snap-start group block text-left bg-white p-3.5 rounded-2xl border border-warmstone-200/80 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta-600"
+              className="flex-none w-[75vw] sm:w-[50vw] snap-start group block text-left bg-white p-4 rounded-3xl border border-[#DFCCA] shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
               aria-label={`View ${item.name} in menu for ${formatPrice(item.price)}`}
             >
               {/* Photo */}
-              <div className="relative w-full h-40 rounded-xl overflow-hidden mb-3 bg-warmstone-100">
+              <div className="relative w-full h-40 rounded-2xl overflow-hidden mb-3 bg-[#FAF5EE]">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -100,16 +100,16 @@ export default function ChefsPicks() {
 
               {/* Name and Price */}
               <div className="flex items-baseline justify-between gap-2 mb-1.5">
-                <h3 className="font-serif font-bold text-warmstone-900 text-sm">
+                <h3 className="font-serif font-bold text-[#1E100A] text-sm">
                   {item.name}
                 </h3>
-                <span className="text-xs font-bold text-terracotta-600 bg-terracotta-50 px-2 py-0.5 rounded-md whitespace-nowrap">
+                <span className="text-xs font-bold text-[#A96434] bg-[#C07A46]/10 px-2.5 py-1 rounded-full whitespace-nowrap">
                   {formatPrice(item.price)}
                 </span>
               </div>
 
               {/* Description */}
-              <p className="text-xs text-warmstone-600 leading-relaxed">
+              <p className="text-xs text-[#542F1E] leading-relaxed">
                 {item.description}
               </p>
             </a>
@@ -118,9 +118,9 @@ export default function ChefsPicks() {
 
         {/* Swipe for more hint */}
         <div className="flex justify-center mt-3">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-warmstone-300 text-[11px] font-medium text-warmstone-700 bg-white shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#1E100A] text-[#FAF5EE] text-[11px] font-semibold shadow-xs">
             <svg
-              className="w-3.5 h-3.5 text-terracotta-600"
+              className="w-3.5 h-3.5 text-[#C07A46]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

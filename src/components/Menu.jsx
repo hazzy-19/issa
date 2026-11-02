@@ -15,9 +15,9 @@ export default function Menu() {
         const el = document.getElementById(menuItemId);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
-          el.classList.add("ring-2", "ring-terracotta-600", "bg-white", "shadow-lg", "p-3", "-m-3", "rounded-2xl", "transition-all");
+          el.classList.add("ring-2", "ring-[#C07A46]", "bg-white", "shadow-xl", "p-3", "-m-3", "rounded-2xl", "transition-all");
           setTimeout(() => {
-            el.classList.remove("ring-2", "ring-terracotta-600", "bg-white", "shadow-lg", "p-3", "-m-3", "rounded-2xl");
+            el.classList.remove("ring-2", "ring-[#C07A46]", "bg-white", "shadow-xl", "p-3", "-m-3", "rounded-2xl");
           }, 2200);
         }
       }, 120);
@@ -36,13 +36,13 @@ export default function Menu() {
     <section id="menu" className="scroll-mt-24 py-12 md:py-16">
       {/* Section Header */}
       <div className="text-center mb-10">
-        <span className="text-xs font-semibold uppercase tracking-widest text-terracotta-600 block mb-1">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-[#C07A46] bg-[#C07A46]/10 px-3.5 py-1 rounded-full inline-block mb-2">
           Seasonal Selection
         </span>
-        <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-warmstone-900">
+        <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-[#1E100A]">
           The menu
         </h2>
-        <p className="text-xs sm:text-sm text-warmstone-600 mt-2 max-w-md mx-auto">
+        <p className="text-xs sm:text-sm text-[#542F1E] mt-2 max-w-md mx-auto">
           Simple ingredients, freshly prepared. Find something you'll love.
         </p>
       </div>
@@ -57,10 +57,10 @@ export default function Menu() {
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
-                className={`whitespace-nowrap px-5 py-2 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta-600 ${
+                className={`whitespace-nowrap px-6 py-2.5 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
                   isActive
-                    ? "bg-warmstone-900 text-white shadow-md"
-                    : "bg-white text-warmstone-700 border border-warmstone-200/90 hover:border-warmstone-400 hover:text-warmstone-900"
+                    ? "bg-[#1E100A] text-[#FAF5EE] shadow-md border border-[#1E100A]"
+                    : "bg-white text-[#542F1E] border border-[#DFCCA] hover:border-[#C07A46] hover:text-[#1E100A]"
                 }`}
                 aria-pressed={isActive}
               >
@@ -72,11 +72,11 @@ export default function Menu() {
       </div>
 
       {/* Category Title & Kitchen Hours Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-warmstone-200 pb-3 mb-8">
-        <h3 className="font-serif text-xl font-bold text-warmstone-900">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-[#DFCCA] pb-3 mb-8">
+        <h3 className="font-serif text-2xl font-bold text-[#1E100A]">
           {activeCategory}
         </h3>
-        <span className="text-xs text-warmstone-500 mt-1 sm:mt-0 font-medium">
+        <span className="text-xs text-[#542F1E] mt-1 sm:mt-0 font-medium bg-[#C07A46]/10 px-3 py-1 rounded-full">
           {cafeData.hours.kitchenNotice}
         </span>
       </div>
@@ -89,8 +89,8 @@ export default function Menu() {
             id={item.id}
             className="flex items-start gap-4 text-left group transition-all"
           >
-            {/* Real photo thumbnail with rounded corners */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-xl overflow-hidden bg-warmstone-100 border border-warmstone-200/80 shadow-xs">
+            {/* Real photo thumbnail with rounded-2xl corners */}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-2xl overflow-hidden bg-[#FAF5EE] border border-[#DFCCA] shadow-xs">
               <img
                 src={item.image}
                 alt={item.name}
@@ -102,20 +102,20 @@ export default function Menu() {
             {/* Item Details */}
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline justify-between gap-2 mb-1">
-                <h4 className="font-serif font-bold text-warmstone-900 text-base leading-snug group-hover:text-terracotta-600 transition-colors">
+                <h4 className="font-serif font-bold text-[#1E100A] text-base leading-snug group-hover:text-[#C07A46] transition-colors">
                   {item.name}
                 </h4>
-                <span className="text-xs sm:text-sm font-bold text-terracotta-600 whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-bold text-[#C07A46] whitespace-nowrap">
                   {item.price}
                 </span>
               </div>
 
-              <p className="text-xs sm:text-sm text-warmstone-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#542F1E] leading-relaxed">
                 {item.description}
               </p>
 
               {item.dietaryTag && (
-                <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full inline-block mt-1.5">
+                <span className="text-[11px] font-semibold text-[#8E4F25] bg-[#C07A46]/10 border border-[#C07A46]/20 px-2.5 py-0.5 rounded-full inline-block mt-1.5">
                   {item.dietaryTag}
                 </span>
               )}
@@ -125,11 +125,11 @@ export default function Menu() {
       </div>
 
       {/* Notes Below the List */}
-      <div className="mt-14 pt-6 border-t border-warmstone-200 text-center space-y-1.5 bg-white/60 rounded-2xl p-6 border border-warmstone-200/80">
-        <p className="text-xs text-warmstone-700 font-medium">
+      <div className="mt-14 pt-6 border-t border-[#DFCCA] text-center space-y-1.5 bg-[#FAF5EE] rounded-3xl p-6 border border-[#DFCCA]">
+        <p className="text-xs text-[#1E100A] font-semibold">
           {cafeData.hours.kitchenNotice}
         </p>
-        <p className="text-xs text-warmstone-500">
+        <p className="text-xs text-[#542F1E]">
           {cafeData.hours.allergyNotice}
         </p>
       </div>

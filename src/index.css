@@ -5,16 +5,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    color: #1c1917;
-    background-color: #faf8f5;
+    color: #1e100a;
+    background-color: #faf5ee;
   }
 
-  /* Accessible high-contrast focus outlines */
+  /* Accessible high-contrast focus outlines in warm caramel */
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
   select:focus-visible {
-    outline: 2px solid #a96126;
+    outline: 2px solid #c07a46;
     outline-offset: 3px;
   }
 }
