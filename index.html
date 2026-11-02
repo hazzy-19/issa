@@ -1,22 +1,107 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Corner Café - Good food. Great coffee.</title>
-    <meta
-      name="description"
-      content="The Corner Café - Freshly brewed coffee, comforting plates and a welcoming neighbourhood space in Brookside."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-[#FAF8F5] text-stone-900 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>The Corner Café | Fresh Coffee, Breakfast and Lunch in Brookside</title>
+  <meta name="description"
+    content="Freshly brewed coffee, comforting plates and a welcoming neighbourhood space in Brookside. See our menu, opening hours and get directions to The Corner Café." />
+  <meta name="keywords"
+    content="café in Brookside, coffee shop, breakfast, lunch, fresh coffee, brunch, sourdough, vegetarian food, vegan options, The Corner Café" />
+  <meta name="author" content="The Corner Café" />
+  <link rel="canonical" href="https://YOUR-DOMAIN/" />
+
+  <!-- Indexing -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <!-- Theme and icons -->
+  <meta name="theme-color" content="#FAF8F5" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Corner Café" />
+  <meta property="og:title" content="The Corner Café | Good food. Great coffee." />
+  <meta property="og:description"
+    content="Freshly brewed coffee, comforting plates and a welcoming space to slow down. Breakfast, lunch and more in Brookside." />
+  <meta property="og:url" content="https://YOUR-DOMAIN/" />
+  <meta property="og:image" content="https://YOUR-DOMAIN/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Inside The Corner Café" />
+  <meta property="og:locale" content="en_KE" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Corner Café | Good food. Great coffee." />
+  <meta name="twitter:description"
+    content="Freshly brewed coffee, comforting plates and a welcoming space to slow down." />
+  <meta name="twitter:image" content="https://YOUR-DOMAIN/og-image.jpg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Structured data (local business) -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "name": "The Corner Café",
+        "description": "Neighbourhood café serving freshly brewed coffee, breakfast, lunch and treats.",
+        "url": "https://YOUR-DOMAIN/",
+        "image": "https://YOUR-DOMAIN/og-image.jpg",
+        "telephone": "+254-000-000000",
+        "email": "hello@cornercafe.example",
+        "priceRange": "KSh",
+        "servesCuisine": ["Café", "Breakfast", "Lunch"],
+        "menu": "https://YOUR-DOMAIN/#menu",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Market Street",
+          "addressLocality": "Brookside",
+          "addressCountry": "KE"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "20:00"
+          }
+        ],
+        "sameAs": [
+          "https://instagram.com/YOUR-HANDLE",
+          "https://facebook.com/YOUR-PAGE",
+          "https://tiktok.com/@YOUR-HANDLE"
+        ]
+      }
+    </script>
+
+  <script type="module" src="/src/main.jsx"></script>
+</head>
+
+<body
+  class="bg-[#FAF8F5] text-stone-900 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
+  <div id="root"></div>
+  <noscript>
+    The Corner Café, 123 Market Street, Brookside. Open Mon to Fri 8:00 am to 8:00 pm,
+    Sat to Sun 9:00 am to 8:00 pm. Enable JavaScript to view our menu.
+  </noscript>
+</body>
+
 </html>
