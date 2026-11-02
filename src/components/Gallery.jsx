@@ -1,75 +1,77 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { cafeData } from "../data/cafe";
 
 export default function Gallery() {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const categories = cafeData.galleryCategories || [
-    "All",
-    "Customers & Moments",
-    "Food & Treats",
-    "The Space & Brews",
-  ];
-
-  const filteredItems =
-    activeCategory === "All"
-      ? cafeData.gallery
-      : cafeData.gallery.filter((item) => item.category === activeCategory);
+  // Show a curated selection of 6 varied photos for the Pinterest preview on home page
+  const previewItems = cafeData.gallery.slice(0, 6);
 
   return (
-    <section id="gallery" className="scroll-mt-20 py-8 md:py-12">
-      {/* Dark Roast Container for dramatic coffeehouse contrast */}
-      <div className="bg-[#1E100A] text-[#FAF5EE] rounded-3xl p-6 sm:p-10 border border-[#321B11] shadow-2xl">
-        {/* Section Header without fluff badges */}
-        <div className="text-center mb-8">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-[#FAF5EE]">
-            The space gallery
-          </h2>
+    <section id="gallery" className="scroll-mt-20 py-6 md:py-8">
+      {/* Dark Roast Container for rich coffeehouse contrast */}
+      <div className="bg-[#1E100A] text-[#FAF5EE] rounded-3xl p-5 sm:p-8 md:p-10 border border-[#321B11] shadow-2xl">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#FAF5EE]">
+              The space & moments
+            </h2>
+          </div>
+          <Link
+            to="/gallery"
+            className="text-xs sm:text-sm font-semibold text-[#C07A46] hover:text-[#D58E59] transition-colors flex items-center gap-1 group"
+          >
+            <span>Full gallery</span>
+            <svg
+              className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
 
-        {/* Category Filter Pills: Customers, Foods, Space */}
-        <div className="flex overflow-x-auto gap-2.5 pb-2 mb-8 scrollbar-none justify-start sm:justify-center -mx-2 px-2">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActiveCategory(cat)}
-                className={`whitespace-nowrap px-5 py-2 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
-                  isActive
-                    ? "bg-[#C07A46] text-white shadow-md"
-                    : "bg-[#26140D] text-[#D1B89F] border border-[#3D2217] hover:border-[#C07A46] hover:text-white"
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Gallery Grid of Distinct Images */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredItems.map((item) => (
-            <div key={item.id} className="text-center group">
-              <div className="relative w-full h-64 rounded-2xl overflow-hidden bg-[#26140D] shadow-lg border border-[#321B11] mb-2.5">
+        {/* ============================================================ */}
+        {/* PINTEREST WATERFALL MASONRY PREVIEW (2 COLUMNS ON MOBILE)   */}
+        {/* ============================================================ */}
+        <div className="columns-2 md:columns-3 gap-3 md:gap-4 mb-6">
+          {previewItems.map((item) => (
+            <Link
+              key={item.id}
+              to="/gallery"
+              className="break-inside-avoid block mb-3 md:mb-4 group rounded-2xl overflow-hidden bg-[#26140D] border border-[#321B11] shadow-md hover:shadow-2xl transition-all"
+            >
+              <div className={`relative w-full ${item.aspect || "aspect-[3/4]"} overflow-hidden`}>
                 <img
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                  <span className="text-xs font-semibold text-white drop-shadow-xs">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <span className="text-[11px] sm:text-xs font-semibold text-white drop-shadow-xs line-clamp-1">
                     {item.title}
                   </span>
                 </div>
               </div>
-              <p className="font-serif text-sm font-medium text-[#D1B89F] group-hover:text-white transition-colors">
-                {item.title}
-              </p>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* View Full Gallery Button */}
+        <div className="text-center pt-2">
+          <Link
+            to="/gallery"
+            className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3 bg-[#C07A46] hover:bg-[#D58E59] text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+          >
+            <span>Explore Full Gallery ({cafeData.gallery.length} Photos)</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

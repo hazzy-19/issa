@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cafeData } from "../data/cafe";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -10,6 +13,35 @@ export default function Header() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const handleLinkClick = (e, href) => {
+    closeMobileMenu();
+
+    if (href === "/") {
+      if (location.pathname === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+      }
+      return;
+    }
+
+    if (href.startsWith("/#")) {
+      const sectionId = href.replace("/#", "");
+      if (location.pathname === "/") {
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // Navigate to home with target hash
+        navigate(`/#${sectionId}`);
+      }
+      return;
+    }
   };
 
   // Close on Escape key press and prevent background scroll when drawer is open
@@ -39,29 +71,48 @@ export default function Header() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Desktop Header */}
           <div className="hidden md:flex items-center justify-between h-20">
-            <a
-              href="#home"
+            <Link
+              to="/"
+              onClick={(e) => handleLinkClick(e, "/")}
               className="font-serif text-2xl font-bold tracking-wide text-[#FAF5EE] hover:text-[#C07A46] transition-colors flex items-center gap-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
               <span className="w-8 h-8 rounded-full bg-[#C07A46] text-white flex items-center justify-center text-sm font-serif shadow-xs">
                 C
               </span>
               <span>{cafeData.brand.name}</span>
-            </a>
+            </Link>
 
             <nav
               aria-label="Desktop Navigation"
-              className="flex items-center space-x-8 text-sm font-medium text-[#D1B89F]"
+              className="flex items-center space-x-7 text-sm font-medium text-[#D1B89F]"
             >
-              {cafeData.navigation.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="hover:text-[#FAF5EE] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {cafeData.navigation.map((item) => {
+                const isPage = item.href === "/menu" || item.href === "/gallery";
+                const isActive =
+                  location.pathname === item.href ||
+                  (item.href === "/" && location.pathname === "/");
+
+                return isPage ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className={`transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
+                      isActive ? "text-[#C07A46] font-semibold" : "hover:text-[#FAF5EE]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={(e) => handleLinkClick(e, item.href)}
+                    className="hover:text-[#FAF5EE] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
 
             <a
@@ -104,12 +155,13 @@ export default function Header() {
             </button>
 
             {/* Logo center */}
-            <a
-              href="#home"
+            <Link
+              to="/"
+              onClick={(e) => handleLinkClick(e, "/")}
               className="font-serif text-lg font-bold text-[#FAF5EE] tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
               {cafeData.brand.name}
-            </a>
+            </Link>
 
             {/* Call us button */}
             <a
@@ -147,16 +199,16 @@ export default function Header() {
         <div>
           {/* Sidebar Top Header with Brand and Close Button */}
           <div className="flex items-center justify-between pb-6 border-b border-[#321B11] mb-6">
-            <a
-              href="#home"
-              onClick={closeMobileMenu}
+            <Link
+              to="/"
+              onClick={(e) => handleLinkClick(e, "/")}
               className="font-serif text-xl font-bold tracking-wide text-[#FAF5EE] flex items-center gap-2.5"
             >
               <span className="w-8 h-8 rounded-full bg-[#C07A46] text-white flex items-center justify-center text-sm font-serif font-bold shadow-xs">
                 C
               </span>
               <span>{cafeData.brand.name}</span>
-            </a>
+            </Link>
 
             <button
               type="button"
@@ -172,25 +224,54 @@ export default function Header() {
 
           {/* Navigation Links with smooth hover styling */}
           <nav aria-label="Mobile Navigation Links" className="flex flex-col space-y-2">
-            {cafeData.navigation.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={closeMobileMenu}
-                className="py-3 px-3.5 rounded-xl text-base font-medium text-[#FAF5EE] hover:bg-[#26140D] hover:text-[#C07A46] transition-all flex items-center justify-between group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
-              >
-                <span>{item.label}</span>
-                <svg
-                  className="w-4 h-4 text-[#D1B89F] group-hover:text-[#C07A46] transition-colors"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+            {cafeData.navigation.map((item) => {
+              const isPage = item.href === "/menu" || item.href === "/gallery";
+              const isActive =
+                location.pathname === item.href ||
+                (item.href === "/" && location.pathname === "/");
+
+              return isPage ? (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  onClick={closeMobileMenu}
+                  className={`py-3 px-3.5 rounded-xl text-base font-medium transition-all flex items-center justify-between group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
+                    isActive
+                      ? "bg-[#26140D] text-[#C07A46] font-semibold"
+                      : "text-[#FAF5EE] hover:bg-[#26140D] hover:text-[#C07A46]"
+                  }`}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            ))}
+                  <span>{item.label}</span>
+                  <svg
+                    className="w-4 h-4 text-[#D1B89F] group-hover:text-[#C07A46] transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              ) : (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => handleLinkClick(e, item.href)}
+                  className="py-3 px-3.5 rounded-xl text-base font-medium text-[#FAF5EE] hover:bg-[#26140D] hover:text-[#C07A46] transition-all flex items-center justify-between group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
+                >
+                  <span>{item.label}</span>
+                  <svg
+                    className="w-4 h-4 text-[#D1B89F] group-hover:text-[#C07A46] transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              );
+            })}
           </nav>
         </div>
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { cafeData } from "../data/cafe";
 
 export default function Hero() {
@@ -16,9 +17,9 @@ export default function Hero() {
   }, [slides.length]);
 
   return (
-    <section id="home" className="scroll-mt-20 pt-4 pb-8 md:py-8">
-      {/* Full Hero Container covering the entire section */}
-      <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#321B11] min-h-[580px] sm:min-h-[540px] md:min-h-[500px] lg:min-h-[540px] flex items-end md:items-center">
+    <section id="home" className="scroll-mt-20 pt-2 pb-6 md:py-6">
+      {/* Hero Container covering the entire section */}
+      <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#321B11] h-[520px] sm:h-[500px] md:h-[540px] flex items-end md:items-center">
         {/* 5-Image Slideshow with smooth crossfade */}
         {slides.map((slide, index) => (
           <img
@@ -33,49 +34,49 @@ export default function Hero() {
           />
         ))}
 
-        {/* Ambient Dark Roast Vignette to emphasize coffee colors and glass sheen */}
+        {/* Delicate Vignette: keeps coffee photography luminous and clear while ensuring text contrast */}
         <div
-          className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/85 via-black/40 to-black/15 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent md:bg-gradient-to-r md:from-black/80 md:via-black/35 md:to-transparent pointer-events-none"
           aria-hidden="true"
         />
 
         {/* ============================================================ */}
-        {/* TRUE LIQUID GLASS / FROSTED GLASS CARD                       */}
+        {/* LIQUID FROSTED GLASS CARD: Compact & elegant on all screens  */}
         {/* ============================================================ */}
-        <div className="relative z-10 m-4 sm:m-6 md:my-10 md:ml-10 lg:ml-14 max-w-md lg:max-w-lg w-full rounded-3xl p-6 sm:p-8 lg:p-10 text-left backdrop-blur-2xl bg-gradient-to-br from-white/25 via-white/10 to-white/5 border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_1px_0_rgba(255,255,255,0.4),inset_0_-1px_1px_0_rgba(0,0,0,0.2)]">
-          {/* Heading */}
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight mb-3.5 drop-shadow-md">
+        <div className="relative z-10 m-3 sm:m-5 md:my-8 md:ml-8 lg:ml-12 max-w-md lg:max-w-lg w-full rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 text-left backdrop-blur-xl bg-black/45 md:bg-white/15 border border-white/25 md:border-white/35 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_0_rgba(255,255,255,0.35)]">
+          {/* Main Tagline */}
+          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-snug mb-2 sm:mb-3 drop-shadow-md">
             {cafeData.brand.tagline}
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-sm sm:text-base text-[#FAF5EE]/90 mb-7 leading-relaxed drop-shadow-xs font-normal">
+          {/* Subtitle / Blurb */}
+          <p className="text-xs sm:text-sm text-[#FAF5EE]/90 mb-4 sm:mb-6 leading-relaxed drop-shadow-xs line-clamp-2 sm:line-clamp-none">
             {cafeData.brand.heroBlurb}
           </p>
 
-          {/* Pill Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <a
-              href="#menu"
-              className="inline-block px-6 sm:px-7 py-3 bg-[#C07A46] hover:bg-[#D58E59] text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
+          {/* Action Pills */}
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-5">
+            <Link
+              to="/menu"
+              className="inline-flex items-center justify-center px-5 sm:px-6 py-2.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-lg transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
             >
               Explore our menu
-            </a>
+            </Link>
 
             <a
               href={cafeData.contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 sm:px-7 py-3 bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-semibold rounded-full shadow-sm hover:shadow border border-white/40 backdrop-blur-md transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
+              className="inline-flex items-center justify-center px-4 sm:px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-semibold rounded-full shadow-xs hover:shadow border border-white/35 backdrop-blur-md transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
             >
               Get directions
             </a>
           </div>
 
-          {/* Opening hours line inside card under buttons */}
-          <div className="pt-3.5 border-t border-white/20 flex items-center gap-2 text-[#FAF5EE]/85">
+          {/* Opening Hours Info */}
+          <div className="pt-2.5 border-t border-white/20 flex items-center gap-2 text-[#FAF5EE]/85">
             <svg
-              className="w-4 h-4 text-[#D58E59] flex-shrink-0"
+              className="w-3.5 h-3.5 text-[#D58E59] flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -88,22 +89,22 @@ export default function Hero() {
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <p className="text-xs leading-normal font-medium drop-shadow-2xs">
+            <p className="text-[11px] sm:text-xs leading-normal font-medium drop-shadow-2xs">
               {cafeData.hours.display}
             </p>
           </div>
         </div>
 
-        {/* Slideshow Indicator Dots */}
-        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+        {/* Slideshow Indicator Dots: Floating in bottom-right corner of the section */}
+        <div className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 z-20 flex items-center gap-1.5 sm:gap-2 bg-black/50 backdrop-blur-md px-2.5 sm:px-3 py-1.5 rounded-full border border-white/20">
           {slides.map((_, idx) => (
             <button
               key={idx}
               type="button"
               onClick={() => setCurrentSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-white ${
-                idx === currentSlide ? "w-6 bg-[#C07A46]" : "w-2 bg-white/50 hover:bg-white"
+              className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-white ${
+                idx === currentSlide ? "w-5 sm:w-6 bg-[#C07A46]" : "w-1.5 sm:w-2 bg-white/50 hover:bg-white"
               }`}
             />
           ))}
