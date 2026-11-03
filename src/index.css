@@ -27,3 +27,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Floating animation for preview card respecting prefers-reduced-motion */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-gentle-float {
+    animation: gentleFloat 6s ease-in-out infinite;
+  }
+}
