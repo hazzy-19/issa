@@ -124,7 +124,7 @@ export default function WelcomePage() {
       {/* ============================================================ */}
       {/* 2. HOW IT WORKS ROW (3 STEPS)                                */}
       {/* ============================================================ */}
-      <section className="space-y-6">
+      <section id="how" className="scroll-mt-24 space-y-6">
         <div className="text-center max-w-md mx-auto">
           <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1E100A] mb-2">
             How it works
@@ -157,7 +157,7 @@ export default function WelcomePage() {
       {/* ============================================================ */}
       {/* 3. WHAT YOU CAN SET UP (2 COLUMNS ON MOBILE)                 */}
       {/* ============================================================ */}
-      <section className="space-y-6">
+      <section id="features" className="scroll-mt-24 space-y-6">
         <div className="text-center max-w-md mx-auto">
           <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1E100A] mb-2">
             What you can set up
@@ -190,9 +190,9 @@ export default function WelcomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 4. FINAL CALL TO ACTION                                      */}
+      {/* 4. FINAL CALL TO ACTION / EXAMPLE                            */}
       {/* ============================================================ */}
-      <section className="bg-[#1E100A] text-[#FAF5EE] rounded-3xl p-6 sm:p-10 text-center border border-[#321B11] shadow-xl space-y-4">
+      <section id="example" className="scroll-mt-24 bg-[#1E100A] text-[#FAF5EE] rounded-3xl p-6 sm:p-10 text-center border border-[#321B11] shadow-xl space-y-4">
         <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white">
           Ready to set up your café?
         </h2>
