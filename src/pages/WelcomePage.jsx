@@ -429,32 +429,248 @@ export default function WelcomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 4. FINAL CALL TO ACTION                                      */}
+      {/* 4. SHOWCASE: SEE WHAT YOU GET (id="example")                 */}
       {/* ============================================================ */}
       <section
         id="example"
-        className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20"
+        className="scroll-mt-20 bg-[#FAF5EE] border-t border-[#DFCCA] py-20 sm:py-24 lg:py-28"
       >
-        <div className="bg-[#1E100A] text-[#FAF5EE] rounded-3xl p-6 sm:p-12 text-center border border-[#321B11] shadow-xl space-y-4">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-            Ready to set up your café?
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#C07A46] mb-2.5">
+              Live Preview
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1E100A]">
+              See what you get
+            </h2>
+            <p className="text-xs sm:text-sm text-[#542F1E] mt-3 leading-relaxed">
+              A complete, mobile-optimized website for your café with all the details your customers look for.
+            </p>
+          </div>
+
+          {/* Large Browser Frame Mockup */}
+          <div className="relative max-w-4xl mx-auto">
+            <div className="rounded-2xl sm:rounded-3xl border border-[#321B11] shadow-2xl bg-[#1E100A] overflow-hidden">
+              {/* Browser Header Bar */}
+              <div className="h-9 sm:h-11 bg-[#26140D] border-b border-[#321B11] px-3.5 sm:px-4 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                </div>
+                <div className="w-48 sm:w-64 bg-[#1E100A] text-[#D1B89F] text-[11px] sm:text-xs font-mono py-1 px-3 rounded-full border border-white/10 flex items-center justify-center gap-1.5">
+                  <svg className="w-3 h-3 text-[#C07A46]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <span>yourcafe.com</span>
+                </div>
+                <div className="w-8" />
+              </div>
+
+              {/* Accessible Summary for Screen Readers */}
+              <p className="sr-only">
+                Preview of a completed café website showing the full-bleed hero banner, opening hours, chef's picks menu items, and photo gallery.
+              </p>
+
+              {/* Mockup Canvas (Non-interactive) */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none select-none bg-[#FAF5EE] text-[#1E100A] p-3 sm:p-6 space-y-4 sm:space-y-6"
+              >
+                {/* 1. Mini Hero */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[16/7] sm:aspect-[16/6] bg-[#1E100A] flex items-center px-4 sm:px-8">
+                  <img
+                    src={cafeData.brand.heroSlides[0]?.url}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
+                  />
+                  <div className="relative z-10 max-w-sm text-left">
+                    <div className="font-serif font-bold text-base sm:text-2xl text-white leading-tight mb-1">
+                      {cafeData.brand.name}
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-[#FAF5EE]/90 line-clamp-1 mb-2">
+                      {cafeData.brand.tagline}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#C07A46] text-white text-[9px] sm:text-[10px] font-semibold">
+                        Explore our menu
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[9px] sm:text-[10px] font-semibold border border-white/30 backdrop-blur-xs">
+                        Get directions
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Mini Chef's Picks Row */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-serif font-bold text-xs sm:text-sm text-[#1E100A]">
+                      Chef's picks
+                    </span>
+                    <span className="text-[10px] text-[#C07A46] font-semibold">
+                      Full menu &rarr;
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                    {cafeData.chefsPicks.slice(0, 3).map((item) => (
+                      <div
+                        key={item.id}
+                        className="bg-white rounded-xl p-2 border border-[#DFCCA] shadow-2xs"
+                      >
+                        <div className="relative aspect-square rounded-lg overflow-hidden mb-1.5 bg-[#FAF5EE]">
+                          <img
+                            src={item.image}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                          <span className="absolute top-1 right-1 bg-black/70 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                            {item.price}
+                          </span>
+                        </div>
+                        <p className="font-serif font-bold text-[10px] sm:text-xs truncate text-[#1E100A]">
+                          {item.name}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3. Mini Gallery Row */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-serif font-bold text-xs sm:text-sm text-[#1E100A]">
+                      The space & moments
+                    </span>
+                    <span className="text-[10px] text-[#C07A46] font-semibold">
+                      Full gallery &rarr;
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                    {cafeData.gallery.slice(0, 3).map((item) => (
+                      <div
+                        key={item.id}
+                        className="aspect-[4/3] rounded-xl overflow-hidden bg-[#26140D] border border-[#DFCCA]"
+                      >
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Three Pointing Callouts */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto mt-6">
+              <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#DFCCA] shadow-xs text-xs font-semibold text-[#1E100A]">
+                <span className="text-[#C07A46] font-bold">&uarr;</span>
+                <span>Your hours and location</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#DFCCA] shadow-xs text-xs font-semibold text-[#1E100A]">
+                <span className="text-[#C07A46] font-bold">&uarr;</span>
+                <span>Your menu with prices</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#DFCCA] shadow-xs text-xs font-semibold text-[#1E100A]">
+                <span className="text-[#C07A46] font-bold">&uarr;</span>
+                <span>Your photos</span>
+              </div>
+            </div>
+
+            {/* Live Example Button */}
+            <div className="text-center mt-8">
+              <Link
+                to="/?example=true"
+                onClick={handleSeeLiveExample}
+                className="inline-flex items-center gap-2 px-7 py-3 bg-[#1E100A] hover:bg-[#C07A46] text-[#FAF5EE] text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
+              >
+                <span>See the live example</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 5. SOCIAL PROOF STRIP (Honest, generic stat blocks)          */}
+      {/* ============================================================ */}
+      <section className="bg-white border-t border-[#DFCCA] py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-[#DFCCA]">
+            <div className="pt-4 sm:pt-0">
+              <div className="font-serif text-3xl sm:text-4xl font-bold text-[#1E100A] mb-1">
+                5 minutes
+              </div>
+              <p className="text-xs sm:text-sm text-[#542F1E]">
+                Average time to set up
+              </p>
+            </div>
+            <div className="pt-4 sm:pt-0 sm:pl-4">
+              <div className="font-serif text-3xl sm:text-4xl font-bold text-[#C07A46] mb-1">
+                0 lines
+              </div>
+              <p className="text-xs sm:text-sm text-[#542F1E]">
+                Of code required
+              </p>
+            </div>
+            <div className="pt-4 sm:pt-0 sm:pl-4">
+              <div className="font-serif text-3xl sm:text-4xl font-bold text-[#1E100A] mb-1">
+                100%
+              </div>
+              <p className="text-xs sm:text-sm text-[#542F1E]">
+                Mobile and desktop ready
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 6. FINAL FULL-WIDTH CALL TO ACTION (Flush with footer)       */}
+      {/* ============================================================ */}
+      <section className="relative w-full min-h-[460px] sm:min-h-[500px] flex items-center justify-center overflow-hidden mb-0">
+        {/* Background Image: heroSlides[3] */}
+        <img
+          src={cafeData.brand.heroSlides[3]?.url}
+          alt={cafeData.brand.heroSlides[3]?.alt || "Warm ambient café interior"}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Dark espresso overlay (70% opacity) with soft gradient toward bottom */}
+        <div
+          className="absolute inset-0 bg-[#1E100A]/70 bg-gradient-to-b from-[#1E100A]/65 via-[#1E100A]/75 to-[#140A06]"
+          aria-hidden="true"
+        />
+
+        {/* Content Container */}
+        <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center text-[#FAF5EE]">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 leading-tight">
+            Ready to open your doors online?
           </h2>
-          <p className="text-xs sm:text-sm text-[#D1B89F] max-w-lg mx-auto leading-relaxed">
-            It takes just a couple of minutes to fill in your details and view your site live on any device.
+          <p className="text-sm sm:text-base text-[#D1B89F] max-w-lg mx-auto leading-relaxed mb-8">
+            Set up your café presence in minutes and welcome local customers with a beautiful, fast digital storefront.
           </p>
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
               to="/setup"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-sm font-semibold rounded-full shadow-lg transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               Get started
             </Link>
+
             <Link
-              to="/?example=true"
-              onClick={handleSeeLiveExample}
-              className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm text-[#D1B89F] hover:text-white transition-colors"
+              to="/setup/assistant"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-white/10 text-white text-sm font-semibold rounded-full border border-white/40 backdrop-blur-xs transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
-              Or preview the live example
+              Describe it instead
             </Link>
           </div>
         </div>
