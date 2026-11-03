@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { cafeData } from "../data/cafe";
+import { useCafe } from "../context/CafeContext";
 
 export default function Footer() {
+  const { cafeData } = useCafe();
   return (
     <footer className="bg-[#140A06] text-[#D1B89F] pt-12 sm:pt-16 pb-10 sm:pb-12 text-sm border-t border-[#26140D]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -45,13 +46,17 @@ export default function Footer() {
             <p className="text-[#A8917A] text-xs sm:text-sm max-w-sm leading-relaxed mb-3">
               {cafeData.brand.blurb}
             </p>
-            <div className="flex flex-wrap gap-2 text-xs">
+            <div className="flex flex-wrap items-center gap-2 text-xs">
               <Link to="/menu" className="text-[#C07A46] hover:underline font-medium">
                 Menu &rarr;
               </Link>
               <span className="text-[#3D2217]">&bull;</span>
               <Link to="/gallery" className="text-[#C07A46] hover:underline font-medium">
                 Gallery &rarr;
+              </Link>
+              <span className="text-[#3D2217]">&bull;</span>
+              <Link to="/setup" className="text-[#C07A46] hover:underline font-medium">
+                Edit my details &rarr;
               </Link>
             </div>
           </div>
@@ -115,9 +120,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-6 text-center text-xs text-[#7A6452]">
+        {/* Copyright & Edit Details Link */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#7A6452] gap-2">
           <p>&copy; {cafeData.copyrightYear} {cafeData.brand.name}. All rights reserved.</p>
+          <Link
+            to="/setup"
+            className="text-[#D1B89F] hover:text-[#C07A46] transition-colors underline flex items-center gap-1.5"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span>Edit my details</span>
+          </Link>
         </div>
       </div>
     </footer>

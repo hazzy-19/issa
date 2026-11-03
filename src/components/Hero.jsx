@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { cafeData } from "../data/cafe";
+import { useCafe } from "../context/CafeContext";
 
 export default function Hero() {
+  const { cafeData } = useCafe();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = cafeData.brand.heroSlides || [
     { url: cafeData.brand.heroImage, alt: "Café interior" },

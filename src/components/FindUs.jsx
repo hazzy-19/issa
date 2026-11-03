@@ -1,7 +1,8 @@
 import React from "react";
-import { cafeData } from "../data/cafe";
+import { useCafe } from "../context/CafeContext";
 
 export default function FindUs() {
+  const { cafeData } = useCafe();
   return (
     <section id="contact" className="scroll-mt-20 pt-4 pb-8 md:py-8">
       {/* Section Header */}

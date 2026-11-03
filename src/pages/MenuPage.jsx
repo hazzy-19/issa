@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { cafeData } from "../data/cafe";
+import { useCafe } from "../context/CafeContext";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";
@@ -8,6 +8,7 @@ function formatPrice(priceStr) {
 }
 
 export default function MenuPage() {
+  const { cafeData } = useCafe();
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 

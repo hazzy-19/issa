@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { cafeData } from "../data/cafe";
+import { useCafe } from "../context/CafeContext";
 
 export default function Header() {
+  const { cafeData } = useCafe();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
