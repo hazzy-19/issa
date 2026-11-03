@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
 export function useInView(options = {}) {
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(() => {
+    return typeof window === "undefined" || !("IntersectionObserver" in window);
+  });
   const ref = useRef(null);
 
   useEffect(() => {
@@ -9,7 +11,6 @@ export function useInView(options = {}) {
     if (!element) return;
 
     if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
-      setIsInView(true);
       return;
     }
 

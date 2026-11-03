@@ -23,7 +23,7 @@ export default function MenuPage() {
         item.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesQuery;
     });
-  }, [activeCategory, searchQuery]);
+  }, [activeCategory, searchQuery, cafeData.menuItems]);
 
   return (
     <div className="py-6 sm:py-10">

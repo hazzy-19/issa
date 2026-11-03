@@ -4,6 +4,14 @@ import { Clock, MapPin, MessageCircle, Share2 } from "lucide-react";
 import { cafeData } from "../data/cafe";
 import { useInView } from "../hooks/useInView";
 
+function getOptimizedImageUrl(url, width = 800) {
+  if (!url) return "";
+  if (url.includes("images.unsplash.com")) {
+    return url.replace(/w=\d+/, `w=${width}`);
+  }
+  return url;
+}
+
 function AnimatedCard({ children, index = 0, className = "" }) {
   const [ref, isInView] = useInView({ threshold: 0.1 });
   const delayMs = index * 80;
@@ -43,15 +51,15 @@ export default function WelcomePage() {
       visual: (
         <div className="aspect-[16/10] w-full rounded-2xl bg-[#1E100A] p-3.5 sm:p-4 flex flex-col justify-between shadow-inner border border-[#321B11]">
           <div className="space-y-2">
-            <div className="h-2 w-1/3 bg-[#C07A46]/60 rounded-full" />
+            <div className="h-2 w-1/3 bg-[#C07A46]/70 rounded-full" />
             <div className="h-4 sm:h-5 w-full bg-[#26140D] rounded-md border border-white/10 px-2 flex items-center">
-              <div className="h-1.5 w-1/2 bg-white/25 rounded-full" />
+              <div className="h-1.5 w-1/2 bg-white/30 rounded-full" />
             </div>
             <div className="h-4 sm:h-5 w-full bg-[#26140D] rounded-md border border-white/10 px-2 flex items-center">
-              <div className="h-1.5 w-2/3 bg-white/25 rounded-full" />
+              <div className="h-1.5 w-2/3 bg-white/30 rounded-full" />
             </div>
             <div className="h-4 sm:h-5 w-full bg-[#26140D] rounded-md border border-white/10 px-2 flex items-center">
-              <div className="h-1.5 w-1/3 bg-white/25 rounded-full" />
+              <div className="h-1.5 w-1/3 bg-white/30 rounded-full" />
             </div>
           </div>
           <div className="pt-1">
@@ -86,7 +94,7 @@ export default function WelcomePage() {
               </div>
             </div>
           </div>
-          <div className="h-5 sm:h-6 w-full bg-[#26140D] rounded-full border border-white/10 px-2.5 flex items-center justify-between text-[9px] sm:text-[10px] text-[#A8917A]">
+          <div className="h-5 sm:h-6 w-full bg-[#26140D] rounded-full border border-white/10 px-2.5 flex items-center justify-between text-[9px] sm:text-[10px] text-[#D1B89F]">
             <span>Type a change...</span>
             <span className="w-3.5 h-3.5 rounded-full bg-[#C07A46] flex items-center justify-center text-white text-[8px] font-bold">&uarr;</span>
           </div>
@@ -105,14 +113,15 @@ export default function WelcomePage() {
             <span className="w-1.5 h-1.5 rounded-full bg-rose-500/70" />
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500/70" />
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/70" />
-            <div className="ml-2 h-2.5 w-28 bg-white/10 rounded-full" />
+            <div className="ml-2 h-2.5 w-28 bg-white/15 rounded-full" />
           </div>
           {/* Image preview */}
           <div className="relative flex-1 w-full overflow-hidden bg-[#1E100A]">
             <img
-              src={cafeData.gallery[9]?.image}
+              src={getOptimizedImageUrl(cafeData.gallery[9]?.image, 800)}
               alt={cafeData.gallery[9]?.title || "Live café dining room preview"}
               loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex items-end p-2.5">
@@ -160,7 +169,7 @@ export default function WelcomePage() {
       description:
         "Showcase dishes, bakery items, prices, dietary tags, and chef's picks with high-resolution photos.",
       type: "thumbnail",
-      image: cafeData.menuHighlights[1]?.image || cafeData.menuItems[0]?.image,
+      image: getOptimizedImageUrl(cafeData.menuHighlights[1]?.image || cafeData.menuItems[0]?.image, 800),
       alt: "Handmade pasta and artisan café dishes",
     },
     {
@@ -168,7 +177,7 @@ export default function WelcomePage() {
       description:
         "Pinterest-style masonry gallery sharing candid moments, coffee roasts, and cozy dining spaces.",
       type: "thumbnail",
-      image: cafeData.gallery[0]?.image,
+      image: getOptimizedImageUrl(cafeData.gallery[0]?.image, 800),
       alt: "Customers enjoying morning coffee in café",
     },
   ];
@@ -186,7 +195,7 @@ export default function WelcomePage() {
       {/* ============================================================ */}
       <section
         id="top"
-        className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-12 sm:pb-16"
+        className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-12 sm:pb-16 lg:pb-20"
       >
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1E100A] via-[#2A160E] to-[#140A06] text-[#FAF5EE] p-5 sm:p-10 lg:p-12 border border-[#321B11] shadow-2xl">
           {/* Subtle decorative background glow */}
@@ -207,7 +216,7 @@ export default function WelcomePage() {
                 Your café website, ready in under five minutes.
               </h1>
 
-              <p className="text-sm sm:text-base text-[#D1B89F] leading-relaxed mb-6 sm:mb-8">
+              <p className="text-sm sm:text-base text-[#FAF5EE]/90 leading-relaxed mb-6 sm:mb-8 max-w-xl">
                 Create an inviting digital home for your coffeehouse or bistro. Set up your hours, location, WhatsApp ordering, and social channels without touching a line of code.
               </p>
 
@@ -215,7 +224,7 @@ export default function WelcomePage() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
                 <Link
                   to="/setup"
-                  className="inline-flex items-center justify-center px-7 py-3.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
+                  className="inline-flex items-center justify-center px-7 sm:px-8 py-3 sm:py-3.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] focus-visible:outline-offset-2 text-center"
                 >
                   Get started
                 </Link>
@@ -223,14 +232,14 @@ export default function WelcomePage() {
                 <Link
                   to="/?example=true"
                   onClick={handleSeeLiveExample}
-                  className="inline-flex items-center justify-center px-6 py-3.5 bg-white/10 hover:bg-white/20 text-[#FAF5EE] text-sm font-semibold rounded-full border border-white/25 backdrop-blur-xs transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
+                  className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 bg-white/10 hover:bg-white/20 text-[#FAF5EE] text-xs sm:text-sm font-semibold rounded-full border border-white/25 backdrop-blur-xs transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 text-center"
                 >
                   See a live example
                 </Link>
               </div>
 
               {/* Trust points row */}
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-2 border-t border-[#321B11]/80 text-xs text-[#D1B89F]">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-4 border-t border-[#321B11]/80 text-xs text-[#FAF5EE]/85">
                 {trustPoints.map((point) => (
                   <div key={point} className="inline-flex items-center gap-1.5">
                     <svg className="w-3.5 h-3.5 text-[#C07A46] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -251,12 +260,13 @@ export default function WelcomePage() {
                   aria-hidden="true"
                 />
 
-                {/* 1. Large Image: Latte art */}
+                {/* 1. Large Image: Latte art (eager loaded, only eager image on page) */}
                 <div className="absolute top-4 left-4 sm:left-6 w-[70%] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-[#26140D]">
                   <img
-                    src={cafeData.brand.heroSlides[0]?.url}
+                    src={getOptimizedImageUrl(cafeData.brand.heroSlides[0]?.url, 1200)}
                     alt={cafeData.brand.heroSlides[0]?.alt || "Barista pouring latte art into cup"}
                     loading="eager"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -264,9 +274,10 @@ export default function WelcomePage() {
                 {/* 2. Second Image: Café interior */}
                 <div className="absolute bottom-2 left-0 w-[54%] aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-4 border-[#FAF5EE] z-10 bg-[#26140D]">
                   <img
-                    src={cafeData.brand.heroSlides[1]?.url}
+                    src={getOptimizedImageUrl(cafeData.brand.heroSlides[1]?.url, 800)}
                     alt={cafeData.brand.heroSlides[1]?.alt || "Sunlit café interior and seating"}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -274,9 +285,10 @@ export default function WelcomePage() {
                 {/* 3. Third Image: Avocado toast */}
                 <div className="absolute top-0 right-1 sm:right-2 w-[42%] aspect-square rounded-2xl overflow-hidden shadow-xl border-4 border-[#FAF5EE] z-10 bg-[#26140D]">
                   <img
-                    src={cafeData.chefsPicks[0]?.image}
+                    src={getOptimizedImageUrl(cafeData.chefsPicks[0]?.image, 800)}
                     alt="Fresh artisan avocado toast with poached egg"
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -402,6 +414,7 @@ export default function WelcomePage() {
                           src={feat.image}
                           alt={feat.alt}
                           loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200 motion-reduce:group-hover:scale-100"
                         />
                       </div>
@@ -480,8 +493,10 @@ export default function WelcomePage() {
                 {/* 1. Mini Hero */}
                 <div className="relative rounded-2xl overflow-hidden aspect-[16/7] sm:aspect-[16/6] bg-[#1E100A] flex items-center px-4 sm:px-8">
                   <img
-                    src={cafeData.brand.heroSlides[0]?.url}
+                    src={getOptimizedImageUrl(cafeData.brand.heroSlides[0]?.url, 1200)}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover opacity-50"
                   />
                   <div className="relative z-10 max-w-sm text-left">
@@ -520,8 +535,10 @@ export default function WelcomePage() {
                       >
                         <div className="relative aspect-square rounded-lg overflow-hidden mb-1.5 bg-[#FAF5EE]">
                           <img
-                            src={item.image}
+                            src={getOptimizedImageUrl(item.image, 600)}
                             alt=""
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover"
                           />
                           <span className="absolute top-1 right-1 bg-black/70 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 rounded-full">
@@ -553,8 +570,10 @@ export default function WelcomePage() {
                         className="aspect-[4/3] rounded-xl overflow-hidden bg-[#26140D] border border-[#DFCCA]"
                       >
                         <img
-                          src={item.image}
+                          src={getOptimizedImageUrl(item.image, 600)}
                           alt=""
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -585,7 +604,7 @@ export default function WelcomePage() {
               <Link
                 to="/?example=true"
                 onClick={handleSeeLiveExample}
-                className="inline-flex items-center gap-2 px-7 py-3 bg-[#1E100A] hover:bg-[#C07A46] text-[#FAF5EE] text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
+                className="inline-flex items-center gap-2 px-7 py-3 bg-[#1E100A] hover:bg-[#C07A46] text-[#FAF5EE] text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] focus-visible:outline-offset-2"
               >
                 <span>See the live example</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -637,9 +656,10 @@ export default function WelcomePage() {
       <section className="relative w-full min-h-[460px] sm:min-h-[500px] flex items-center justify-center overflow-hidden mb-0">
         {/* Background Image: heroSlides[3] */}
         <img
-          src={cafeData.brand.heroSlides[3]?.url}
+          src={getOptimizedImageUrl(cafeData.brand.heroSlides[3]?.url, 1200)}
           alt={cafeData.brand.heroSlides[3]?.alt || "Warm ambient café interior"}
           loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
         />
 
@@ -654,21 +674,21 @@ export default function WelcomePage() {
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 leading-tight">
             Ready to open your doors online?
           </h2>
-          <p className="text-sm sm:text-base text-[#D1B89F] max-w-lg mx-auto leading-relaxed mb-8">
+          <p className="text-sm sm:text-base text-[#FAF5EE]/90 max-w-lg mx-auto leading-relaxed mb-8">
             Set up your café presence in minutes and welcome local customers with a beautiful, fast digital storefront.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
               to="/setup"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-[#C07A46] hover:bg-[#D58E59] text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] focus-visible:outline-offset-2"
             >
               Get started
             </Link>
 
             <Link
               to="/setup/assistant"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-white/10 text-white text-sm font-semibold rounded-full border border-white/40 backdrop-blur-xs transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-white/10 text-white text-sm font-semibold rounded-full border border-white/40 backdrop-blur-xs transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
             >
               Describe it instead
             </Link>
