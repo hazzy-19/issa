@@ -157,7 +157,7 @@ export default function SetupPage() {
   };
 
   return (
-    <div className="py-6 sm:py-10 max-w-3xl mx-auto">
+    <div className="py-6 sm:py-10 max-w-3xl mx-auto px-4 sm:px-6">
       {/* Top Breadcrumb & Header */}
       <div className="flex items-center justify-between mb-6">
         <Link
