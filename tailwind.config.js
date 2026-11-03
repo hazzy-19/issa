@@ -26,7 +26,7 @@ export default {
           50: '#FAF5EE',
           100: '#F5ECE1',
           200: '#EDE0D0',
-          300: '#DFCCA',
+          300: '#DFCCAA',
           400: '#CCAFA',
         },
         amber: {

@@ -42,7 +42,7 @@ export default function ChefsPicks() {
           <Link
             key={item.id}
             to="/menu"
-            className="group block text-left bg-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-[#DFCCA] shadow-sm hover:shadow-xl hover:border-[#C07A46]/60 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
+            className="group block text-left bg-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-[#DFCCAA] shadow-sm hover:shadow-xl hover:border-[#C07A46]/60 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             aria-label={`View ${item.name} in menu for ${formatPrice(item.price)}`}
           >
             {/* Real photo container with smooth zoom */}

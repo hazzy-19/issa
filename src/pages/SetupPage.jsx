@@ -162,7 +162,7 @@ export default function SetupPage() {
       <div className="flex items-center justify-between mb-6">
         <Link
           to="/welcome"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E100A] hover:text-[#C07A46] bg-white px-4 py-2 rounded-full border border-[#DFCCA] shadow-xs hover:shadow transition-all"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E100A] hover:text-[#C07A46] bg-white px-4 py-2 rounded-full border border-[#DFCCAA] shadow-xs hover:shadow transition-all"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -190,7 +190,7 @@ export default function SetupPage() {
       {/* ============================================================ */}
       <div className="mb-8">
         {/* Progress track */}
-        <div className="w-full bg-[#DFCCA]/50 h-2 rounded-full overflow-hidden mb-3">
+        <div className="w-full bg-[#DFCCAA]/50 h-2 rounded-full overflow-hidden mb-3">
           <div
             className="bg-[#C07A46] h-full transition-all duration-300 rounded-full"
             style={{ width: `${(currentStep / STEPS.length) * 100}%` }}
@@ -230,11 +230,11 @@ export default function SetupPage() {
       {/* ============================================================ */}
       {/* STEP FORM CARD                                               */}
       {/* ============================================================ */}
-      <div className="bg-white rounded-3xl border border-[#DFCCA] p-5 sm:p-8 shadow-md mb-6 text-left">
+      <div className="bg-white rounded-3xl border border-[#DFCCAA] p-5 sm:p-8 shadow-md mb-6 text-left">
         {/* STEP 1: BRAND */}
         {currentStep === 1 && (
           <div className="space-y-4">
-            <div className="border-b border-[#DFCCA] pb-3 mb-4">
+            <div className="border-b border-[#DFCCAA] pb-3 mb-4">
               <h2 className="font-serif text-lg sm:text-xl font-bold text-[#1E100A]">
                 1. Café Brand & Story
               </h2>
@@ -255,7 +255,7 @@ export default function SetupPage() {
                 value={formData.name}
                 onChange={handleChange}
                 className={`w-full bg-[#FAF5EE] border rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:ring-1 focus:ring-[#C07A46] ${
-                  errors.name ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCA] focus:border-[#C07A46]"
+                  errors.name ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCAA] focus:border-[#C07A46]"
                 }`}
               />
               {errors.name && <p className="text-[11px] text-rose-600 mt-1">{errors.name}</p>}
@@ -272,7 +272,7 @@ export default function SetupPage() {
                 placeholder="e.g. Good food. Great coffee. Your everyday café."
                 value={formData.tagline}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
 
@@ -287,7 +287,7 @@ export default function SetupPage() {
                 placeholder="Freshly brewed coffee, comforting plates and a welcoming space to slow down..."
                 value={formData.heroBlurb}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
 
@@ -302,7 +302,7 @@ export default function SetupPage() {
                 placeholder="Your neighbourhood spot for fresh food and good coffee."
                 value={formData.blurb}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
           </div>
@@ -311,7 +311,7 @@ export default function SetupPage() {
         {/* STEP 2: HOURS */}
         {currentStep === 2 && (
           <div className="space-y-4">
-            <div className="border-b border-[#DFCCA] pb-3 mb-4">
+            <div className="border-b border-[#DFCCAA] pb-3 mb-4">
               <h2 className="font-serif text-lg sm:text-xl font-bold text-[#1E100A]">
                 2. Opening Hours & Kitchen Notice
               </h2>
@@ -332,7 +332,7 @@ export default function SetupPage() {
                   placeholder="Mon-Fri"
                   value={formData.weekdayDays}
                   onChange={handleChange}
-                  className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                  className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
                 />
               </div>
 
@@ -347,7 +347,7 @@ export default function SetupPage() {
                   placeholder="8:00 am - 8:00 pm"
                   value={formData.weekdayHours}
                   onChange={handleChange}
-                  className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                  className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
                 />
               </div>
 
@@ -362,7 +362,7 @@ export default function SetupPage() {
                   placeholder="Sat-Sun"
                   value={formData.weekendDays}
                   onChange={handleChange}
-                  className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                  className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
                 />
               </div>
 
@@ -377,7 +377,7 @@ export default function SetupPage() {
                   placeholder="9:00 am - 8:00 pm"
                   value={formData.weekendHours}
                   onChange={handleChange}
-                  className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                  className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
                 />
               </div>
             </div>
@@ -393,7 +393,7 @@ export default function SetupPage() {
                 placeholder="Kitchen serves 11:00 am to 8:00 pm"
                 value={formData.kitchenNotice}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
 
@@ -408,7 +408,7 @@ export default function SetupPage() {
                 placeholder="Please tell our team about any allergies. Plant-based options are available on request."
                 value={formData.allergyNotice}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
           </div>
@@ -417,7 +417,7 @@ export default function SetupPage() {
         {/* STEP 3: CONTACT */}
         {currentStep === 3 && (
           <div className="space-y-4">
-            <div className="border-b border-[#DFCCA] pb-3 mb-4">
+            <div className="border-b border-[#DFCCAA] pb-3 mb-4">
               <h2 className="font-serif text-lg sm:text-xl font-bold text-[#1E100A]">
                 3. Contact & Location
               </h2>
@@ -438,7 +438,7 @@ export default function SetupPage() {
                 value={formData.address}
                 onChange={handleChange}
                 className={`w-full bg-[#FAF5EE] border rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:ring-1 focus:ring-[#C07A46] ${
-                  errors.address ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCA] focus:border-[#C07A46]"
+                  errors.address ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCAA] focus:border-[#C07A46]"
                 }`}
               />
               {errors.address && <p className="text-[11px] text-rose-600 mt-1">{errors.address}</p>}
@@ -456,7 +456,7 @@ export default function SetupPage() {
                 value={formData.email}
                 onChange={handleChange}
                 className={`w-full bg-[#FAF5EE] border rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:ring-1 focus:ring-[#C07A46] ${
-                  errors.email ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCA] focus:border-[#C07A46]"
+                  errors.email ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCAA] focus:border-[#C07A46]"
                 }`}
               />
               {errors.email && <p className="text-[11px] text-rose-600 mt-1">{errors.email}</p>}
@@ -474,7 +474,7 @@ export default function SetupPage() {
                 value={formData.phone}
                 onChange={handleChange}
                 className={`w-full bg-[#FAF5EE] border rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:ring-1 focus:ring-[#C07A46] ${
-                  errors.phone ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCA] focus:border-[#C07A46]"
+                  errors.phone ? "border-rose-500 focus:border-rose-500" : "border-[#DFCCAA] focus:border-[#C07A46]"
                 }`}
               />
               <p className="text-[11px] text-[#7A4B29] mt-1">
@@ -488,7 +488,7 @@ export default function SetupPage() {
         {/* STEP 4: SOCIALS */}
         {currentStep === 4 && (
           <div className="space-y-4">
-            <div className="border-b border-[#DFCCA] pb-3 mb-4">
+            <div className="border-b border-[#DFCCAA] pb-3 mb-4">
               <h2 className="font-serif text-lg sm:text-xl font-bold text-[#1E100A]">
                 4. Social Media Links
               </h2>
@@ -508,7 +508,7 @@ export default function SetupPage() {
                 placeholder="https://instagram.com/yourcafe"
                 value={formData.instagram}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
 
@@ -523,7 +523,7 @@ export default function SetupPage() {
                 placeholder="https://facebook.com/yourcafe"
                 value={formData.facebook}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
 
@@ -538,7 +538,7 @@ export default function SetupPage() {
                 placeholder="https://tiktok.com/@yourcafe"
                 value={formData.tiktok}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
 
@@ -553,7 +553,7 @@ export default function SetupPage() {
                 placeholder="https://twitter.com/yourcafe"
                 value={formData.twitter}
                 onChange={handleChange}
-                className="w-full bg-[#FAF5EE] border border-[#DFCCA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
+                className="w-full bg-[#FAF5EE] border border-[#DFCCAA] rounded-xl py-2.5 px-3.5 text-xs sm:text-sm text-[#1E100A] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46]"
               />
             </div>
           </div>
@@ -562,7 +562,7 @@ export default function SetupPage() {
         {/* STEP 5: SUMMARY */}
         {currentStep === 5 && (
           <div className="space-y-6">
-            <div className="border-b border-[#DFCCA] pb-3 mb-4">
+            <div className="border-b border-[#DFCCAA] pb-3 mb-4">
               <h2 className="font-serif text-lg sm:text-xl font-bold text-[#1E100A]">
                 5. Review Your Setup Summary
               </h2>
@@ -572,7 +572,7 @@ export default function SetupPage() {
             </div>
 
             {/* Brand Summary */}
-            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCA]">
+            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCAA]">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-serif text-sm font-bold text-[#1E100A]">
                   Brand Information
@@ -591,7 +591,7 @@ export default function SetupPage() {
             </div>
 
             {/* Hours Summary */}
-            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCA]">
+            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCAA]">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-serif text-sm font-bold text-[#1E100A]">
                   Opening Schedule
@@ -614,7 +614,7 @@ export default function SetupPage() {
             </div>
 
             {/* Contact Summary */}
-            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCA]">
+            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCAA]">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-serif text-sm font-bold text-[#1E100A]">
                   Contact & Location
@@ -639,7 +639,7 @@ export default function SetupPage() {
             </div>
 
             {/* Socials Summary */}
-            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCA]">
+            <div className="bg-[#FAF5EE] rounded-2xl p-4 border border-[#DFCCAA]">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-serif text-sm font-bold text-[#1E100A]">
                   Social Media Links
@@ -666,12 +666,12 @@ export default function SetupPage() {
         )}
 
         {/* Buttons Row */}
-        <div className="flex items-center justify-between pt-6 border-t border-[#DFCCA] mt-6">
+        <div className="flex items-center justify-between pt-6 border-t border-[#DFCCAA] mt-6">
           {currentStep > 1 ? (
             <button
               type="button"
               onClick={handleBack}
-              className="px-5 py-2.5 bg-[#FAF5EE] hover:bg-[#DFCCA]/60 text-[#1E100A] text-xs sm:text-sm font-semibold rounded-full border border-[#DFCCA] transition-colors"
+              className="px-5 py-2.5 bg-[#FAF5EE] hover:bg-[#DFCCAA]/60 text-[#1E100A] text-xs sm:text-sm font-semibold rounded-full border border-[#DFCCAA] transition-colors"
             >
               Back
             </button>

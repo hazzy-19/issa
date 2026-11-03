@@ -15,14 +15,14 @@ export default function FindUs() {
       {/* Grid: 2 cols on desktop, stacked on mobile */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 items-stretch">
         {/* Contact Card */}
-        <div className="bg-[#FAF5EE] rounded-3xl border border-[#DFCCA] p-5 sm:p-8 lg:p-10 shadow-lg flex flex-col justify-between text-left relative overflow-hidden">
+        <div className="bg-[#FAF5EE] rounded-3xl border border-[#DFCCAA] p-5 sm:p-8 lg:p-10 shadow-lg flex flex-col justify-between text-left relative overflow-hidden">
           <div className="relative z-10">
             <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold text-[#1E100A] mb-3">
-              Contact details
+              Contact Details
             </h3>
 
             {/* Address & Contact Info */}
-            <div className="space-y-2.5 mb-5 bg-white/80 rounded-2xl p-4 sm:p-5 border border-[#DFCCA]/60">
+            <div className="space-y-2.5 mb-5 bg-white/80 rounded-2xl p-4 sm:p-5 border border-[#DFCCAA]/60">
               <div className="flex items-center gap-3 text-xs sm:text-sm font-medium text-[#1E100A]">
                 <div className="w-8 h-8 rounded-full bg-[#C07A46]/10 flex items-center justify-center text-[#C07A46] flex-shrink-0">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -49,7 +49,7 @@ export default function FindUs() {
                 </a>
               </div>
 
-              <div className="pt-2 pl-11 border-t border-[#DFCCA]/40 flex items-center gap-2 text-xs text-[#7A4B29]">
+              <div className="pt-2 pl-11 border-t border-[#DFCCAA]/40 flex items-center gap-2 text-xs text-[#7A4B29]">
                 <svg className="w-3.5 h-3.5 text-[#C07A46]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -83,7 +83,7 @@ export default function FindUs() {
               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
-              <span>Directions</span>
+              <span>Get Directions</span>
             </a>
 
             {/* Call us */}
@@ -94,14 +94,14 @@ export default function FindUs() {
               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <span>Call us: {cafeData.contact.phone}</span>
+              <span>Call Us: {cafeData.contact.phone}</span>
             </a>
           </div>
         </div>
 
         {/* Map Container */}
         <div
-          className="relative min-h-[260px] sm:min-h-[340px] rounded-3xl overflow-hidden border border-[#DFCCA] shadow-lg bg-[#FAF5EE]"
+          className="relative min-h-[260px] sm:min-h-[340px] rounded-3xl overflow-hidden border border-[#DFCCAA] shadow-lg bg-[#FAF5EE]"
           aria-label="Location map"
         >
           <iframe

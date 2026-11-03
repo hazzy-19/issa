@@ -14,7 +14,7 @@ export default function About() {
       </div>
 
       {/* Story & History Section */}
-      <div className="bg-[#FAF5EE] rounded-3xl border border-[#DFCCA] p-5 sm:p-8 lg:p-10 shadow-lg mb-6">
+      <div className="bg-[#FAF5EE] rounded-3xl border border-[#DFCCAA] p-5 sm:p-8 lg:p-10 shadow-lg mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
           <div>
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1E100A] mb-2 sm:mb-3">
@@ -28,7 +28,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="relative h-48 sm:h-64 rounded-2xl overflow-hidden shadow-md border border-[#DFCCA]">
+          <div className="relative h-48 sm:h-64 rounded-2xl overflow-hidden shadow-md border border-[#DFCCAA]">
             <img
               src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80"
               alt="Craft coffee roasting and brewing"
@@ -44,7 +44,7 @@ export default function About() {
         {about.principles.map((principle, index) => (
           <div
             key={principle.title}
-            className={`bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-[#DFCCA] shadow-xs hover:shadow-md transition-shadow ${
+            className={`bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-[#DFCCAA] shadow-xs hover:shadow-md transition-shadow ${
               index === 2 ? "col-span-2 md:col-span-1" : "col-span-1"
             }`}
           >

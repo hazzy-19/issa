@@ -43,7 +43,7 @@ export default function Menu() {
         {items.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-2xl sm:rounded-3xl border border-[#DFCCA] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#C07A46]/60 transition-all flex flex-col justify-between p-3 sm:p-4 group"
+            className="bg-white rounded-2xl sm:rounded-3xl border border-[#DFCCAA] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#C07A46]/60 transition-all flex flex-col justify-between p-3 sm:p-4 group"
           >
             <div>
               {/* Photo Container */}

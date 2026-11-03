@@ -31,7 +31,7 @@ export default function MenuPage() {
       <div className="flex items-center justify-between mb-6">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E100A] hover:text-[#C07A46] bg-white px-4 py-2 rounded-full border border-[#DFCCA] shadow-xs hover:shadow transition-all"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E100A] hover:text-[#C07A46] bg-white px-4 py-2 rounded-full border border-[#DFCCAA] shadow-xs hover:shadow transition-all"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -65,7 +65,7 @@ export default function MenuPage() {
             placeholder="Search dishes, flatbreads, coffee..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-[#DFCCA] rounded-full py-2.5 pl-10 pr-4 text-xs sm:text-sm text-[#1E100A] placeholder-[#8C705F] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46] shadow-2xs"
+            className="w-full bg-white border border-[#DFCCAA] rounded-full py-2.5 pl-10 pr-4 text-xs sm:text-sm text-[#1E100A] placeholder-[#8C705F] focus:outline-none focus:border-[#C07A46] focus:ring-1 focus:ring-[#C07A46] shadow-2xs"
           />
           <svg
             className="w-4 h-4 text-[#8C705F] absolute left-3.5 top-1/2 -translate-y-1/2"
@@ -99,7 +99,7 @@ export default function MenuPage() {
                 className={`whitespace-nowrap px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
                   isActive
                     ? "bg-[#1E100A] text-white shadow-xs"
-                    : "bg-white text-[#542F1E] border border-[#DFCCA] hover:border-[#C07A46] hover:text-[#1E100A]"
+                    : "bg-white text-[#542F1E] border border-[#DFCCAA] hover:border-[#C07A46] hover:text-[#1E100A]"
                 }`}
               >
                 {cat}
@@ -113,7 +113,7 @@ export default function MenuPage() {
       {/* 2-COLUMN ON MOBILE, 2/3-COLUMN ON DESKTOP                     */}
       {/* ============================================================ */}
       {filteredItems.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-3xl border border-[#DFCCA] p-8 max-w-md mx-auto">
+        <div className="text-center py-12 bg-white rounded-3xl border border-[#DFCCAA] p-8 max-w-md mx-auto">
           <p className="font-serif text-lg font-bold text-[#1E100A] mb-1">
             No dishes found
           </p>
@@ -136,7 +136,7 @@ export default function MenuPage() {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl sm:rounded-3xl border border-[#DFCCA] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#C07A46]/60 transition-all flex flex-col justify-between p-3 sm:p-4 group"
+              className="bg-white rounded-2xl sm:rounded-3xl border border-[#DFCCAA] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#C07A46]/60 transition-all flex flex-col justify-between p-3 sm:p-4 group"
             >
               <div>
                 {/* Photo */}

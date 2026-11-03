@@ -41,7 +41,7 @@ export default function GalleryPage() {
       <div className="flex items-center justify-between mb-6">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E100A] hover:text-[#C07A46] bg-white px-4 py-2 rounded-full border border-[#DFCCA] shadow-xs hover:shadow transition-all"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E100A] hover:text-[#C07A46] bg-white px-4 py-2 rounded-full border border-[#DFCCAA] shadow-xs hover:shadow transition-all"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -76,7 +76,7 @@ export default function GalleryPage() {
               className={`whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
                 isActive
                   ? "bg-[#1E100A] text-white shadow-md"
-                  : "bg-white text-[#542F1E] border border-[#DFCCA] hover:border-[#C07A46] hover:text-[#1E100A]"
+                  : "bg-white text-[#542F1E] border border-[#DFCCAA] hover:border-[#C07A46] hover:text-[#1E100A]"
               }`}
             >
               {cat}
@@ -93,7 +93,7 @@ export default function GalleryPage() {
           <div
             key={item.id}
             onClick={() => setSelectedImage(item)}
-            className="break-inside-avoid block mb-3 md:mb-4 group rounded-2xl overflow-hidden bg-white border border-[#DFCCA] shadow-xs hover:shadow-xl transition-all cursor-pointer"
+            className="break-inside-avoid block mb-3 md:mb-4 group rounded-2xl overflow-hidden bg-white border border-[#DFCCAA] shadow-xs hover:shadow-xl transition-all cursor-pointer"
           >
             <div className={`relative w-full ${item.aspect || "aspect-[3/4]"} overflow-hidden bg-[#FAF5EE]`}>
               <img

@@ -40,12 +40,12 @@ export const cafeData = {
       "Please tell our team about any allergies. Plant-based options are available on request.",
   },
   contact: {
-    address: "123 Market Street, Brookside",
-    email: "hello@cornercafe.example",
-    phone: "(555) 012-3456",
-    phoneRaw: "5550123456",
+    address: "Egertn, Njoro hapo gate sides za Ng'ondu",
+    email: "anyonaonchoke@gmail.com",
+    phone: "(254) 0757611486",
+    phoneRaw: "0757611486",
     mapsUrl: "https://maps.google.com/?q=123+Market+Street,+Brookside",
-    whatsappUrl: "https://wa.me/15550123456",
+    whatsappUrl: "https://wa.me/254757611486",
     mapEmbedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.818379646453!2d36.7909!3d-1.2828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNTguMSJTIDM2wrA0Nyc0Ny4yIkU!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske",
   },
@@ -66,7 +66,7 @@ export const cafeData = {
   about: {
     historyTitle: "Our Story",
     historyText:
-      "Founded in 2018 in Brookside, The Corner Café began with a single vintage espresso group and a passion for slow, honest mornings. What started as a modest neighborhood espresso corner has grown into a community hearth where neighbors, creators, and coffee lovers gather every day.",
+      "Founded in 2018 in Njoro, The Corner Café began with a single vintage espresso group and a passion for slow, honest mornings. What started as a modest neighborhood espresso corner has grown into a community hearth where neighbors, creators, and coffee lovers gather every day.",
     principles: [
       {
         title: "Ethical Direct Trade",
@@ -130,7 +130,7 @@ export const cafeData = {
       id: "menu-grilled-chicken-sandwich",
       category: "Main course",
       name: "Grilled chicken sandwich",
-      price: "KSh 12.00",
+      price: "KSh 400",
       description:
         "Grilled chicken, lettuce, tomato and house mayo on toasted sourdough.",
       dietaryTag: "",
@@ -141,7 +141,7 @@ export const cafeData = {
       id: "menu-creamy-mushroom-pasta",
       category: "Main course",
       name: "Creamy mushroom pasta",
-      price: "KSh 13.50",
+      price: "KSh 300",
       description:
         "Penne, sautéed mushrooms, garlic cream and parmesan.",
       dietaryTag: "Vegetarian",
@@ -152,7 +152,7 @@ export const cafeData = {
       id: "menu-classic-cafe-burger",
       category: "Main course",
       name: "Classic café burger",
-      price: "KSh 14.00",
+      price: "KSh 450",
       description:
         "Beef patty, cheddar, lettuce and pickles. Served with fries.",
       dietaryTag: "",
@@ -163,7 +163,7 @@ export const cafeData = {
       id: "menu-roasted-vegetable-bowl",
       category: "Main course",
       name: "Roasted vegetable bowl",
-      price: "KSh 11.50",
+      price: "KSh 200",
       description:
         "Seasonal vegetables, quinoa, chickpeas and a lemon tahini dressing.",
       dietaryTag: "Vegan",
@@ -174,7 +174,7 @@ export const cafeData = {
       id: "menu-margherita-flatbread",
       category: "Main course",
       name: "Margherita flatbread",
-      price: "KSh 12.50",
+      price: "KSh 150",
       description:
         "Tomato, mozzarella and fresh basil on our house flatbread.",
       dietaryTag: "Vegetarian",
@@ -185,7 +185,7 @@ export const cafeData = {
       id: "menu-soup-and-sourdough",
       category: "Main course",
       name: "Soup & sourdough",
-      price: "KSh 8.50",
+      price: "KSh 350",
       description:
         "Our soup of the day, served with toasted sourdough and butter.",
       dietaryTag: "Ask for today's soup",
@@ -196,7 +196,7 @@ export const cafeData = {
       id: "menu-house-pasta",
       category: "Main course",
       name: "House pasta",
-      price: "KSh 16.00",
+      price: "KSh 600",
       description: "Tomato sauce, basil, parmesan.",
       dietaryTag: "Vegetarian",
       image:
@@ -206,7 +206,7 @@ export const cafeData = {
       id: "menu-avocado-toast",
       category: "Main course",
       name: "Avocado toast",
-      price: "KSh 9.50",
+      price: "KSh 100",
       description: "Sourdough, avocado, poached egg.",
       dietaryTag: "Vegetarian",
       image:
@@ -239,7 +239,7 @@ export const cafeData = {
       id: "menu-warm-apple-tart",
       category: "Dessert",
       name: "Warm apple tart",
-      price: "KSh 7.50",
+      price: "KSh 150",
       description:
         "Caramelised spiced apples on flaky pastry with custard.",
       dietaryTag: "Vegetarian",
@@ -250,7 +250,7 @@ export const cafeData = {
       id: "menu-affogato",
       category: "Dessert",
       name: "Affogato al caffè",
-      price: "KSh 5.50",
+      price: "KSh 50",
       description:
         "Freshly extracted espresso poured over Madagascar vanilla gelato.",
       dietaryTag: "Vegetarian",
@@ -273,7 +273,7 @@ export const cafeData = {
       id: "menu-roasted-veg-salad",
       category: "Salad",
       name: "Roasted vegetable bowl",
-      price: "KSh 11.50",
+      price: "KSh 10",
       description:
         "Seasonal vegetables, quinoa, chickpeas and a lemon tahini dressing.",
       dietaryTag: "Vegan",
