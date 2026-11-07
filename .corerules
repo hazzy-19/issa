@@ -1,0 +1,4 @@
+Never modify, move, rename or delete files unless the current task explicitly says so.
+Never delete any file. List unused files instead.
+Work in one step at a time and stop after each step.
+If a task says "audit" or "report", output a report only and end your response.
