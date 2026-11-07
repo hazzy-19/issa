@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCafe } from "../context/CafeContext";
 
-export default function Header() {
-  const { cafeData } = useCafe();
+export default function StorefrontHeader() {
+  const { cafe } = useCafe();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -80,14 +80,14 @@ export default function Header() {
               <span className="w-8 h-8 rounded-full bg-[#C07A46] text-white flex items-center justify-center text-sm font-serif shadow-xs">
                 C
               </span>
-              <span>{cafeData.brand.name}</span>
+              <span>{cafe.brand.name}</span>
             </Link>
 
             <nav
               aria-label="Desktop Navigation"
               className="flex items-center space-x-7 text-sm font-medium text-[#D1B89F]"
             >
-              {cafeData.navigation.map((item) => {
+              {cafe.navigation.map((item) => {
                 const isPage = item.href === "/menu" || item.href === "/gallery";
                 const isActive =
                   location.pathname === item.href ||
@@ -117,7 +117,7 @@ export default function Header() {
             </nav>
 
             <a
-              href={`tel:${cafeData.contact.phoneRaw}`}
+              href={`tel:${cafe.contact.phoneRaw}`}
               className="hidden lg:inline-flex items-center gap-2 px-5 py-2 bg-[#C07A46] hover:bg-[#A96434] text-white text-xs font-semibold rounded-full shadow-sm transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -161,12 +161,12 @@ export default function Header() {
               onClick={(e) => handleLinkClick(e, "/")}
               className="font-serif text-lg font-bold text-[#FAF5EE] tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
-              {cafeData.brand.name}
+              {cafe.brand.name}
             </Link>
 
             {/* Call us button */}
             <a
-              href={`tel:${cafeData.contact.phoneRaw}`}
+              href={`tel:${cafe.contact.phoneRaw}`}
               className="px-4 py-1.5 bg-[#C07A46] hover:bg-[#A96434] text-white text-xs font-semibold rounded-full shadow-xs transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
               Call us
@@ -208,7 +208,7 @@ export default function Header() {
               <span className="w-8 h-8 rounded-full bg-[#C07A46] text-white flex items-center justify-center text-sm font-serif font-bold shadow-xs">
                 C
               </span>
-              <span>{cafeData.brand.name}</span>
+              <span>{cafe.brand.name}</span>
             </Link>
 
             <button
@@ -225,7 +225,7 @@ export default function Header() {
 
           {/* Navigation Links with smooth hover styling */}
           <nav aria-label="Mobile Navigation Links" className="flex flex-col space-y-2">
-            {cafeData.navigation.map((item) => {
+            {cafe.navigation.map((item) => {
               const isPage = item.href === "/menu" || item.href === "/gallery";
               const isActive =
                 location.pathname === item.href ||
@@ -279,16 +279,16 @@ export default function Header() {
         {/* Sidebar Footer with direct Call button */}
         <div className="pt-6 border-t border-[#321B11] space-y-3">
           <a
-            href={`tel:${cafeData.contact.phoneRaw}`}
+            href={`tel:${cafe.contact.phoneRaw}`}
             className="flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#C07A46] hover:bg-[#A96434] text-white rounded-full text-sm font-semibold shadow-md transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.02l-2.2 2.19z" />
             </svg>
-            <span>Call us: {cafeData.contact.phone}</span>
+            <span>Call us: {cafe.contact.phone}</span>
           </a>
           <p className="text-[11px] text-center text-[#A8917A]">
-            {cafeData.hours.display}
+            {cafe.hours.display}
           </p>
         </div>
       </aside>

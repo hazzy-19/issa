@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { useCafe } from "../context/CafeContext";
 
 export default function Hero() {
-  const { cafeData } = useCafe();
+  const { cafe } = useCafe();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = cafeData.brand.heroSlides || [
-    { url: cafeData.brand.heroImage, alt: "Café interior" },
+  const slides = cafe.brand.heroSlides || [
+    { url: cafe.brand.heroImage, alt: "Café interior" },
   ];
 
   // Auto-advance slideshow every 5 seconds
@@ -47,12 +47,12 @@ export default function Hero() {
         <div className="relative z-10 m-3 sm:m-5 md:my-8 md:ml-8 lg:ml-12 max-w-md lg:max-w-lg w-full rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 text-left backdrop-blur-xl bg-black/45 md:bg-white/15 border border-white/25 md:border-white/35 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_0_rgba(255,255,255,0.35)]">
           {/* Main Tagline */}
           <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-snug mb-2 sm:mb-3 drop-shadow-md">
-            {cafeData.brand.tagline}
+            {cafe.brand.tagline}
           </h1>
 
           {/* Subtitle / Blurb */}
           <p className="text-xs sm:text-sm text-[#FAF5EE]/90 mb-4 sm:mb-6 leading-relaxed drop-shadow-xs line-clamp-2 sm:line-clamp-none">
-            {cafeData.brand.heroBlurb}
+            {cafe.brand.heroBlurb}
           </p>
 
           {/* Action Pills */}
@@ -65,7 +65,7 @@ export default function Hero() {
             </Link>
 
             <a
-              href={cafeData.contact.mapsUrl}
+              href={cafe.contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-4 sm:px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-semibold rounded-full shadow-xs hover:shadow border border-white/35 backdrop-blur-md transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
@@ -91,7 +91,7 @@ export default function Hero() {
               />
             </svg>
             <p className="text-[11px] sm:text-xs leading-normal font-medium drop-shadow-2xs">
-              {cafeData.hours.display}
+              {cafe.hours.display}
             </p>
           </div>
         </div>

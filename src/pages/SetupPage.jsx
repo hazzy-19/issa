@@ -11,43 +11,43 @@ const STEPS = [
 ];
 
 export default function SetupPage() {
-  const { cafeData, saveCafeData } = useCafe();
+  const { cafe, saveCafeData } = useCafe();
   const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState({});
 
-  // Initialize form state from existing cafeData
+  // Initialize form state from existing cafe
   const [formData, setFormData] = useState({
-    name: cafeData.brand.name || "",
-    tagline: cafeData.brand.tagline || "",
-    heroBlurb: cafeData.brand.heroBlurb || "",
-    blurb: cafeData.brand.blurb || "",
+    name: cafe.brand.name || "",
+    tagline: cafe.brand.tagline || "",
+    heroBlurb: cafe.brand.heroBlurb || "",
+    blurb: cafe.brand.blurb || "",
 
-    weekdayDays: cafeData.hours.lines[0]?.days || "Mon-Fri",
-    weekdayHours: cafeData.hours.lines[0]?.hours || "8:00 am - 8:00 pm",
-    weekendDays: cafeData.hours.lines[1]?.days || "Sat-Sun",
-    weekendHours: cafeData.hours.lines[1]?.hours || "9:00 am - 8:00 pm",
-    kitchenNotice: cafeData.hours.kitchenNotice || "Kitchen serves 11:00 am to 8:00 pm",
+    weekdayDays: cafe.hours.lines[0]?.days || "Mon-Fri",
+    weekdayHours: cafe.hours.lines[0]?.hours || "8:00 am - 8:00 pm",
+    weekendDays: cafe.hours.lines[1]?.days || "Sat-Sun",
+    weekendHours: cafe.hours.lines[1]?.hours || "9:00 am - 8:00 pm",
+    kitchenNotice: cafe.hours.kitchenNotice || "Kitchen serves 11:00 am to 8:00 pm",
     allergyNotice:
-      cafeData.hours.allergyNotice ||
+      cafe.hours.allergyNotice ||
       "Please tell our team about any allergies. Plant-based options are available on request.",
 
-    address: cafeData.contact.address || "",
-    email: cafeData.contact.email || "",
-    phone: cafeData.contact.phone || "+254 700 000 000",
+    address: cafe.contact.address || "",
+    email: cafe.contact.email || "",
+    phone: cafe.contact.phone || "+254 700 000 000",
 
     instagram:
-      cafeData.socials.find((s) => s.name.toLowerCase() === "instagram")?.href ||
+      cafe.socials.find((s) => s.name.toLowerCase() === "instagram")?.href ||
       "https://instagram.com",
     facebook:
-      cafeData.socials.find((s) => s.name.toLowerCase() === "facebook")?.href ||
+      cafe.socials.find((s) => s.name.toLowerCase() === "facebook")?.href ||
       "https://facebook.com",
     twitter:
-      cafeData.socials.find((s) => s.name.toLowerCase() === "twitter")?.href ||
+      cafe.socials.find((s) => s.name.toLowerCase() === "twitter")?.href ||
       "https://twitter.com",
     tiktok:
-      cafeData.socials.find((s) => s.name.toLowerCase() === "tiktok")?.href ||
+      cafe.socials.find((s) => s.name.toLowerCase() === "tiktok")?.href ||
       "https://tiktok.com",
   });
 
@@ -121,13 +121,13 @@ export default function SetupPage() {
       return;
     }
 
-    // Assemble new data adhering to cafeData shape
+    // Assemble new data adhering to cafe shape
     const updatedData = {
       brand: {
         name: formData.name.trim(),
-        tagline: formData.tagline.trim() || cafeData.brand.tagline,
-        heroBlurb: formData.heroBlurb.trim() || cafeData.brand.heroBlurb,
-        blurb: formData.blurb.trim() || cafeData.brand.blurb,
+        tagline: formData.tagline.trim() || cafe.brand.tagline,
+        heroBlurb: formData.heroBlurb.trim() || cafe.brand.heroBlurb,
+        blurb: formData.blurb.trim() || cafe.brand.blurb,
       },
       hours: {
         lines: [

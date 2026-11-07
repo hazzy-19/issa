@@ -97,7 +97,7 @@ The UI is in place. The next phase focuses on **functionality integration and da
 - [ ] Normalize all menu prices to whole KSh values (some items still show decimal `KSh 10.00` format)
 - [ ] Sync `chefsPicks` and `menuHighlights` prices with their corresponding `menuItems` entries
 - [ ] Update `mapsUrl` to reflect the actual Njoro address instead of the placeholder Brookside link
-- [ ] Replace hardcoded "Open today 8:00 am to 8:00 pm" in `WelcomePage` floating card with dynamic `cafeData.hours`
+- [ ] Replace hardcoded "Open today 8:00 am to 8:00 pm" in `WelcomePage` floating card with dynamic `cafe.hours`
 
 ### 2.2 — Setup Form → Live Site Pipeline
 - [ ] Wire the multi-step `SetupPage` form to `CafeContext.saveCafeData()` so user input actually persists

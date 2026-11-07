@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Clock, MapPin, MessageCircle, Share2 } from "lucide-react";
-import { cafeData } from "../data/cafe";
+import { sampleCafe } from "../data/cafe";
 import { useInView } from "../hooks/useInView";
 
 function AnimatedCard({ children, index = 0, className = "" }) {
@@ -109,14 +109,14 @@ export default function WelcomePage() {
           {/* Image preview */}
           <div className="relative flex-1 w-full overflow-hidden bg-[#1E100A]">
             <img
-              src={cafeData.gallery[9]?.image}
-              alt={cafeData.gallery[9]?.title || "Live café dining room preview"}
+              src={sampleCafe.gallery[9]?.image}
+              alt={sampleCafe.gallery[9]?.title || "Live café dining room preview"}
               loading="lazy"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex items-end p-2.5">
               <span className="text-[10px] sm:text-xs font-semibold text-white drop-shadow-xs truncate">
-                {cafeData.brand.name} &bull; Live online
+                {sampleCafe.brand.name} &bull; Live online
               </span>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function WelcomePage() {
       description:
         "Showcase dishes, bakery items, prices, dietary tags, and chef's picks with high-resolution photos.",
       type: "thumbnail",
-      image: cafeData.menuHighlights[1]?.image || cafeData.menuItems[0]?.image,
+      image: sampleCafe.menuHighlights[1]?.image || sampleCafe.menuItems[0]?.image,
       alt: "Handmade pasta and artisan café dishes",
     },
     {
@@ -167,7 +167,7 @@ export default function WelcomePage() {
       description:
         "Pinterest-style masonry gallery sharing candid moments, coffee roasts, and cozy dining spaces.",
       type: "thumbnail",
-      image: cafeData.gallery[0]?.image,
+      image: sampleCafe.gallery[0]?.image,
       alt: "Customers enjoying morning coffee in café",
     },
   ];
@@ -253,8 +253,8 @@ export default function WelcomePage() {
                 {/* 1. Large Image: Latte art */}
                 <div className="absolute top-4 left-4 sm:left-6 w-[70%] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-[#26140D]">
                   <img
-                    src={cafeData.brand.heroSlides[0]?.url}
-                    alt={cafeData.brand.heroSlides[0]?.alt || "Barista pouring latte art into cup"}
+                    src={sampleCafe.brand.heroSlides[0]?.url}
+                    alt={sampleCafe.brand.heroSlides[0]?.alt || "Barista pouring latte art into cup"}
                     loading="eager"
                     className="w-full h-full object-cover"
                   />
@@ -263,8 +263,8 @@ export default function WelcomePage() {
                 {/* 2. Second Image: Café interior */}
                 <div className="absolute bottom-2 left-0 w-[54%] aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-4 border-[#FAF5EE] z-10 bg-[#26140D]">
                   <img
-                    src={cafeData.brand.heroSlides[1]?.url}
-                    alt={cafeData.brand.heroSlides[1]?.alt || "Sunlit café interior and seating"}
+                    src={sampleCafe.brand.heroSlides[1]?.url}
+                    alt={sampleCafe.brand.heroSlides[1]?.alt || "Sunlit café interior and seating"}
                     loading="lazy"
                     className="w-full h-full object-cover"
                   />
@@ -273,7 +273,7 @@ export default function WelcomePage() {
                 {/* 3. Third Image: Avocado toast */}
                 <div className="absolute top-0 right-1 sm:right-2 w-[42%] aspect-square rounded-2xl overflow-hidden shadow-xl border-4 border-[#FAF5EE] z-10 bg-[#26140D]">
                   <img
-                    src={cafeData.chefsPicks[0]?.image}
+                    src={sampleCafe.chefsPicks[0]?.image}
                     alt="Fresh artisan avocado toast with poached egg"
                     loading="lazy"
                     className="w-full h-full object-cover"
@@ -285,7 +285,7 @@ export default function WelcomePage() {
                   <div className="flex items-center gap-1.5 mb-1">
                     <span className="w-2 h-2 rounded-full bg-[#C07A46] flex-shrink-0" />
                     <span className="font-serif font-bold text-xs sm:text-sm text-[#1E100A] truncate">
-                      {cafeData.brand.name}
+                      {sampleCafe.brand.name}
                     </span>
                   </div>
                   <p className="text-[10px] sm:text-[11px] text-[#542F1E] mb-2 font-medium">
@@ -479,16 +479,16 @@ export default function WelcomePage() {
                 {/* 1. Mini Hero */}
                 <div className="relative rounded-2xl overflow-hidden aspect-[16/7] sm:aspect-[16/6] bg-[#1E100A] flex items-center px-4 sm:px-8">
                   <img
-                    src={cafeData.brand.heroSlides[0]?.url}
+                    src={sampleCafe.brand.heroSlides[0]?.url}
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover opacity-50"
                   />
                   <div className="relative z-10 max-w-sm text-left">
                     <div className="font-serif font-bold text-base sm:text-2xl text-white leading-tight mb-1">
-                      {cafeData.brand.name}
+                      {sampleCafe.brand.name}
                     </div>
                     <p className="text-[10px] sm:text-xs text-[#FAF5EE]/90 line-clamp-1 mb-2">
-                      {cafeData.brand.tagline}
+                      {sampleCafe.brand.tagline}
                     </p>
                     <div className="flex items-center gap-2">
                       <span className="px-2.5 py-0.5 rounded-full bg-[#C07A46] text-white text-[9px] sm:text-[10px] font-semibold">
@@ -512,7 +512,7 @@ export default function WelcomePage() {
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    {cafeData.chefsPicks.slice(0, 3).map((item) => (
+                    {sampleCafe.chefsPicks.slice(0, 3).map((item) => (
                       <div
                         key={item.id}
                         className="bg-white rounded-xl p-2 border border-[#DFCCAA] shadow-2xs"
@@ -546,7 +546,7 @@ export default function WelcomePage() {
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    {cafeData.gallery.slice(0, 3).map((item) => (
+                    {sampleCafe.gallery.slice(0, 3).map((item) => (
                       <div
                         key={item.id}
                         className="aspect-[4/3] rounded-xl overflow-hidden bg-[#26140D] border border-[#DFCCAA]"
@@ -637,8 +637,8 @@ export default function WelcomePage() {
       <section className="relative w-full min-h-[460px] sm:min-h-[500px] flex items-center justify-center overflow-hidden mb-0">
         {/* Background Image: heroSlides[3] */}
         <img
-          src={cafeData.brand.heroSlides[3]?.url}
-          alt={cafeData.brand.heroSlides[3]?.alt || "Warm ambient café interior"}
+          src={sampleCafe.brand.heroSlides[3]?.url}
+          alt={sampleCafe.brand.heroSlides[3]?.alt || "Warm ambient café interior"}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
         />

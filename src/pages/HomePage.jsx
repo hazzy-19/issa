@@ -2,8 +2,8 @@ import React from "react";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import ChefsPicks from "../components/ChefsPicks";
-import Menu from "../components/Menu";
-import Gallery from "../components/Gallery";
+import MenuPreview from "../components/MenuPreview";
+import GalleryPreview from "../components/GalleryPreview";
 import FindUs from "../components/FindUs";
 
 export default function HomePage() {
@@ -16,9 +16,9 @@ export default function HomePage() {
 
       <ChefsPicks />
 
-      <Menu />
+      <MenuPreview />
 
-      <Gallery />
+      <GalleryPreview />
 
       <FindUs />
     </>

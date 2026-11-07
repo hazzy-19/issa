@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import StorefrontHeader from "../components/StorefrontHeader";
+import StorefrontFooter from "../components/StorefrontFooter";
 
 export default function CafeLayout() {
   return (
@@ -15,7 +15,7 @@ export default function CafeLayout() {
       </a>
 
       {/* Café Header */}
-      <Header />
+      <StorefrontHeader />
 
       {/* Main Content Area */}
       <main id="main-content" className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6">
@@ -23,7 +23,7 @@ export default function CafeLayout() {
       </main>
 
       {/* Café Footer */}
-      <Footer />
+      <StorefrontFooter />
     </div>
   );
 }

@@ -8,14 +8,14 @@ function formatPrice(priceStr) {
 }
 
 export default function MenuPage() {
-  const { cafeData } = useCafe();
+  const { cafe } = useCafe();
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = ["All", ...cafeData.menuCategories];
+  const categories = ["All", ...cafe.menuCategories];
 
   const filteredItems = useMemo(() => {
-    return cafeData.menuItems.filter((item) => {
+    return cafe.menuItems.filter((item) => {
       const matchesCategory =
         activeCategory === "All" || item.category === activeCategory;
       const matchesQuery =
@@ -23,7 +23,7 @@ export default function MenuPage() {
         item.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesQuery;
     });
-  }, [activeCategory, searchQuery, cafeData.menuItems]);
+  }, [activeCategory, searchQuery, cafe.menuItems]);
 
   return (
     <div className="py-6 sm:py-10">
@@ -53,7 +53,7 @@ export default function MenuPage() {
           Fresh seasonal ingredients, slow-fermented breads, and comforting hearth-fired plates.
         </p>
         <p className="text-[11px] sm:text-xs text-[#7A4B29]">
-          {cafeData.hours.kitchenNotice} &bull; {cafeData.hours.allergyNotice}
+          {cafe.hours.kitchenNotice} &bull; {cafe.hours.allergyNotice}
         </p>
       </div>
 

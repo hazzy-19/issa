@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { cafeData } from "../data/cafe";
+import { sampleCafe } from "../data/cafe";
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const categories = cafeData.galleryCategories || [
+  const categories = sampleCafe.galleryCategories || [
     "All",
     "Customers & Moments",
     "Food & Treats",
@@ -15,8 +15,8 @@ export default function GalleryPage() {
 
   const filteredItems =
     activeCategory === "All"
-      ? cafeData.gallery
-      : cafeData.gallery.filter((item) => item.category === activeCategory);
+      ? sampleCafe.gallery
+      : sampleCafe.gallery.filter((item) => item.category === activeCategory);
 
   // Close lightbox on Escape key
   useEffect(() => {

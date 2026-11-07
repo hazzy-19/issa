@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { cafeData } from "../data/cafe";
+import { sampleCafe } from "../data/cafe";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";
@@ -38,7 +38,7 @@ export default function ChefsPicks() {
       {/* 2-COLUMN ON MOBILE, 4-COLUMN ON DESKTOP                       */}
       {/* ============================================================ */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-        {cafeData.chefsPicks.map((item) => (
+        {sampleCafe.chefsPicks.map((item) => (
           <Link
             key={item.id}
             to="/menu"

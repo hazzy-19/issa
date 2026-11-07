@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../context/CafeContext";
 
-export default function Footer() {
-  const { cafeData } = useCafe();
+export default function StorefrontFooter() {
+  const { cafe } = useCafe();
   return (
     <footer className="bg-[#140A06] text-[#D1B89F] pt-12 sm:pt-16 pb-10 sm:pb-12 text-sm border-t border-[#26140D]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -40,11 +40,11 @@ export default function Footer() {
                 C
               </span>
               <h3 className="font-serif text-lg sm:text-xl font-bold text-[#FAF5EE]">
-                {cafeData.brand.name}
+                {cafe.brand.name}
               </h3>
             </div>
             <p className="text-[#A8917A] text-xs sm:text-sm max-w-sm leading-relaxed mb-3">
-              {cafeData.brand.blurb}
+              {cafe.brand.blurb}
             </p>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               <Link to="/menu" className="text-[#C07A46] hover:underline font-medium">
@@ -71,14 +71,14 @@ export default function Footer() {
               <span>Visit us</span>
             </h3>
             <p className="text-[#FAF5EE] text-xs sm:text-sm font-medium leading-snug">
-              {cafeData.contact.address}
+              {cafe.contact.address}
             </p>
             <p className="text-[#A8917A] mt-2 text-[11px] sm:text-xs">
               <a
-                href={`tel:${cafeData.contact.phoneRaw}`}
+                href={`tel:${cafe.contact.phoneRaw}`}
                 className="hover:text-[#C07A46] transition-colors"
               >
-                {cafeData.contact.phone}
+                {cafe.contact.phone}
               </a>
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function Footer() {
               <span>Hours</span>
             </h3>
             <div className="space-y-1 text-[11px] sm:text-xs text-[#FAF5EE]">
-              {cafeData.hours.lines.map((line) => (
+              {cafe.hours.lines.map((line) => (
                 <div key={line.days} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-0.5 border-b border-[#26140D]">
                   <span className="text-[#A8917A]">{line.days}</span>
                   <span className="font-semibold text-[#FAF5EE]">{line.hours}</span>
@@ -105,7 +105,7 @@ export default function Footer() {
         {/* Social Media Pages */}
         <div className="text-center pt-6 border-t border-[#26140D]">
           <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 text-xs">
-            {cafeData.socials.map((social) => (
+            {cafe.socials.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
@@ -122,7 +122,7 @@ export default function Footer() {
 
         {/* Copyright & Edit Details Link */}
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#7A6452] gap-2">
-          <p>&copy; {cafeData.copyrightYear} {cafeData.brand.name}. All rights reserved.</p>
+          <p>&copy; {cafe.copyrightYear} {cafe.brand.name}. All rights reserved.</p>
           <Link
             to="/setup"
             className="text-[#D1B89F] hover:text-[#C07A46] transition-colors underline flex items-center gap-1.5"

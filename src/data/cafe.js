@@ -1,4 +1,4 @@
-export const cafeData = {
+export const sampleCafe = {
   brand: {
     name: "The Corner Café",
     tagline: "Good food. Great coffee. Your everyday café.",
