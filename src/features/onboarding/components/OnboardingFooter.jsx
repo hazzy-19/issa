@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { PRODUCT_NAME, PRODUCT_TAGLINE, PRODUCT_YEAR } from "../config/product";
+import { PRODUCT_NAME, PRODUCT_TAGLINE, PRODUCT_YEAR } from "../product";
 
 export default function OnboardingFooter() {
   const location = useLocation();

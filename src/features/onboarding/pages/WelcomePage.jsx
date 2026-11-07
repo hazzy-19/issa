@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Clock, MapPin, MessageCircle, Share2 } from "lucide-react";
-import { sampleCafe } from "../data/cafe";
-import { useInView } from "../hooks/useInView";
+import { sampleCafe } from "../../../schema/sampleCafe";
+import { useInView } from "../../../hooks/useInView";
 
 function AnimatedCard({ children, index = 0, className = "" }) {
   const [ref, isInView] = useInView({ threshold: 0.1 });

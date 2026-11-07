@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { PRODUCT_NAME } from "../config/product";
+import { PRODUCT_NAME } from "../product";
 
 export default function OnboardingHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

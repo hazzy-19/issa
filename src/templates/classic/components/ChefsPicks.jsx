@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { sampleCafe } from "../data/cafe";
+import { useCafe } from "../../../features/storefront/CafeContext";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";
@@ -8,6 +8,7 @@ function formatPrice(priceStr) {
 }
 
 export default function ChefsPicks() {
+  const { cafe } = useCafe();
   return (
     <section id="chefs-picks" className="scroll-mt-20 py-6 md:py-8">
       {/* Section Header */}
@@ -38,7 +39,7 @@ export default function ChefsPicks() {
       {/* 2-COLUMN ON MOBILE, 4-COLUMN ON DESKTOP                       */}
       {/* ============================================================ */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-        {sampleCafe.chefsPicks.map((item) => (
+        {cafe.chefsPicks.map((item) => (
           <Link
             key={item.id}
             to="/menu"

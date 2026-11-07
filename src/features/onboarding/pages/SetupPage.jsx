@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useCafe } from "../context/CafeContext";
+import { useCafe } from "../../storefront/CafeContext";
 
 const STEPS = [
   { id: 1, name: "Brand", label: "Café Brand" },

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation, Navigate, Link } from "react-router-dom";
-import CafeLayout from "./layouts/CafeLayout";
-import OnboardingLayout from "./layouts/OnboardingLayout";
-import HomePage from "./pages/HomePage";
-import MenuPage from "./pages/MenuPage";
-import GalleryPage from "./pages/GalleryPage";
-import WelcomePage from "./pages/WelcomePage";
-import SetupPage from "./pages/SetupPage";
-import { CafeProvider, useCafe } from "./context/CafeContext";
+import CafeLayout from "./templates/classic/Layout";
+import OnboardingLayout from "./features/onboarding/OnboardingLayout";
+import HomePage from "./templates/classic/pages/HomePage";
+import MenuPage from "./templates/classic/pages/MenuPage";
+import GalleryPage from "./templates/classic/pages/GalleryPage";
+import WelcomePage from "./features/onboarding/pages/WelcomePage";
+import SetupPage from "./features/onboarding/pages/SetupPage";
+import { CafeProvider, useCafe } from "./features/storefront/CafeContext";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();

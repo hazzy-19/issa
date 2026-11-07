@@ -1,8 +1,9 @@
 import React from "react";
-import { sampleCafe } from "../data/cafe";
+import { useCafe } from "../../../features/storefront/CafeContext";
 
 export default function About() {
-  const { about } = sampleCafe;
+  const { cafe } = useCafe();
+  const { about } = cafe;
 
   return (
     <section id="about" className="scroll-mt-20 py-6 md:py-8">

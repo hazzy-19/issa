@@ -1,5 +1,5 @@
 import React from "react";
-import { useCafe } from "../context/CafeContext";
+import { useCafe } from "../../../features/storefront/CafeContext";
 
 export default function FindUs() {
   const { cafe } = useCafe();

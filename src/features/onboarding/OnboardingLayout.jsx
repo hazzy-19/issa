@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import OnboardingHeader from "../components/OnboardingHeader";
-import OnboardingFooter from "../components/OnboardingFooter";
+import OnboardingHeader from "./components/OnboardingHeader";
+import OnboardingFooter from "./components/OnboardingFooter";
 
 export default function OnboardingLayout() {
   return (

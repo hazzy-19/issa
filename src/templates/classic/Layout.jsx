@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import StorefrontHeader from "../components/StorefrontHeader";
-import StorefrontFooter from "../components/StorefrontFooter";
+import StorefrontHeader from "./components/StorefrontHeader";
+import StorefrontFooter from "./components/StorefrontFooter";
 
 export default function CafeLayout() {
   return (

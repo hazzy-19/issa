@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { sampleCafe } from "../data/cafe";
+import { useCafe } from "../../../features/storefront/CafeContext";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";
@@ -8,7 +8,8 @@ function formatPrice(priceStr) {
 }
 
 export default function MenuPreview() {
-  const items = sampleCafe.menuHighlights || sampleCafe.menuItems.slice(0, 6);
+  const { cafe } = useCafe();
+  const items = cafe.menuHighlights || cafe.menuItems.slice(0, 6);
 
   return (
     <section id="menu" className="scroll-mt-20 py-6 md:py-8">
@@ -84,7 +85,7 @@ export default function MenuPreview() {
           to="/menu"
           className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3 sm:py-3.5 bg-[#1E100A] hover:bg-[#C07A46] text-[#FAF5EE] text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
         >
-          <span>Explore Full Menu ({sampleCafe.menuItems.length}+ Items)</span>
+          <span>Explore Full Menu ({cafe.menuItems.length}+ Items)</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>

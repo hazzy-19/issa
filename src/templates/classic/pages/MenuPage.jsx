@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { useCafe } from "../context/CafeContext";
+import { useCafe } from "../../../features/storefront/CafeContext";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";

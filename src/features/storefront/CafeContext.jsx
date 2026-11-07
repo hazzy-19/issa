@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { sampleCafe } from "../data/cafe";
+import { sampleCafe } from "../../schema/sampleCafe";
 
 const CAFE_STORAGE_KEY = "cafe_custom_data";
 const CAFE_HAS_SAVED_KEY = "cafe_has_saved";

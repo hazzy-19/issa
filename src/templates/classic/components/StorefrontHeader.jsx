@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCafe } from "../context/CafeContext";
+import { useCafe } from "../../../features/storefront/CafeContext";
 
 export default function StorefrontHeader() {
   const { cafe } = useCafe();
