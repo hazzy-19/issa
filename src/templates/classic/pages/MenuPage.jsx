@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import { getImageProps } from "../../../schema/cafeSchema";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";
@@ -9,21 +10,24 @@ function formatPrice(priceStr) {
 
 export default function MenuPage() {
   const { cafe } = useCafe();
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategoryId, setActiveCategoryId] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = ["All", ...cafe.menuCategories];
+  const categories = useMemo(() => {
+    return [{ id: "all", name: "All" }, ...(cafe.menu?.categories || [])];
+  }, [cafe.menu?.categories]);
 
   const filteredItems = useMemo(() => {
-    return cafe.menuItems.filter((item) => {
+    const items = cafe.menu?.items || [];
+    return items.filter((item) => {
       const matchesCategory =
-        activeCategory === "All" || item.category === activeCategory;
+        activeCategoryId === "all" || item.categoryId === activeCategoryId;
       const matchesQuery =
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesQuery;
     });
-  }, [activeCategory, searchQuery, cafe.menuItems]);
+  }, [activeCategoryId, searchQuery, cafe.menu?.items]);
 
   return (
     <div className="py-6 sm:py-10">
@@ -90,19 +94,19 @@ export default function MenuPage() {
         {/* Category Pills */}
         <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-none justify-start sm:justify-center -mx-2 px-2">
           {categories.map((cat) => {
-            const isActive = activeCategory === cat;
+            const isActive = activeCategoryId === cat.id;
             return (
               <button
-                key={cat}
+                key={cat.id}
                 type="button"
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => setActiveCategoryId(cat.id)}
                 className={`whitespace-nowrap px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
                   isActive
                     ? "bg-[#1E100A] text-white shadow-xs"
                     : "bg-white text-[#542F1E] border border-[#DFCCAA] hover:border-[#C07A46] hover:text-[#1E100A]"
                 }`}
               >
-                {cat}
+                {cat.name}
               </button>
             );
           })}
@@ -123,7 +127,7 @@ export default function MenuPage() {
           <button
             type="button"
             onClick={() => {
-              setActiveCategory("All");
+              setActiveCategoryId("all");
               setSearchQuery("");
             }}
             className="px-5 py-2 bg-[#C07A46] text-white text-xs font-semibold rounded-full hover:bg-[#A96434] transition-colors"
@@ -142,8 +146,7 @@ export default function MenuPage() {
                 {/* Photo */}
                 <div className="relative w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-2.5 sm:mb-3 bg-[#FAF5EE]">
                   <img
-                    src={item.image}
-                    alt={item.name}
+                    {...getImageProps(item.image, item.name)}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />

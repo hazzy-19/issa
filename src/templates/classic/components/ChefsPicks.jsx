@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import { getItemsByIds, getImageProps } from "../../../schema/cafeSchema";
 
 function formatPrice(priceStr) {
   if (!priceStr) return "";
@@ -9,6 +10,11 @@ function formatPrice(priceStr) {
 
 export default function ChefsPicks() {
   const { cafe } = useCafe();
+  const items = getItemsByIds(
+    cafe.menu?.items || [],
+    cafe.highlights?.chefsPicks || []
+  );
+
   return (
     <section id="chefs-picks" className="scroll-mt-20 py-6 md:py-8">
       {/* Section Header */}
@@ -39,7 +45,7 @@ export default function ChefsPicks() {
       {/* 2-COLUMN ON MOBILE, 4-COLUMN ON DESKTOP                       */}
       {/* ============================================================ */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-        {cafe.chefsPicks.map((item) => (
+        {items.map((item) => (
           <Link
             key={item.id}
             to="/menu"
@@ -49,8 +55,7 @@ export default function ChefsPicks() {
             {/* Real photo container with smooth zoom */}
             <div className="relative w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden mb-2.5 bg-[#FAF5EE]">
               <img
-                src={item.image}
-                alt={item.name}
+                {...getImageProps(item.image, item.name)}
                 loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />

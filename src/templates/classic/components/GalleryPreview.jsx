@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import { getImageProps } from "../../../schema/cafeSchema";
 
 export default function GalleryPreview() {
   const { cafe } = useCafe();
   // Show a curated selection of 6 varied photos for the Pinterest preview on home page
-  const previewItems = cafe.gallery.slice(0, 6);
+  const previewItems = (cafe.gallery?.items || []).slice(0, 6);
 
   return (
     <section id="gallery" className="scroll-mt-20 py-6 md:py-8">
@@ -47,8 +48,7 @@ export default function GalleryPreview() {
             >
               <div className={`relative w-full ${item.aspect || "aspect-[3/4]"} overflow-hidden`}>
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  {...getImageProps(item.image, item.title)}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -68,7 +68,7 @@ export default function GalleryPreview() {
             to="/gallery"
             className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3 bg-[#C07A46] hover:bg-[#D58E59] text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
           >
-            <span>Explore Full Gallery ({cafe.gallery.length} Photos)</span>
+            <span>Explore Full Gallery ({cafe.gallery?.items?.length || 0} Photos)</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import { getImageProps, getCategoryName } from "../../../schema/cafeSchema";
 
 export default function GalleryPage() {
   const { cafe } = useCafe();
-  const [activeCategory, setActiveCategory] = useState("All");
+  const categories = cafe.gallery?.categories || [];
+  const allCatId =
+    categories.find(
+      (c) =>
+        c.name.toLowerCase() === "all" ||
+        c.id === "all" ||
+        c.id === "gal-all"
+    )?.id || "all";
+  const [activeCategoryId, setActiveCategoryId] = useState(allCatId);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const categories = cafe.galleryCategories || [
-    "All",
-    "Customers & Moments",
-    "Food & Treats",
-    "The Space & Brews",
-  ];
-
+  const galleryItems = cafe.gallery?.items || [];
   const filteredItems =
-    activeCategory === "All"
-      ? cafe.gallery
-      : cafe.gallery.filter((item) => item.category === activeCategory);
+    activeCategoryId === allCatId ||
+    activeCategoryId === "all" ||
+    activeCategoryId === "gal-all"
+      ? galleryItems
+      : galleryItems.filter((item) => item.categoryId === activeCategoryId);
 
   // Close lightbox on Escape key
   useEffect(() => {
@@ -68,19 +73,18 @@ export default function GalleryPage() {
       {/* Category Filter Pills */}
       <div className="flex overflow-x-auto gap-2 pb-3 mb-8 scrollbar-none justify-start sm:justify-center -mx-2 px-2">
         {categories.map((cat) => {
-          const isActive = activeCategory === cat;
+          const isActive = activeCategoryId === cat.id;
           return (
             <button
-              key={cat}
+              key={cat.id}
               type="button"
-              onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${
-                isActive
-                  ? "bg-[#1E100A] text-white shadow-md"
-                  : "bg-white text-[#542F1E] border border-[#DFCCAA] hover:border-[#C07A46] hover:text-[#1E100A]"
-              }`}
+              onClick={() => setActiveCategoryId(cat.id)}
+              className={`whitespace-nowrap px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46] ${isActive
+                ? "bg-[#1E100A] text-white shadow-md"
+                : "bg-white text-[#542F1E] border border-[#DFCCAA] hover:border-[#C07A46] hover:text-[#1E100A]"
+                }`}
             >
-              {cat}
+              {cat.name}
             </button>
           );
         })}
@@ -98,14 +102,13 @@ export default function GalleryPage() {
           >
             <div className={`relative w-full ${item.aspect || "aspect-[3/4]"} overflow-hidden bg-[#FAF5EE]`}>
               <img
-                src={item.image}
-                alt={item.title}
+                {...getImageProps(item.image, item.title)}
                 loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 sm:p-4 text-white">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-[#C07A46] mb-0.5">
-                  {item.category}
+                  {getCategoryName(cafe.gallery?.categories, item.categoryId)}
                 </span>
                 <span className="text-xs sm:text-sm font-semibold drop-shadow-xs line-clamp-2">
                   {item.title}
@@ -114,7 +117,7 @@ export default function GalleryPage() {
             </div>
             <div className="p-2.5 sm:p-3 text-left">
               <span className="block text-[10px] font-bold text-[#A96434] uppercase tracking-wider mb-0.5">
-                {item.category}
+                {getCategoryName(cafe.gallery?.categories, item.categoryId)}
               </span>
               <p className="font-serif text-xs sm:text-sm font-semibold text-[#1E100A] line-clamp-1">
                 {item.title}
@@ -149,14 +152,13 @@ export default function GalleryPage() {
             </button>
 
             <img
-              src={selectedImage.image}
-              alt={selectedImage.title}
+              {...getImageProps(selectedImage.image, selectedImage.title)}
               className="max-h-[75vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-white/20"
             />
 
             <div className="mt-4 text-center text-white">
               <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#C07A46] mb-1">
-                {selectedImage.category}
+                {getCategoryName(cafe.gallery?.categories, selectedImage.categoryId)}
               </span>
               <h3 className="font-serif text-base sm:text-lg font-bold">
                 {selectedImage.title}

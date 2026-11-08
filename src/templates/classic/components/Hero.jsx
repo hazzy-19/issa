@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import {
+  getImageProps,
+  getMapsUrl,
+  getHoursDisplay,
+} from "../../../schema/cafeSchema";
 
 export default function Hero() {
   const { cafe } = useCafe();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = cafe.brand.heroSlides || [
-    { url: cafe.brand.heroImage, alt: "Café interior" },
-  ];
+  const slides = cafe.brand.heroImages || [];
 
   // Auto-advance slideshow every 5 seconds
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -22,18 +26,20 @@ export default function Hero() {
       {/* Hero Container covering the entire section */}
       <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#321B11] h-[520px] sm:h-[500px] md:h-[540px] flex items-end md:items-center">
         {/* 5-Image Slideshow with smooth crossfade */}
-        {slides.map((slide, index) => (
-          <img
-            key={slide.url}
-            src={slide.url}
-            alt={slide.alt}
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-            }`}
-            style={{ transitionProperty: "opacity, transform" }}
-            loading={index === 0 ? "eager" : "lazy"}
-          />
-        ))}
+        {slides.map((slide, index) => {
+          const imgProps = getImageProps(slide, "Café interior");
+          return (
+            <img
+              key={imgProps.src || index}
+              {...imgProps}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+              }`}
+              style={{ ...imgProps.style, transitionProperty: "opacity, transform" }}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          );
+        })}
 
         {/* Delicate Vignette: keeps coffee photography luminous and clear while ensuring text contrast */}
         <div
@@ -65,7 +71,7 @@ export default function Hero() {
             </Link>
 
             <a
-              href={cafe.contact.mapsUrl}
+              href={getMapsUrl(cafe.contact.address)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-4 sm:px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-semibold rounded-full shadow-xs hover:shadow border border-white/35 backdrop-blur-md transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white text-center"
@@ -91,7 +97,7 @@ export default function Hero() {
               />
             </svg>
             <p className="text-[11px] sm:text-xs leading-normal font-medium drop-shadow-2xs">
-              {cafe.hours.display}
+              {getHoursDisplay(cafe.hours)}
             </p>
           </div>
         </div>

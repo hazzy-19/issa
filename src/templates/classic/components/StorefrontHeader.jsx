@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import { NAV_LINKS } from "../navigation";
+import { getTelUrl, getHoursDisplay } from "../../../schema/cafeSchema";
 
 export default function StorefrontHeader() {
   const { cafe } = useCafe();
@@ -87,7 +89,7 @@ export default function StorefrontHeader() {
               aria-label="Desktop Navigation"
               className="flex items-center space-x-7 text-sm font-medium text-[#D1B89F]"
             >
-              {cafe.navigation.map((item) => {
+              {NAV_LINKS.map((item) => {
                 const isPage = item.href === "/menu" || item.href === "/gallery";
                 const isActive =
                   location.pathname === item.href ||
@@ -117,7 +119,7 @@ export default function StorefrontHeader() {
             </nav>
 
             <a
-              href={`tel:${cafe.contact.phoneRaw}`}
+              href={getTelUrl(cafe.contact.phone)}
               className="hidden lg:inline-flex items-center gap-2 px-5 py-2 bg-[#C07A46] hover:bg-[#A96434] text-white text-xs font-semibold rounded-full shadow-sm transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -166,7 +168,7 @@ export default function StorefrontHeader() {
 
             {/* Call us button */}
             <a
-              href={`tel:${cafe.contact.phoneRaw}`}
+              href={getTelUrl(cafe.contact.phone)}
               className="px-4 py-1.5 bg-[#C07A46] hover:bg-[#A96434] text-white text-xs font-semibold rounded-full shadow-xs transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
             >
               Call us
@@ -225,7 +227,7 @@ export default function StorefrontHeader() {
 
           {/* Navigation Links with smooth hover styling */}
           <nav aria-label="Mobile Navigation Links" className="flex flex-col space-y-2">
-            {cafe.navigation.map((item) => {
+            {NAV_LINKS.map((item) => {
               const isPage = item.href === "/menu" || item.href === "/gallery";
               const isActive =
                 location.pathname === item.href ||
@@ -279,7 +281,7 @@ export default function StorefrontHeader() {
         {/* Sidebar Footer with direct Call button */}
         <div className="pt-6 border-t border-[#321B11] space-y-3">
           <a
-            href={`tel:${cafe.contact.phoneRaw}`}
+            href={getTelUrl(cafe.contact.phone)}
             className="flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#C07A46] hover:bg-[#A96434] text-white rounded-full text-sm font-semibold shadow-md transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C07A46]"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -288,7 +290,7 @@ export default function StorefrontHeader() {
             <span>Call us: {cafe.contact.phone}</span>
           </a>
           <p className="text-[11px] text-center text-[#A8917A]">
-            {cafe.hours.display}
+            {getHoursDisplay(cafe.hours)}
           </p>
         </div>
       </aside>

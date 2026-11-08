@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import { getTelUrl, getCopyrightYear } from "../../../schema/cafeSchema";
 
 export default function StorefrontFooter() {
   const { cafe } = useCafe();
@@ -75,7 +76,7 @@ export default function StorefrontFooter() {
             </p>
             <p className="text-[#A8917A] mt-2 text-[11px] sm:text-xs">
               <a
-                href={`tel:${cafe.contact.phoneRaw}`}
+                href={getTelUrl(cafe.contact.phone)}
                 className="hover:text-[#C07A46] transition-colors"
               >
                 {cafe.contact.phone}
@@ -105,24 +106,28 @@ export default function StorefrontFooter() {
         {/* Social Media Pages */}
         <div className="text-center pt-6 border-t border-[#26140D]">
           <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 text-xs">
-            {cafe.socials.map((social) => (
-              <a
-                key={social.name}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Follow us on ${social.name}`}
-                className="px-3.5 py-1.5 rounded-full bg-[#1E100A] border border-[#321B11] text-[#D1B89F] hover:text-[#FAF5EE] hover:bg-[#C07A46] hover:border-[#C07A46] transition-all text-xs"
-              >
-                {social.name}
-              </a>
-            ))}
+            {cafe.socials.map((social) => {
+              const platform = social.platform || social.name || "";
+              const url = social.url || social.href || "#";
+              return (
+                <a
+                  key={platform}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow us on ${platform}`}
+                  className="px-3.5 py-1.5 rounded-full bg-[#1E100A] border border-[#321B11] text-[#D1B89F] hover:text-[#FAF5EE] hover:bg-[#C07A46] hover:border-[#C07A46] transition-all text-xs capitalize"
+                >
+                  {platform}
+                </a>
+              );
+            })}
           </div>
         </div>
 
         {/* Copyright & Edit Details Link */}
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#7A6452] gap-2">
-          <p>&copy; {cafe.copyrightYear} {cafe.brand.name}. All rights reserved.</p>
+          <p>&copy; {getCopyrightYear()} {cafe.brand.name}. All rights reserved.</p>
           <Link
             to="/setup"
             className="text-[#D1B89F] hover:text-[#C07A46] transition-colors underline flex items-center gap-1.5"

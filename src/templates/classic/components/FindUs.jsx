@@ -1,5 +1,12 @@
 import React from "react";
 import { useCafe } from "../../../features/storefront/CafeContext";
+import {
+  getTelUrl,
+  getHoursDisplay,
+  getWhatsappUrl,
+  getMapsUrl,
+  getMapEmbedSrc,
+} from "../../../schema/cafeSchema";
 
 export default function FindUs() {
   const { cafe } = useCafe();
@@ -42,7 +49,7 @@ export default function FindUs() {
                 </a>
                 <span>-</span>
                 <a
-                  href={`tel:${cafe.contact.phoneRaw}`}
+                  href={getTelUrl(cafe.contact.phone)}
                   className="hover:text-[#C07A46] font-medium transition-colors"
                 >
                   {cafe.contact.phone}
@@ -53,7 +60,7 @@ export default function FindUs() {
                 <svg className="w-3.5 h-3.5 text-[#C07A46]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>{cafe.hours.display}</span>
+                <span>{getHoursDisplay(cafe.hours)}</span>
               </div>
             </div>
           </div>
@@ -62,7 +69,7 @@ export default function FindUs() {
           <div className="grid grid-cols-2 gap-2.5 relative z-10 pt-1">
             {/* WhatsApp */}
             <a
-              href={cafe.contact.whatsappUrl}
+              href={getWhatsappUrl(cafe.contact.phone)}
               target="_blank"
               rel="noopener noreferrer"
               className="col-span-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-[#1E100A] hover:bg-[#321B11] text-[#FAF5EE] text-xs font-semibold rounded-full shadow-sm hover:shadow transition-all text-center"
@@ -75,7 +82,7 @@ export default function FindUs() {
 
             {/* Get directions */}
             <a
-              href={cafe.contact.mapsUrl}
+              href={getMapsUrl(cafe.contact.address)}
               target="_blank"
               rel="noopener noreferrer"
               className="col-span-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-[#C07A46] hover:bg-[#A96434] text-white text-xs font-semibold rounded-full shadow-sm hover:shadow transition-all text-center"
@@ -88,7 +95,7 @@ export default function FindUs() {
 
             {/* Call us */}
             <a
-              href={`tel:${cafe.contact.phoneRaw}`}
+              href={getTelUrl(cafe.contact.phone)}
               className="col-span-2 flex items-center justify-center gap-2 py-2.5 px-4 border border-[#1E100A] bg-transparent hover:bg-[#1E100A] text-[#1E100A] hover:text-[#FAF5EE] text-xs font-semibold rounded-full transition-all text-center"
             >
               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -105,8 +112,8 @@ export default function FindUs() {
           aria-label="Location map"
         >
           <iframe
-            title="The Corner Café Location Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.818379646453!2d36.7909!3d-1.2828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNTguMSJTIDM2wrA0Nyc0Ny4yIkU!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
+            title={`${cafe.brand.name} Location Map`}
+            src={getMapEmbedSrc(cafe.contact)}
             className="w-full h-full min-h-[260px] border-0"
             loading="lazy"
             allowFullScreen=""

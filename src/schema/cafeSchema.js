@@ -738,6 +738,63 @@ export function getCopyrightYear() {
   return new Date().getFullYear();
 }
 
+export function getItemsByIds(items, ids) {
+  if (!Array.isArray(items) || !Array.isArray(ids)) return [];
+  const map = new Map();
+  for (const item of items) {
+    if (item && item.id) {
+      map.set(item.id, item);
+    }
+  }
+  const result = [];
+  for (const id of ids) {
+    if (typeof id === "string" && map.has(id)) {
+      result.push(map.get(id));
+    }
+  }
+  return result;
+}
+
+export function getCategoryName(categories, id) {
+  if (!Array.isArray(categories) || !id) return "";
+  const found = categories.find((c) => c?.id === id);
+  return found && typeof found.name === "string" ? found.name : "";
+}
+
+export function getImageProps(image, fallbackAlt = "") {
+  const src =
+    (image && typeof image.url === "string" ? image.url : "") ||
+    (typeof image === "string" ? image : "");
+  const alt =
+    (image && typeof image.alt === "string" ? image.alt : "") || fallbackAlt;
+  const focalX =
+    image && typeof image.focalX === "number" && !Number.isNaN(image.focalX)
+      ? image.focalX
+      : 0.5;
+  const focalY =
+    image && typeof image.focalY === "number" && !Number.isNaN(image.focalY)
+      ? image.focalY
+      : 0.5;
+  const objectPosition = `${focalX * 100}% ${focalY * 100}%`;
+  return {
+    src,
+    alt,
+    style: { objectPosition },
+  };
+}
+
+export function getMapEmbedSrc(contact) {
+  if (
+    contact?.mapEmbedUrl &&
+    typeof contact.mapEmbedUrl === "string" &&
+    contact.mapEmbedUrl.trim()
+  ) {
+    return contact.mapEmbedUrl;
+  }
+  const address = contact?.address || "";
+  return `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+}
+
 // Validators
 
 export function isValidPhone(phone) {
