@@ -1,10 +1,30 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { sampleCafe } from "../../schema/sampleCafe";
+import { normalizeCafe, migrateLegacySaved } from "../../schema/cafeSchema";
 
 const CAFE_STORAGE_KEY = "cafe_custom_data";
 const CAFE_HAS_SAVED_KEY = "cafe_has_saved";
 
 const CafeContext = createContext(null);
+
+function mergeSectionBySection(base, saved) {
+  if (!saved || typeof saved !== "object") return base;
+  const merged = { ...base };
+  for (const [key, val] of Object.entries(saved)) {
+    if (val === undefined || val === null) continue;
+    if (
+      typeof val === "object" &&
+      !Array.isArray(val) &&
+      typeof base[key] === "object" &&
+      !Array.isArray(base[key])
+    ) {
+      merged[key] = { ...base[key], ...val };
+    } else {
+      merged[key] = val;
+    }
+  }
+  return merged;
+}
 
 export function CafeProvider({ children }) {
   const [hasSaved, setHasSaved] = useState(() => {
@@ -20,14 +40,12 @@ export function CafeProvider({ children }) {
       const saved = localStorage.getItem(CAFE_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return {
-          ...sampleCafe,
-          ...parsed,
-          brand: { ...sampleCafe.brand, ...(parsed.brand || {}) },
-          hours: { ...sampleCafe.hours, ...(parsed.hours || {}) },
-          contact: { ...sampleCafe.contact, ...(parsed.contact || {}) },
-          socials: parsed.socials || sampleCafe.socials,
-        };
+        const savedData =
+          parsed && typeof parsed === "object" && !("schemaVersion" in parsed)
+            ? migrateLegacySaved(parsed)
+            : parsed;
+        const merged = mergeSectionBySection(sampleCafe, savedData);
+        return normalizeCafe(merged);
       }
     } catch {
       // Fallback to initial cafe data if parsing fails
@@ -35,47 +53,21 @@ export function CafeProvider({ children }) {
     return sampleCafe;
   });
 
-  const saveCafeData = (newData) => {
+  const saveCafeData = (payload) => {
     try {
-      // Clean phone digits for raw phone and WhatsApp link
-      const phoneRaw = (newData.contact?.phone || cafe.contact.phone || "").replace(/[^0-9]/g, "");
-      const address = newData.contact?.address || cafe.contact.address || "";
-      const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(address)}`;
-      const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-      const whatsappUrl = `https://wa.me/${phoneRaw}`;
+      const savedData =
+        payload && typeof payload === "object" && !("schemaVersion" in payload)
+          ? migrateLegacySaved(payload)
+          : payload;
 
-      // Format display hours line
-      const lines = newData.hours?.lines || cafe.hours.lines;
-      const displayHours = lines.map((l) => `${l.days} ${l.hours}`).join(", ");
+      const merged = mergeSectionBySection(cafe, savedData);
+      const normalized = normalizeCafe(merged);
 
-      const mergedData = {
-        ...cafe,
-        brand: {
-          ...cafe.brand,
-          ...(newData.brand || {}),
-        },
-        hours: {
-          ...cafe.hours,
-          ...(newData.hours || {}),
-          display: displayHours || cafe.hours.display,
-          lines,
-        },
-        contact: {
-          ...cafe.contact,
-          ...(newData.contact || {}),
-          phoneRaw,
-          mapsUrl,
-          mapEmbedUrl,
-          whatsappUrl,
-        },
-        socials: newData.socials || cafe.socials,
-      };
-
-      localStorage.setItem(CAFE_STORAGE_KEY, JSON.stringify(mergedData));
+      localStorage.setItem(CAFE_STORAGE_KEY, JSON.stringify(normalized));
       localStorage.setItem(CAFE_HAS_SAVED_KEY, "true");
-      setCafe(mergedData);
+      setCafe(normalized);
       setHasSaved(true);
-      return mergedData;
+      return normalized;
     } catch (err) {
       console.error("Error saving cafe data to localStorage", err);
       return cafe;

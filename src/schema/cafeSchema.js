@@ -203,157 +203,222 @@ export function fromLegacy(old) {
     return deepClone(DEFAULT_CAFE);
   }
 
-  // 1. Brand & hero images
-  const heroImages = Array.isArray(old.brand?.heroSlides)
-    ? old.brand.heroSlides.map((slide) => toImage(slide, slide?.alt || ""))
+  // 1. Brand & hero images (tolerates missing sections or alternative key names)
+  const brandSource =
+    old.brand && typeof old.brand === "object" ? old.brand : {};
+  const rawHeroSlides = brandSource.heroImages || brandSource.heroSlides;
+  const heroImages = Array.isArray(rawHeroSlides)
+    ? rawHeroSlides.map((slide) => toImage(slide, slide?.alt || ""))
     : [];
 
   const brand = {
-    name: typeof old.brand?.name === "string" ? old.brand.name : "",
-    tagline: typeof old.brand?.tagline === "string" ? old.brand.tagline : "",
-    heroBlurb: typeof old.brand?.heroBlurb === "string" ? old.brand.heroBlurb : "",
+    name: typeof brandSource.name === "string" ? brandSource.name : "",
+    tagline: typeof brandSource.tagline === "string" ? brandSource.tagline : "",
+    heroBlurb:
+      typeof brandSource.heroBlurb === "string" ? brandSource.heroBlurb : "",
     heroBlurbShort:
-      typeof old.brand?.heroBlurbShort === "string" ? old.brand.heroBlurbShort : "",
-    blurb: typeof old.brand?.blurb === "string" ? old.brand.blurb : "",
+      typeof brandSource.heroBlurbShort === "string"
+        ? brandSource.heroBlurbShort
+        : "",
+    blurb: typeof brandSource.blurb === "string" ? brandSource.blurb : "",
     heroImages,
   };
 
   // 2. Hours (lines kept, display dropped)
+  const hoursSource =
+    old.hours && typeof old.hours === "object" ? old.hours : {};
   const hours = {
-    lines: Array.isArray(old.hours?.lines)
-      ? old.hours.lines.map((line) => ({
+    lines: Array.isArray(hoursSource.lines)
+      ? hoursSource.lines.map((line) => ({
           days: typeof line?.days === "string" ? line.days : "",
           hours: typeof line?.hours === "string" ? line.hours : "",
         }))
       : [],
     kitchenNotice:
-      typeof old.hours?.kitchenNotice === "string" ? old.hours.kitchenNotice : "",
+      typeof hoursSource.kitchenNotice === "string"
+        ? hoursSource.kitchenNotice
+        : "",
     allergyNotice:
-      typeof old.hours?.allergyNotice === "string" ? old.hours.allergyNotice : "",
+      typeof hoursSource.allergyNotice === "string"
+        ? hoursSource.allergyNotice
+        : "",
   };
 
   // 3. Contact (phone normalized, phoneRaw/mapsUrl/whatsappUrl dropped)
+  const contactSource =
+    old.contact && typeof old.contact === "object" ? old.contact : {};
   const contact = {
-    address: typeof old.contact?.address === "string" ? old.contact.address : "",
-    email: typeof old.contact?.email === "string" ? old.contact.email : "",
-    phone: normalizePhone(old.contact?.phone || ""),
+    address:
+      typeof contactSource.address === "string" ? contactSource.address : "",
+    email: typeof contactSource.email === "string" ? contactSource.email : "",
+    phone: normalizePhone(contactSource.phone || ""),
     mapEmbedUrl:
-      typeof old.contact?.mapEmbedUrl === "string" ? old.contact.mapEmbedUrl : "",
+      typeof contactSource.mapEmbedUrl === "string"
+        ? contactSource.mapEmbedUrl
+        : "",
   };
 
   // 4. Socials [{ name, href }] -> [{ platform, url }]
-  const socials = Array.isArray(old.socials)
-    ? old.socials.map((s) => ({
-        platform:
-          typeof s?.platform === "string"
-            ? s.platform
-            : typeof s?.name === "string"
-            ? s.name
-            : "",
-        url:
-          typeof s?.url === "string"
-            ? s.url
-            : typeof s?.href === "string"
-            ? s.href
-            : "",
-      }))
-    : [];
+  const rawSocials = Array.isArray(old.socials) ? old.socials : [];
+  const socials = rawSocials.map((s) => ({
+    platform:
+      typeof s?.platform === "string"
+        ? s.platform.toLowerCase()
+        : typeof s?.name === "string"
+        ? s.name.toLowerCase()
+        : "",
+    url:
+      typeof s?.url === "string"
+        ? s.url
+        : typeof s?.href === "string"
+        ? s.href
+        : "",
+  }));
 
   // 5. About
+  const aboutSource =
+    old.about && typeof old.about === "object" ? old.about : {};
   const about = {
     historyTitle:
-      typeof old.about?.historyTitle === "string" ? old.about.historyTitle : "",
+      typeof aboutSource.historyTitle === "string"
+        ? aboutSource.historyTitle
+        : "",
     historyText:
-      typeof old.about?.historyText === "string" ? old.about.historyText : "",
-    principles: Array.isArray(old.about?.principles)
-      ? old.about.principles.map((p) => ({
+      typeof aboutSource.historyText === "string" ? aboutSource.historyText : "",
+    principles: Array.isArray(aboutSource.principles)
+      ? aboutSource.principles.map((p) => ({
           title: typeof p?.title === "string" ? p.title : "",
           description: typeof p?.description === "string" ? p.description : "",
         }))
       : [],
   };
 
-  // 6. Menu categories & items
-  const menuCategories = Array.isArray(old.menuCategories)
-    ? old.menuCategories.map((name) => ({
-        id: slugifyId(name, "cat"),
-        name: String(name).trim(),
-      }))
+  // 6. Menu categories & items (tolerates top-level or nested sections)
+  const rawMenuCats = Array.isArray(old.menuCategories)
+    ? old.menuCategories
+    : Array.isArray(old.menu?.categories)
+    ? old.menu.categories
     : [];
+
+  const menuCategories = rawMenuCats.map((cat) => {
+    if (cat && typeof cat === "object") {
+      return {
+        id:
+          typeof cat.id === "string" && cat.id
+            ? cat.id
+            : slugifyId(cat.name, "cat"),
+        name: String(cat.name || "").trim(),
+      };
+    }
+    return {
+      id: slugifyId(cat, "cat"),
+      name: String(cat).trim(),
+    };
+  });
 
   const categoryLookup = new Map(
     menuCategories.map((c) => [c.name.toLowerCase(), c.id])
   );
 
-  const menuItems = Array.isArray(old.menuItems)
-    ? old.menuItems.map((item) => {
-        const catKey = String(item?.category || "").trim().toLowerCase();
-        const categoryId =
-          item?.categoryId || categoryLookup.get(catKey) || "";
-        return {
-          id: typeof item?.id === "string" ? item.id : "",
-          categoryId,
-          name: typeof item?.name === "string" ? item.name : "",
-          price: item?.price !== undefined ? item.price : "",
-          description:
-            typeof item?.description === "string" ? item.description : "",
-          dietaryTag:
-            typeof item?.dietaryTag === "string" ? item.dietaryTag : "",
-          image: toImage(item?.image, item?.name || ""),
-        };
-      })
+  const rawMenuItems = Array.isArray(old.menuItems)
+    ? old.menuItems
+    : Array.isArray(old.menu?.items)
+    ? old.menu.items
     : [];
+
+  const menuItems = rawMenuItems.map((item) => {
+    const catKey = String(item?.category || "").trim().toLowerCase();
+    const categoryId = item?.categoryId || categoryLookup.get(catKey) || "";
+    return {
+      id: typeof item?.id === "string" ? item.id : "",
+      categoryId,
+      name: typeof item?.name === "string" ? item.name : "",
+      price: item?.price !== undefined ? item.price : "",
+      description:
+        typeof item?.description === "string" ? item.description : "",
+      dietaryTag:
+        typeof item?.dietaryTag === "string" ? item.dietaryTag : "",
+      image: toImage(item?.image, item?.name || ""),
+    };
+  });
 
   // 7. Highlights (chefsPicks by menuItemId, menuHighlights by id)
   const validMenuItemIds = new Set(menuItems.map((item) => item.id));
 
+  const rawChefsPicks = Array.isArray(old.chefsPicks)
+    ? old.chefsPicks
+    : Array.isArray(old.highlights?.chefsPicks)
+    ? old.highlights.chefsPicks
+    : [];
+
   const chefsPicks = [];
-  if (Array.isArray(old.chefsPicks)) {
-    for (const pick of old.chefsPicks) {
-      const targetId =
-        pick && typeof pick === "object" ? pick.menuItemId || pick.id : pick;
-      if (typeof targetId === "string" && validMenuItemIds.has(targetId)) {
-        chefsPicks.push(targetId);
-      }
+  for (const pick of rawChefsPicks) {
+    const targetId =
+      pick && typeof pick === "object" ? pick.menuItemId || pick.id : pick;
+    if (typeof targetId === "string" && validMenuItemIds.has(targetId)) {
+      chefsPicks.push(targetId);
     }
   }
 
+  const rawHighlights = Array.isArray(old.menuHighlights)
+    ? old.menuHighlights
+    : Array.isArray(old.highlights?.menuHighlights)
+    ? old.highlights.menuHighlights
+    : [];
+
   const menuHighlights = [];
-  if (Array.isArray(old.menuHighlights)) {
-    for (const h of old.menuHighlights) {
-      const targetId = h && typeof h === "object" ? h.id : h;
-      if (typeof targetId === "string" && validMenuItemIds.has(targetId)) {
-        menuHighlights.push(targetId);
-      }
+  for (const h of rawHighlights) {
+    const targetId = h && typeof h === "object" ? h.id : h;
+    if (typeof targetId === "string" && validMenuItemIds.has(targetId)) {
+      menuHighlights.push(targetId);
     }
   }
 
   // 8. Gallery categories & items
-  const galleryCategories = Array.isArray(old.galleryCategories)
-    ? old.galleryCategories.map((name) => ({
-        id: slugifyId(name, "gal"),
-        name: String(name).trim(),
-      }))
+  const rawGalleryCats = Array.isArray(old.galleryCategories)
+    ? old.galleryCategories
+    : Array.isArray(old.gallery?.categories)
+    ? old.gallery.categories
     : [];
+
+  const galleryCategories = rawGalleryCats.map((cat) => {
+    if (cat && typeof cat === "object") {
+      return {
+        id:
+          typeof cat.id === "string" && cat.id
+            ? cat.id
+            : slugifyId(cat.name, "gal"),
+        name: String(cat.name || "").trim(),
+      };
+    }
+    return {
+      id: slugifyId(cat, "gal"),
+      name: String(cat).trim(),
+    };
+  });
 
   const galleryCategoryLookup = new Map(
     galleryCategories.map((c) => [c.name.toLowerCase(), c.id])
   );
 
-  const galleryItems = Array.isArray(old.gallery)
-    ? old.gallery.map((item) => {
-        const catKey = String(item?.category || "").trim().toLowerCase();
-        const categoryId =
-          item?.categoryId || galleryCategoryLookup.get(catKey) || "";
-        return {
-          id: typeof item?.id === "string" ? item.id : "",
-          title: typeof item?.title === "string" ? item.title : "",
-          categoryId,
-          aspect: typeof item?.aspect === "string" ? item.aspect : "",
-          image: toImage(item?.image, item?.title || ""),
-        };
-      })
+  const rawGalleryItems = Array.isArray(old.gallery)
+    ? old.gallery
+    : Array.isArray(old.gallery?.items)
+    ? old.gallery.items
     : [];
+
+  const galleryItems = rawGalleryItems.map((item) => {
+    const catKey = String(item?.category || "").trim().toLowerCase();
+    const categoryId =
+      item?.categoryId || galleryCategoryLookup.get(catKey) || "";
+    return {
+      id: typeof item?.id === "string" ? item.id : "",
+      title: typeof item?.title === "string" ? item.title : "",
+      categoryId,
+      aspect: typeof item?.aspect === "string" ? item.aspect : "",
+      image: toImage(item?.image, item?.title || ""),
+    };
+  });
 
   return {
     schemaVersion: 1,
@@ -383,6 +448,103 @@ export function fromLegacy(old) {
       items: galleryItems,
     },
   };
+}
+
+export function migrateLegacySaved(saved) {
+  if (!saved || typeof saved !== "object" || Array.isArray(saved)) {
+    return {};
+  }
+
+  const result = {};
+
+  if (
+    saved.brand &&
+    typeof saved.brand === "object" &&
+    !Array.isArray(saved.brand)
+  ) {
+    const brand = {};
+    if ("name" in saved.brand && saved.brand.name !== undefined) {
+      brand.name = saved.brand.name;
+    }
+    if ("tagline" in saved.brand && saved.brand.tagline !== undefined) {
+      brand.tagline = saved.brand.tagline;
+    }
+    if ("heroBlurb" in saved.brand && saved.brand.heroBlurb !== undefined) {
+      brand.heroBlurb = saved.brand.heroBlurb;
+    }
+    if ("blurb" in saved.brand && saved.brand.blurb !== undefined) {
+      brand.blurb = saved.brand.blurb;
+    }
+    if (Object.keys(brand).length > 0) {
+      result.brand = brand;
+    }
+  }
+
+  if (
+    saved.hours &&
+    typeof saved.hours === "object" &&
+    !Array.isArray(saved.hours)
+  ) {
+    const hours = {};
+    if ("lines" in saved.hours && Array.isArray(saved.hours.lines)) {
+      hours.lines = saved.hours.lines.map((l) => ({
+        days: l?.days !== undefined ? String(l.days) : "",
+        hours: l?.hours !== undefined ? String(l.hours) : "",
+      }));
+    }
+    if (
+      "kitchenNotice" in saved.hours &&
+      saved.hours.kitchenNotice !== undefined
+    ) {
+      hours.kitchenNotice = saved.hours.kitchenNotice;
+    }
+    if (
+      "allergyNotice" in saved.hours &&
+      saved.hours.allergyNotice !== undefined
+    ) {
+      hours.allergyNotice = saved.hours.allergyNotice;
+    }
+    // Drop display
+    if (Object.keys(hours).length > 0) {
+      result.hours = hours;
+    }
+  }
+
+  if (
+    saved.contact &&
+    typeof saved.contact === "object" &&
+    !Array.isArray(saved.contact)
+  ) {
+    const contact = {};
+    if ("address" in saved.contact && saved.contact.address !== undefined) {
+      contact.address = saved.contact.address;
+    }
+    if ("email" in saved.contact && saved.contact.email !== undefined) {
+      contact.email = saved.contact.email;
+    }
+    if ("phone" in saved.contact && saved.contact.phone !== undefined) {
+      contact.phone = normalizePhone(saved.contact.phone);
+    }
+    // Drop phoneRaw, mapsUrl, whatsappUrl, mapEmbedUrl
+    if (Object.keys(contact).length > 0) {
+      result.contact = contact;
+    }
+  }
+
+  if (Array.isArray(saved.socials)) {
+    result.socials = saved.socials.map((s) => {
+      const platform = String(s?.platform || s?.name || "").toLowerCase();
+      const url =
+        typeof s?.url === "string"
+          ? s.url
+          : typeof s?.href === "string"
+          ? s.href
+          : "";
+      return { platform, url };
+    });
+  }
+
+  return result;
 }
 
 export function normalizeCafe(input) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Clock, MapPin, MessageCircle, Share2 } from "lucide-react";
-import { sampleCafe } from "../../../schema/sampleCafe";
+import { legacySampleCafe as sampleCafe } from "../../../schema/legacySampleCafe";
 import { useInView } from "../../../hooks/useInView";
 
 function AnimatedCard({ children, index = 0, className = "" }) {
